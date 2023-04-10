@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "883959527648",
+    "project_id": "period-ik",
+    "storage_bucket": "period-ik.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883959527648:android:678b5ab4ac42798a04b885",
+        "android_client_info": {
+          "package_name": "com.example.periodik"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883959527648-l3un1med5051gu10gco6gn6qtkk99b5f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBX-Z87gjH16je18cqr3Tsv3f9wPCug_U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883959527648-l3un1med5051gu10gco6gn6qtkk99b5f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
