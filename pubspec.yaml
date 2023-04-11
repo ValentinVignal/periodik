@@ -39,6 +39,7 @@ dependencies:
   flutter_riverpod: ^2.3.4
   go_router: ^6.5.5
   freezed_annotation: ^2.2.0
+  url_strategy: ^0.2.0
 
 dev_dependencies:
   flutter_test:
