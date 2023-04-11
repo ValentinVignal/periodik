@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:periodik/firebase_options.dart';
+import 'package:periodik/router/router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,10 +16,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Periodik',
       darkTheme: ThemeData.dark(useMaterial3: true),
       theme: ThemeData.light(useMaterial3: true),
+      routerConfig: router,
     );
   }
 }
