@@ -9,7 +9,6 @@ part of 'routes.dart';
 List<RouteBase> get $appRoutes => [
       $homeRoute,
       $loginRoute,
-      $signUpRoute,
     ];
 
 RouteBase get $homeRoute => GoRouteData.$route(
@@ -35,6 +34,18 @@ extension $HomeRouteExtension on HomeRoute {
 RouteBase get $loginRoute => GoRouteData.$route(
       path: '/login',
       factory: $LoginRouteExtension._fromState,
+      routes: [
+        GoRouteData.$route(
+          path: 'sign-up',
+          factory: $SignUpRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'verify-email',
+              factory: $VerifyEmailRouteExtension._fromState,
+            ),
+          ],
+        ),
+      ],
     );
 
 extension $LoginRouteExtension on LoginRoute {
@@ -52,16 +63,27 @@ extension $LoginRouteExtension on LoginRoute {
       context.pushReplacement(location);
 }
 
-RouteBase get $signUpRoute => GoRouteData.$route(
-      path: '/sign-up',
-      factory: $SignUpRouteExtension._fromState,
-    );
-
 extension $SignUpRouteExtension on SignUpRoute {
   static SignUpRoute _fromState(GoRouterState state) => const SignUpRoute();
 
   String get location => GoRouteData.$location(
-        '/sign-up',
+        '/login/sign-up',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  void push(BuildContext context) => context.push(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+}
+
+extension $VerifyEmailRouteExtension on VerifyEmailRoute {
+  static VerifyEmailRoute _fromState(GoRouterState state) =>
+      const VerifyEmailRoute();
+
+  String get location => GoRouteData.$location(
+        '/login/sign-up/verify-email',
       );
 
   void go(BuildContext context) => context.go(location);

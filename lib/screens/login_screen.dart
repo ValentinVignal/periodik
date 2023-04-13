@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:periodik/router/routes.dart';
 import 'package:periodik/utils/iterable_extension.dart';
+import 'package:periodik/widgets/animated_visibility.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -28,6 +30,8 @@ class __LoginScreenContentState extends State<_LoginScreenContent> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   var _obscure = true;
+  final _formKey = GlobalKey<FormState>();
+  var _error = '';
 
   @override
   void dispose() {
@@ -36,56 +40,94 @@ class __LoginScreenContentState extends State<_LoginScreenContent> {
     super.dispose();
   }
 
+  Future<void> _login() async {
+    setState(() {
+      _error = '';
+    });
+    if (!_formKey.currentState!.validate()) return;
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      );
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        _error = e.message ?? 'Unknown error';
+      });
+    } catch (e) {
+      setState(() {
+        _error = 'Unknown error';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: TextFormField(
-            decoration: const InputDecoration(label: Text('Email')),
-            controller: _emailController,
+    return Form(
+      key: _formKey,
+      child: ListView(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: TextFormField(
+              decoration: const InputDecoration(label: Text('Email')),
+              controller: _emailController,
+              validator: (value) =>
+                  (value?.isNotEmpty ?? false) ? null : 'Required',
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  decoration: const InputDecoration(label: Text('Password')),
-                  controller: _passwordController,
-                  obscureText: _obscure,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: TextFormField(
+              decoration: InputDecoration(
+                label: const Text('Password'),
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _obscure = !_obscure;
+                    });
+                  },
+                  icon: Icon(
+                    _obscure ? Icons.visibility : Icons.visibility_off,
+                  ),
                 ),
               ),
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    _obscure = !_obscure;
-                  });
-                },
-                icon: Icon(
-                  _obscure ? Icons.visibility : Icons.visibility_off,
+              controller: _passwordController,
+              obscureText: _obscure,
+              validator: (value) =>
+                  (value?.isNotEmpty ?? false) ? null : 'Required',
+            ),
+          ),
+          AnimatedVisibility(
+            visible: _error.isNotEmpty,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  _error,
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.error,
+                  ),
                 ),
               ),
-            ],
+            ),
           ),
-        ),
-        Center(
-          child: ElevatedButton(
-            onPressed: () {},
-            child: const Text('Login'),
+          Center(
+            child: ElevatedButton(
+              onPressed: _login,
+              child: const Text('Login'),
+            ),
           ),
-        ),
-        Center(
-          child: TextButton(
-            onPressed: () {
-              GoRouter.of(context).go(const SignUpRoute().location);
-            },
-            child: const Text('Sign Up'),
+          Center(
+            child: TextButton(
+              onPressed: () {
+                GoRouter.of(context).go(const SignUpRoute().location);
+              },
+              child: const Text('Sign Up'),
+            ),
           ),
-        ),
-      ].separated(const SizedBox(height: 8)).toList(),
+        ].separated(const SizedBox(height: 8)).toList(),
+      ),
     );
   }
 }

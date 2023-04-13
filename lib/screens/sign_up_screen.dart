@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:periodik/router/routes.dart';
 import 'package:periodik/utils/iterable_extension.dart';
+import 'package:periodik/widgets/animated_visibility.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -25,11 +27,14 @@ class _SignUpScreenContent extends StatefulWidget {
 }
 
 class _SignUpScreenContentState extends State<_SignUpScreenContent> {
-  final _emailController = TextEditingController();
-  final _passwordController0 = TextEditingController();
-  final _passwordController1 = TextEditingController();
+  late final _emailController = TextEditingController();
+  late final _passwordController0 = TextEditingController();
+  late final _passwordController1 = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   var _obscure0 = true;
   var _obscure1 = true;
+
+  var _error = '';
 
   @override
   void dispose() {
@@ -39,80 +44,145 @@ class _SignUpScreenContentState extends State<_SignUpScreenContent> {
     super.dispose();
   }
 
+  Future<void> _signUp() async {
+    setState(() {
+      _error = '';
+    });
+    if (!_formKey.currentState!.validate()) return;
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController0.text,
+      );
+      final user = FirebaseAuth.instance.currentUser!;
+
+      if (user.emailVerified) {
+        // Go router should refresh the page.
+      } else {
+        await user.sendEmailVerification();
+        if (mounted) {
+          GoRouter.of(context).go(const VerifyEmailRoute().location);
+        }
+      }
+    } on FirebaseAuthException catch (e) {
+      setState(() {
+        _error = e.message ?? 'Unknown error';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: TextFormField(
-            decoration: const InputDecoration(label: Text('Email')),
-            controller: _emailController,
+    return Form(
+      key: _formKey,
+      child: ListView(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: TextFormField(
+              decoration: const InputDecoration(label: Text('Email')),
+              controller: _emailController,
+              validator: (value) {
+                if (value?.isEmpty ?? true) {
+                  return 'Mandatory field';
+                }
+                return null;
+              },
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  decoration: const InputDecoration(label: Text('Password')),
-                  controller: _passwordController0,
-                  obscureText: _obscure0,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    decoration: const InputDecoration(label: Text('Password')),
+                    controller: _passwordController0,
+                    obscureText: _obscure0,
+                    validator: (value) {
+                      if (value?.isEmpty ?? true) {
+                        return 'Mandatory field';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _obscure0 = !_obscure0;
+                    });
+                  },
+                  icon: Icon(
+                    _obscure0 ? Icons.visibility : Icons.visibility_off,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                      label: Text('Password'),
+                    ),
+                    controller: _passwordController1,
+                    obscureText: _obscure1,
+                    validator: (value) {
+                      if (value?.isEmpty ?? true) {
+                        return 'Mandatory field';
+                      }
+                      if (value != _passwordController0.text) {
+                        return 'Passwords do not match';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _obscure1 = !_obscure1;
+                    });
+                  },
+                  icon: Icon(
+                    _obscure1 ? Icons.visibility : Icons.visibility_off,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          AnimatedVisibility(
+            visible: _error.isNotEmpty,
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  _error,
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
                 ),
               ),
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    _obscure0 = !_obscure0;
-                  });
-                },
-                icon: Icon(
-                  _obscure0 ? Icons.visibility : Icons.visibility_off,
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: TextFormField(
-                  decoration: const InputDecoration(label: Text('Password')),
-                  controller: _passwordController1,
-                  obscureText: _obscure1,
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  setState(() {
-                    _obscure1 = !_obscure1;
-                  });
-                },
-                icon: Icon(
-                  _obscure1 ? Icons.visibility : Icons.visibility_off,
-                ),
-              ),
-            ],
+          Center(
+            child: ElevatedButton(
+              onPressed: _signUp,
+              child: const Text('Sign up'),
+            ),
           ),
-        ),
-        Center(
-          child: ElevatedButton(
-            onPressed: () {},
-            child: const Text('Sign up'),
+          Center(
+            child: TextButton(
+              onPressed: () {
+                GoRouter.of(context).go(const LoginRoute().location);
+              },
+              child: const Text('Login'),
+            ),
           ),
-        ),
-        Center(
-          child: TextButton(
-            onPressed: () {
-              GoRouter.of(context).go(const LoginRoute().location);
-            },
-            child: const Text('Login'),
-          ),
-        ),
-      ].separated(const SizedBox(height: 8)).toList(),
+        ].separated(const SizedBox(height: 8)).toList(),
+      ),
     );
   }
 }
