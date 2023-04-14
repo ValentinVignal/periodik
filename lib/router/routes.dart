@@ -17,15 +17,20 @@ class HomeRoute extends GoRouteData {
   }
 }
 
+@TypedGoRoute<VerifyEmailRoute>(path: '/verify-email')
+class VerifyEmailRoute extends GoRouteData {
+  const VerifyEmailRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const VerifyEmailScreen();
+  }
+}
+
 @TypedGoRoute<LoginRoute>(
   path: '/login',
   routes: [
-    TypedGoRoute<SignUpRoute>(
-      path: 'sign-up',
-      routes: [
-        TypedGoRoute<VerifyEmailRoute>(path: 'verify-email'),
-      ],
-    )
+    TypedGoRoute<SignUpRoute>(path: 'sign-up'),
   ],
 )
 class LoginRoute extends GoRouteData {
@@ -43,14 +48,5 @@ class SignUpRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const SignUpScreen();
-  }
-}
-
-class VerifyEmailRoute extends GoRouteData {
-  const VerifyEmailRoute();
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const VerifyEmailScreen();
   }
 }

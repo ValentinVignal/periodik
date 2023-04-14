@@ -104,22 +104,10 @@ class _SignUpScreenContentState extends State<_SignUpScreenContent> {
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextFormField(
-                    decoration: const InputDecoration(label: Text('Password')),
-                    controller: _passwordController0,
-                    obscureText: _obscure0,
-                    validator: (value) {
-                      if (value?.isEmpty ?? true) {
-                        return 'Mandatory field';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                IconButton(
+            child: TextFormField(
+              decoration: InputDecoration(
+                label: const Text('Password'),
+                suffixIcon: IconButton(
                   onPressed: () {
                     setState(() {
                       _obscure0 = !_obscure0;
@@ -129,32 +117,23 @@ class _SignUpScreenContentState extends State<_SignUpScreenContent> {
                     _obscure0 ? Icons.visibility : Icons.visibility_off,
                   ),
                 ),
-              ],
+              ),
+              controller: _passwordController0,
+              obscureText: _obscure0,
+              validator: (value) {
+                if (value?.isEmpty ?? true) {
+                  return 'Mandatory field';
+                }
+                return null;
+              },
             ),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextFormField(
-                    decoration: const InputDecoration(
-                      label: Text('Password'),
-                    ),
-                    controller: _passwordController1,
-                    obscureText: _obscure1,
-                    validator: (value) {
-                      if (value?.isEmpty ?? true) {
-                        return 'Mandatory field';
-                      }
-                      if (value != _passwordController0.text) {
-                        return 'Passwords do not match';
-                      }
-                      return null;
-                    },
-                  ),
-                ),
-                IconButton(
+            child: TextFormField(
+              decoration: InputDecoration(
+                label: const Text('Password'),
+                suffixIcon: IconButton(
                   onPressed: () {
                     setState(() {
                       _obscure1 = !_obscure1;
@@ -164,7 +143,18 @@ class _SignUpScreenContentState extends State<_SignUpScreenContent> {
                     _obscure1 ? Icons.visibility : Icons.visibility_off,
                   ),
                 ),
-              ],
+              ),
+              controller: _passwordController1,
+              obscureText: _obscure1,
+              validator: (value) {
+                if (value?.isEmpty ?? true) {
+                  return 'Mandatory field';
+                }
+                if (value != _passwordController0.text) {
+                  return 'Passwords do not match';
+                }
+                return null;
+              },
             ),
           ),
           AnimatedVisibility(
