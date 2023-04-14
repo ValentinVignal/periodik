@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logging/logging.dart';
 import 'package:periodik/router/routes.dart';
 import 'package:periodik/utils/iterable_extension.dart';
 import 'package:periodik/widgets/animated_visibility.dart';
+
+final _logger = Logger('SignUpScreen');
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -67,6 +70,15 @@ class _SignUpScreenContentState extends State<_SignUpScreenContent> {
     } on FirebaseAuthException catch (e) {
       setState(() {
         _error = e.message ?? 'Unknown error';
+      });
+    } catch (error, stackTrace) {
+      _logger.severe(
+        'Could not sign up',
+        error,
+        stackTrace,
+      );
+      setState(() {
+        _error = 'Unknown error';
       });
     }
   }
