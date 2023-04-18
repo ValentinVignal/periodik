@@ -43,6 +43,7 @@ dependencies:
   firebase_auth: ^4.4.0
   collection: ^1.17.0
   logging: ^1.1.1
+  cloud_firestore: ^4.5.1
 
 dev_dependencies:
   flutter_test:
@@ -57,6 +58,7 @@ dev_dependencies:
   build_runner: ^2.3.3
   go_router_builder: ^1.2.0
   freezed: ^2.3.2
+  json_serializable: ^6.6.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

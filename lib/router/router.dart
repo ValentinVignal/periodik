@@ -20,7 +20,7 @@ GoRouter _getRouter() {
         if (firstSegment == 'login') {
           return const HomeRoute().location;
         }
-        if (!user.emailVerified && !kVerifyEmail) {
+        if (!user.emailVerified && kVerifyEmail) {
           if (firstSegment != 'verify-email') {
             return const VerifyEmailRoute().location;
           }

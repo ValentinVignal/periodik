@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:periodik/firebase_options.dart';
 import 'package:periodik/router/router.dart';
 import 'package:periodik/utils/logging.dart';
@@ -21,11 +22,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'Periodik',
-      darkTheme: ThemeData.dark(useMaterial3: true),
-      theme: ThemeData.light(useMaterial3: true),
-      routerConfig: router,
+    return ProviderScope(
+      child: MaterialApp.router(
+        title: 'Periodik',
+        darkTheme: ThemeData.dark(useMaterial3: true),
+        theme: ThemeData.light(useMaterial3: true),
+        routerConfig: router,
+      ),
     );
   }
 }
