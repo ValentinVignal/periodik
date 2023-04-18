@@ -20,7 +20,10 @@ Signal _$SignalFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Signal {
-  @JsonKey(ignore: true)
+// It is what freezed recommends.
+//
+// ignore: invalid_annotation_target
+  @JsonKey(includeToJson: false)
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
 
@@ -34,7 +37,7 @@ abstract class $SignalCopyWith<$Res> {
   factory $SignalCopyWith(Signal value, $Res Function(Signal) then) =
       _$SignalCopyWithImpl<$Res, Signal>;
   @useResult
-  $Res call({@JsonKey(ignore: true) String id, String name});
+  $Res call({@JsonKey(includeToJson: false) String id, String name});
 }
 
 /// @nodoc
@@ -72,7 +75,7 @@ abstract class _$$_SignalCopyWith<$Res> implements $SignalCopyWith<$Res> {
       __$$_SignalCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(ignore: true) String id, String name});
+  $Res call({@JsonKey(includeToJson: false) String id, String name});
 }
 
 /// @nodoc
@@ -104,14 +107,18 @@ class __$$_SignalCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Signal extends _Signal {
-  const _$_Signal({@JsonKey(ignore: true) this.id = '', required this.name})
+  const _$_Signal(
+      {@JsonKey(includeToJson: false) required this.id, required this.name})
       : super._();
 
   factory _$_Signal.fromJson(Map<String, dynamic> json) =>
       _$$_SignalFromJson(json);
 
+// It is what freezed recommends.
+//
+// ignore: invalid_annotation_target
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeToJson: false)
   final String id;
   @override
   final String name;
@@ -150,14 +157,16 @@ class _$_Signal extends _Signal {
 
 abstract class _Signal extends Signal {
   const factory _Signal(
-      {@JsonKey(ignore: true) final String id,
+      {@JsonKey(includeToJson: false) required final String id,
       required final String name}) = _$_Signal;
   const _Signal._() : super._();
 
   factory _Signal.fromJson(Map<String, dynamic> json) = _$_Signal.fromJson;
 
-  @override
-  @JsonKey(ignore: true)
+  @override // It is what freezed recommends.
+//
+// ignore: invalid_annotation_target
+  @JsonKey(includeToJson: false)
   String get id;
   @override
   String get name;

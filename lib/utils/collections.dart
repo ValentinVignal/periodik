@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:periodik/utils/user_notifier.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 mixin Collections {
   static DocumentReference get _userDocument => FirebaseFirestore.instance
       .collection(
         'users',
       )
-      .doc(userNotifier.value!.uid);
+      .doc(FirebaseAuth.instance.currentUser!.uid);
 
   static CollectionReference<Map<String, dynamic>> get signals =>
       _userDocument.collection(

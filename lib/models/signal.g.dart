@@ -7,6 +7,7 @@ part of 'signal.dart';
 // **************************************************************************
 
 _$_Signal _$$_SignalFromJson(Map<String, dynamic> json) => _$_Signal(
+      id: json['id'] as String,
       name: json['name'] as String,
     );
 

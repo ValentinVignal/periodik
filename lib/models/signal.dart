@@ -10,7 +10,7 @@ class Signal with _$Signal {
     // It is what freezed recommends.
     //
     // ignore: invalid_annotation_target
-    @JsonKey(ignore: true) @Default('') String id,
+    @JsonKey(includeToJson: false) required String id,
     required String name,
   }) = _Signal;
 

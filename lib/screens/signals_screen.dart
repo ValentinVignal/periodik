@@ -1,21 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
 import 'package:periodik/models/signal.dart';
 import 'package:periodik/providers/signals_provider.dart';
+import 'package:periodik/router/routes.dart';
 import 'package:periodik/utils/collections.dart';
 
 final _logger = Logger('HomeScreen');
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class SignalsScreen extends StatelessWidget {
+  const SignalsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Signals'),
         actions: [
           IconButton(
             onPressed: FirebaseAuth.instance.signOut,
@@ -41,7 +43,11 @@ class _Signals extends ConsumerWidget {
               itemBuilder: (context, index) {
                 final signal = signals[index];
                 return ListTile(
-                  onTap: () {},
+                  onTap: () {
+                    GoRouter.of(context).go(
+                      SignalRoute(id: signal.id).location,
+                    );
+                  },
                   title: Text(signal.name),
                 );
               },
@@ -70,10 +76,14 @@ class _FloatingActionButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: () async {
-        Collections.signals.add(
+        final documentReference = await Collections.signals.add(
           const Signal(id: '', name: '').toJson(),
         );
-        // TODO: Redirect to the signal screen.
+        if (context.mounted) {
+          GoRouter.of(context).go(
+            SignalRoute(id: documentReference.id).location,
+          );
+        }
       },
       child: const Icon(Icons.add),
     );

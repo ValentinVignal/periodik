@@ -1,9 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:periodik/screens/home_screen.dart';
+import 'package:periodik/router/redirect.dart';
 import 'package:periodik/screens/login_screen.dart';
 import 'package:periodik/screens/sign_up_screen.dart';
+import 'package:periodik/screens/signals_screen.dart';
 import 'package:periodik/screens/verify_email_screen.dart';
+
+import '../screens/signal_screen.dart';
 
 part 'routes.g.dart';
 
@@ -12,8 +17,8 @@ class HomeRoute extends GoRouteData {
   const HomeRoute();
 
   @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return const HomeScreen();
+  FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
+    return guardRedirect();
   }
 }
 
@@ -48,5 +53,33 @@ class SignUpRoute extends GoRouteData {
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return const SignUpScreen();
+  }
+}
+
+@TypedGoRoute<SignalsRoute>(
+  path: '/signals',
+  routes: [
+    TypedGoRoute<SignalRoute>(path: ':id'),
+  ],
+)
+class SignalsRoute extends GoRouteData {
+  const SignalsRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const SignalsScreen();
+  }
+}
+
+class SignalRoute extends GoRouteData {
+  const SignalRoute({
+    required this.id,
+  });
+
+  final String id;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return SignalScreen(id: id);
   }
 }
