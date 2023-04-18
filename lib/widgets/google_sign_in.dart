@@ -8,7 +8,10 @@ class GoogleSignInWidget extends StatelessWidget {
 
   Future<void> _signInWithGoogle() async {
     // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAccount? googleUser = await GoogleSignIn(
+      clientId:
+          '883959527648-ntqj2b49kb4680ovjj6m8vn14r0lbbmj.apps.googleusercontent.com',
+    ).signIn();
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication? googleAuth =
