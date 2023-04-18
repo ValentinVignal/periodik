@@ -5,6 +5,7 @@ import 'package:logging/logging.dart';
 import 'package:periodik/router/routes.dart';
 import 'package:periodik/utils/iterable_extension.dart';
 import 'package:periodik/widgets/animated_visibility.dart';
+import 'package:periodik/widgets/google_sign_in.dart';
 
 final _logger = Logger('LoginScreen');
 
@@ -126,6 +127,10 @@ class __LoginScreenContentState extends State<_LoginScreenContent> {
               child: const Text('Login'),
             ),
           ),
+          const Center(
+            child: GoogleSignInWidget(),
+          ),
+          const SizedBox(height: 8),
           Center(
             child: TextButton(
               onPressed: () {
