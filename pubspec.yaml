@@ -46,6 +46,7 @@ dependencies:
   cloud_firestore: ^4.5.1
   google_sign_in: ^6.1.0
   flutter_svg: ^2.0.5
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -102,3 +103,8 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+
+macos:
+  minimum_system_version: '10.14'
+  deployment_target: '10.14'
