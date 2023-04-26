@@ -12,4 +12,7 @@ mixin Collections {
       _userDocument.collection(
         'signals',
       );
+
+  static CollectionReference<Map<String, dynamic>> points(String signalId) =>
+      signals.doc(signalId).collection('points');
 }
