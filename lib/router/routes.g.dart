@@ -124,10 +124,16 @@ extension $SignalsRouteExtension on SignalsRoute {
 extension $SignalRouteExtension on SignalRoute {
   static SignalRoute _fromState(GoRouterState state) => SignalRoute(
         id: state.params['id']!,
+        view: _$convertMapValue(
+                'view', state.queryParams, _$SignalViewEnumMap._$fromName) ??
+            SignalView.calendar,
       );
 
   String get location => GoRouteData.$location(
         '/signals/${Uri.encodeComponent(id)}',
+        queryParams: {
+          if (view != SignalView.calendar) 'view': _$SignalViewEnumMap[view],
+        },
       );
 
   void go(BuildContext context) => context.go(location);
@@ -136,4 +142,23 @@ extension $SignalRouteExtension on SignalRoute {
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
+}
+
+const _$SignalViewEnumMap = {
+  SignalView.calendar: 'calendar',
+  SignalView.list: 'list',
+};
+
+T? _$convertMapValue<T>(
+  String key,
+  Map<String, String> map,
+  T Function(String) converter,
+) {
+  final value = map[key];
+  return value == null ? null : converter(value);
+}
+
+extension<T extends Enum> on Map<T, String> {
+  T _$fromName(String value) =>
+      entries.singleWhere((element) => element.value == value).key;
 }

@@ -1,9 +1,13 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:periodik/models/point.dart';
 import 'package:periodik/providers/points_provider.dart';
 import 'package:periodik/providers/signal_provider.dart';
+import 'package:periodik/router/routes.dart';
+import 'package:periodik/screens/signal/signal_list.dart';
+import 'package:periodik/screens/signal/signal_view.dart';
 import 'package:periodik/utils/collections.dart';
 import 'package:periodik/utils/date_time.dart';
 import 'package:periodik/utils/hero_tag.dart';
@@ -13,10 +17,13 @@ import 'package:table_calendar/table_calendar.dart';
 class SignalScreen extends StatelessWidget {
   const SignalScreen({
     required this.id,
+    this.view = SignalView.calendar,
     super.key,
   });
 
   final String id;
+
+  final SignalView view;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +32,34 @@ class SignalScreen extends StatelessWidget {
         title: _SignalAppBar(
           id: id,
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              GoRouter.of(context).go(
+                SignalRoute(
+                  id: id,
+                  view: view == SignalView.calendar
+                      ? SignalView.list
+                      : SignalView.calendar,
+                ).location,
+              );
+            },
+            icon: Icon(
+              view == SignalView.calendar ? Icons.list : Icons.calendar_month,
+            ),
+          ),
+        ],
       ),
-      body: FractionallySizedBox(
-        heightFactor: 0.8,
-        child: _SignalContent(
-          id: id,
-        ),
-      ),
+      body: view == SignalView.calendar
+          ? FractionallySizedBox(
+              heightFactor: 0.8,
+              child: _SignalContent(
+                id: id,
+              ),
+            )
+          : SignalList(
+              id: id,
+            ),
       floatingActionButton: _FAB(
         id: id,
       ),

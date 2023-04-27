@@ -5,10 +5,11 @@ import 'package:go_router/go_router.dart';
 import 'package:periodik/router/redirect.dart';
 import 'package:periodik/screens/login_screen.dart';
 import 'package:periodik/screens/sign_up_screen.dart';
+import 'package:periodik/screens/signal/signal_view.dart';
 import 'package:periodik/screens/signals_screen.dart';
 import 'package:periodik/screens/verify_email_screen.dart';
 
-import '../screens/signal_screen.dart';
+import '../screens/signal/signal_screen.dart';
 
 part 'routes.g.dart';
 
@@ -74,12 +75,18 @@ class SignalsRoute extends GoRouteData {
 class SignalRoute extends GoRouteData {
   const SignalRoute({
     required this.id,
+    this.view = SignalView.calendar,
   });
 
   final String id;
 
+  final SignalView view;
+
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return SignalScreen(id: id);
+    return SignalScreen(
+      id: id,
+      view: view,
+    );
   }
 }
