@@ -1,10 +1,14 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:periodik/models/point.dart';
 import 'package:periodik/providers/points_provider.dart';
 import 'package:periodik/providers/signal_provider.dart';
 import 'package:periodik/utils/collections.dart';
+import 'package:periodik/utils/date_time.dart';
 import 'package:periodik/utils/hero_tag.dart';
+import 'package:periodik/widgets/calendar/calendar_day.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class SignalScreen extends StatelessWidget {
   const SignalScreen({
@@ -22,8 +26,11 @@ class SignalScreen extends StatelessWidget {
           id: id,
         ),
       ),
-      body: _SignalContent(
-        id: id,
+      body: FractionallySizedBox(
+        heightFactor: 0.8,
+        child: _SignalContent(
+          id: id,
+        ),
       ),
       floatingActionButton: _FAB(
         id: id,
@@ -193,13 +200,20 @@ class _AddPointDialogState extends State<_AddPointDialog> {
             ],
           ),
           const SizedBox(height: 8),
-          Checkbox(
-            value: _state,
-            onChanged: (value) {
-              setState(() {
-                _state = value!;
-              });
-            },
+          Row(
+            children: [
+              Checkbox(
+                value: _state,
+                onChanged: (value) {
+                  setState(() {
+                    _state = value!;
+                  });
+                },
+              ),
+              const Flexible(
+                child: Text('State'),
+              ),
+            ],
           ),
         ],
       ),
@@ -226,7 +240,7 @@ class _AddPointDialogState extends State<_AddPointDialog> {
   }
 }
 
-class _SignalContent extends ConsumerWidget {
+class _SignalContent extends ConsumerStatefulWidget {
   const _SignalContent({
     required this.id,
   });
@@ -234,17 +248,61 @@ class _SignalContent extends ConsumerWidget {
   final String id;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final points = ref.watch(pointsProvider(id)).asData?.value ?? const [];
-    return ListView.builder(
-      itemCount: points.length,
-      itemBuilder: (context, index) {
-        final point = points[index];
-        return ListTile(
-          title: Text(point.date.toString()),
-          subtitle: Text(point.state.toString()),
-        );
+  ConsumerState<_SignalContent> createState() => _SignalContentState();
+}
+
+class _SignalContentState extends ConsumerState<_SignalContent> {
+  var calendarFormat = CalendarFormat.month;
+
+  @override
+  Widget build(BuildContext context) {
+    final now = DateTime.now();
+    const range = Duration(days: 100);
+    final points = ref
+            .watch(
+              pointsProvider(widget.id),
+            )
+            .asData
+            ?.value ??
+        const [];
+    Widget? builder(BuildContext context, DateTime day, DateTime _) {
+      final point = points.firstWhereOrNull(
+        (element) => element.date.isSameDayAs(day),
+      );
+      final CalendarDayState calendarDayState;
+      if (point == null) {
+        calendarDayState = CalendarDayState.none;
+      } else {
+        if (point.state) {
+          calendarDayState = CalendarDayState.activated;
+        } else {
+          calendarDayState = CalendarDayState.deactivated;
+        }
+      }
+      return CalendarDay(
+        date: day,
+        state: calendarDayState,
+        onPressed: () {
+          // TODO
+        },
+      );
+    }
+
+    return TableCalendar(
+      focusedDay: now,
+      firstDay: now.subtract(range),
+      lastDay: now.add(range),
+      calendarFormat: calendarFormat,
+      shouldFillViewport: true,
+      onFormatChanged: (format) {
+        setState(() {
+          calendarFormat = format;
+        });
       },
+      calendarBuilders: CalendarBuilders(
+        todayBuilder: builder,
+        defaultBuilder: builder,
+      ),
     );
   }
 }
