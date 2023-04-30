@@ -6,6 +6,7 @@ import 'package:periodik/models/point.dart';
 import 'package:periodik/providers/points_provider.dart';
 import 'package:periodik/providers/signal_provider.dart';
 import 'package:periodik/router/routes.dart';
+import 'package:periodik/screens/point/point_dialog.dart';
 import 'package:periodik/screens/signal/signal_list.dart';
 import 'package:periodik/screens/signal/signal_view.dart';
 import 'package:periodik/utils/collections.dart';
@@ -96,13 +97,6 @@ class _FAB extends StatelessWidget {
     );
   }
 
-  void _onAdd(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => _AddPointDialog(id: id),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -115,7 +109,7 @@ class _FAB extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         FloatingActionButton(
-          onPressed: () => _onAdd(context),
+          onPressed: () => PointDialog.show(context: context, signalId: id),
           child: const Icon(Icons.add),
         ),
       ],
@@ -180,102 +174,6 @@ class __EditSignalDialogState extends ConsumerState<_EditSignalDialog> {
   }
 }
 
-class _AddPointDialog extends StatefulWidget {
-  const _AddPointDialog({
-    required this.id,
-  });
-
-  final String id;
-
-  @override
-  State<_AddPointDialog> createState() => _AddPointDialogState();
-}
-
-class _AddPointDialogState extends State<_AddPointDialog> {
-  var _state = false;
-  var _date = DateTime.now();
-  @override
-  Widget build(BuildContext context) {
-    final now = DateTime.now();
-    const range = Duration(days: 100);
-    return AlertDialog(
-      title: const Text('New point'),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: InputDatePickerFormField(
-                  initialDate: _date,
-                  firstDate: now.subtract(range),
-                  lastDate: now.add(range),
-                  onDateSaved: (date) {
-                    setState(() {
-                      _date = date;
-                    });
-                  },
-                ),
-              ),
-              IconButton(
-                onPressed: () async {
-                  final date = await showDatePicker(
-                    context: context,
-                    initialDate: now,
-                    firstDate: now.subtract(range),
-                    lastDate: now.add(range),
-                  );
-                  if (date != null) {
-                    setState(() {
-                      _date = date;
-                    });
-                  }
-                },
-                icon: const Icon(Icons.calendar_today),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            children: [
-              Checkbox(
-                value: _state,
-                onChanged: (value) {
-                  setState(() {
-                    _state = value!;
-                  });
-                },
-              ),
-              const Flexible(
-                child: Text('State'),
-              ),
-            ],
-          ),
-        ],
-      ),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const Text('Cancel'),
-        ),
-        ElevatedButton(
-          onPressed: () async {
-            await Collections.points(widget.id).add(Point(
-              id: '',
-              date: _date,
-              state: _state,
-            ).toJson());
-            if (context.mounted) {
-              Navigator.of(context).pop();
-            }
-          },
-          child: const Text('Save'),
-        ),
-      ],
-    );
-  }
-}
-
 class _SignalContent extends ConsumerStatefulWidget {
   const _SignalContent({
     required this.id,
@@ -319,7 +217,16 @@ class _SignalContentState extends ConsumerState<_SignalContent> {
         date: day,
         state: calendarDayState,
         onPressed: () {
-          // TODO
+          if (point == null) {
+            PointDialog.show(
+              context: context,
+              signalId: widget.id,
+              point: Point(
+                id: '',
+                date: day,
+              ),
+            );
+          }
         },
       );
     }

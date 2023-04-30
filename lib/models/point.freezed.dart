@@ -127,7 +127,7 @@ class _$_Point extends _Point {
   const _$_Point(
       {@JsonKey(includeToJson: false) required this.id,
       @TimestampDateTimeConverter() required this.date,
-      required this.state})
+      this.state = false})
       : super._();
 
   factory _$_Point.fromJson(Map<String, dynamic> json) =>
@@ -143,6 +143,7 @@ class _$_Point extends _Point {
   @TimestampDateTimeConverter()
   final DateTime date;
   @override
+  @JsonKey()
   final bool state;
 
   @override
@@ -182,7 +183,7 @@ abstract class _Point extends Point {
   const factory _Point(
       {@JsonKey(includeToJson: false) required final String id,
       @TimestampDateTimeConverter() required final DateTime date,
-      required final bool state}) = _$_Point;
+      final bool state}) = _$_Point;
   const _Point._() : super._();
 
   factory _Point.fromJson(Map<String, dynamic> json) = _$_Point.fromJson;

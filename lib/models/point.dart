@@ -14,7 +14,7 @@ class Point with _$Point {
     // ignore: invalid_annotation_target
     @JsonKey(includeToJson: false) required String id,
     @TimestampDateTimeConverter() required DateTime date,
-    required bool state,
+    @Default(false) bool state,
   }) = _Point;
 
   factory Point.fromJson(Json json) => _$PointFromJson(json);

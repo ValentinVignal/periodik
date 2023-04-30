@@ -10,7 +10,7 @@ _$_Point _$$_PointFromJson(Map<String, dynamic> json) => _$_Point(
       id: json['id'] as String,
       date: const TimestampDateTimeConverter()
           .fromJson(json['date'] as Timestamp),
-      state: json['state'] as bool,
+      state: json['state'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_PointToJson(_$_Point instance) => <String, dynamic>{
