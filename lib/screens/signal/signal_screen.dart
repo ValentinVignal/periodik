@@ -136,7 +136,15 @@ class _EditSignalDialog extends ConsumerStatefulWidget {
 }
 
 class __EditSignalDialogState extends ConsumerState<_EditSignalDialog> {
-  final _textController = TextEditingController();
+  late final TextEditingController _textController;
+
+  @override
+  void initState() {
+    super.initState();
+    _textController = TextEditingController(
+      text: ref.read(signalProvider(widget.id)).asData?.value.name,
+    );
+  }
 
   @override
   void dispose() {
