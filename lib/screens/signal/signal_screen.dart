@@ -217,21 +217,21 @@ class _SignalContentState extends ConsumerState<_SignalContent> {
         date: day,
         state: calendarDayState,
         onPressed: () {
-          if (point == null) {
-            PointDialog.show(
-              context: context,
-              signalId: widget.id,
-              point: Point(
-                id: '',
-                date: day,
-              ),
-            );
-          }
+          PointDialog.show(
+            context: context,
+            signalId: widget.id,
+            point: point ??
+                Point(
+                  id: '',
+                  date: day,
+                ),
+          );
         },
       );
     }
 
     return TableCalendar(
+      startingDayOfWeek: StartingDayOfWeek.monday,
       focusedDay: now,
       firstDay: now.subtract(range),
       lastDay: now.add(range),

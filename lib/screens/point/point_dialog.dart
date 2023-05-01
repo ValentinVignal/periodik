@@ -39,7 +39,6 @@ class _PointDialogState extends State<PointDialog> {
   late var _point = widget.point;
   @override
   Widget build(BuildContext context) {
-    final now = DateTime.now();
     const range = Duration(days: 100);
     return AlertDialog(
       title: const Text('New point'),
@@ -51,8 +50,8 @@ class _PointDialogState extends State<PointDialog> {
               Expanded(
                 child: InputDatePickerFormField(
                   initialDate: _point.date,
-                  firstDate: now.subtract(range),
-                  lastDate: now.add(range),
+                  firstDate: _point.date.subtract(range),
+                  lastDate: _point.date.add(range),
                   onDateSaved: (date) {
                     setState(() {
                       _point = _point.copyWith(date: date);
@@ -64,9 +63,9 @@ class _PointDialogState extends State<PointDialog> {
                 onPressed: () async {
                   final date = await showDatePicker(
                     context: context,
-                    initialDate: now,
-                    firstDate: now.subtract(range),
-                    lastDate: now.add(range),
+                    initialDate: _point.date,
+                    firstDate: _point.date.subtract(range),
+                    lastDate: _point.date.add(range),
                   );
                   if (date != null) {
                     setState(() {
