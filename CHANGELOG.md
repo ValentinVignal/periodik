@@ -1,4 +1,4 @@
-## UNRELEASED
+## 0.9.0
 
 - Allows the edition of a point.
 - Makes Monday the first day of the week in the calendar view.
