@@ -2,6 +2,7 @@
 
 - Allows the edition of a point.
 - Makes Monday the first day of the week in the calendar view.
+- Orders signals and points list
 
 ## 0.8.0
 
