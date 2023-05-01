@@ -2,7 +2,8 @@
 
 - Allows the edition of a point.
 - Makes Monday the first day of the week in the calendar view.
-- Orders signals and points list
+- Orders signals and points list.
+- Adds hero to signal's name.
 
 ## 0.8.0
 
@@ -10,7 +11,7 @@
 
 ## 0.7.0
 
-- Adds the signal calendar view
+- Adds the signal calendar view.
 
 ## 0.6.0
 

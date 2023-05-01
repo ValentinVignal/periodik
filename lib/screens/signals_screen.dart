@@ -7,6 +7,7 @@ import 'package:periodik/models/signal.dart';
 import 'package:periodik/providers/signals_provider.dart';
 import 'package:periodik/router/routes.dart';
 import 'package:periodik/utils/collections.dart';
+import 'package:periodik/widgets/signal_name_widget.dart';
 
 final _logger = Logger('HomeScreen');
 
@@ -48,7 +49,9 @@ class _Signals extends ConsumerWidget {
                       SignalRoute(id: signal.id).location,
                     );
                   },
-                  title: Text(signal.name),
+                  title: SignalNameWidget(
+                    signal: signal,
+                  ),
                 );
               },
             );

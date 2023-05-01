@@ -13,6 +13,7 @@ import 'package:periodik/utils/collections.dart';
 import 'package:periodik/utils/date_time.dart';
 import 'package:periodik/utils/hero_tag.dart';
 import 'package:periodik/widgets/calendar/calendar_day.dart';
+import 'package:periodik/widgets/signal_name_widget.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class SignalScreen extends StatelessWidget {
@@ -77,8 +78,8 @@ class _SignalAppBar extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Text(
-      ref.watch(signalProvider(id)).asData?.value.name ?? '',
+    return SignalNameWidget(
+      signal: ref.watch(signalProvider(id)).asData?.value,
     );
   }
 }
