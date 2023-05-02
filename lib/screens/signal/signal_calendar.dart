@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:periodik/models/point.dart';
 import 'package:periodik/providers/points_provider.dart';
+import 'package:periodik/screens/point/delete_point.dart';
 import 'package:periodik/screens/point/point_dialog.dart';
 import 'package:periodik/utils/date_time.dart';
 import 'package:periodik/widgets/calendar/calendar_day.dart';
@@ -62,6 +63,13 @@ class _SignalContentState extends ConsumerState<SignalCalendar> {
                 ),
           );
         },
+        onLongPressed: point != null
+            ? () => deletePoint(
+                  context: context,
+                  signalId: widget.id,
+                  pointId: point.id,
+                )
+            : null,
       );
     }
 

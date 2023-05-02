@@ -1,6 +1,7 @@
 ## Unreleased
 
 - Adds the possibility to delete a signal.
+- Adds the possibility to delete a point.
 
 ## 0.9.0
 

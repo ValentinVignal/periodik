@@ -51,6 +51,8 @@ class SignalScreen extends StatelessWidget {
         if (delete) {
           await Collections.signals.doc(id).delete();
           if (context.mounted) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(const SnackBar(content: Text('Deleted')));
             GoRouter.of(context).pop();
           }
         }

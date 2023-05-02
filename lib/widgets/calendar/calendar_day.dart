@@ -11,13 +11,16 @@ class CalendarDay extends StatelessWidget {
   const CalendarDay({
     required this.date,
     required this.onPressed,
+    this.onLongPressed,
     this.state = CalendarDayState.none,
     super.key,
   });
 
+  final DateTime date;
+
   final VoidCallback onPressed;
 
-  final DateTime date;
+  final VoidCallback? onLongPressed;
 
   final CalendarDayState state;
 
@@ -41,6 +44,7 @@ class CalendarDay extends StatelessWidget {
     }
     return InkWell(
       onTap: onPressed,
+      onLongPress: onLongPressed,
       borderRadius: BorderRadius.circular(4),
       child: DecoratedBox(
         decoration: BoxDecoration(
