@@ -1,4 +1,4 @@
-## Unreleased
+## 0.10.0
 
 - Adds the possibility to delete a signal.
 - Adds the possibility to delete a point.
