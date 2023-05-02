@@ -1,20 +1,19 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:periodik/models/point.dart';
-import 'package:periodik/providers/points_provider.dart';
 import 'package:periodik/providers/signal_provider.dart';
 import 'package:periodik/router/routes.dart';
 import 'package:periodik/screens/point/point_dialog.dart';
+import 'package:periodik/screens/signal/signal_calendar.dart';
 import 'package:periodik/screens/signal/signal_list.dart';
 import 'package:periodik/screens/signal/signal_view.dart';
 import 'package:periodik/utils/collections.dart';
-import 'package:periodik/utils/date_time.dart';
 import 'package:periodik/utils/hero_tag.dart';
-import 'package:periodik/widgets/calendar/calendar_day.dart';
 import 'package:periodik/widgets/signal_name_widget.dart';
-import 'package:table_calendar/table_calendar.dart';
+
+enum _SignalAction {
+  delete,
+}
 
 class SignalScreen extends StatelessWidget {
   const SignalScreen({
@@ -26,6 +25,38 @@ class SignalScreen extends StatelessWidget {
   final String id;
 
   final SignalView view;
+
+  Future<void> _onAction(BuildContext context, _SignalAction action) async {
+    switch (action) {
+      case _SignalAction.delete:
+        final delete = await showDialog<bool>(
+              context: context,
+              builder: (context) => AlertDialog(
+                title: const Text('Delete Signal?'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    child: const Text('Cancel'),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(true);
+                    },
+                    child: const Text('Delete'),
+                  ),
+                ],
+              ),
+            ) ??
+            false;
+        if (delete) {
+          await Collections.signals.doc(id).delete();
+          if (context.mounted) {
+            GoRouter.of(context).pop();
+          }
+        }
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,12 +81,21 @@ class SignalScreen extends StatelessWidget {
               view == SignalView.calendar ? Icons.list : Icons.calendar_month,
             ),
           ),
+          PopupMenuButton(
+            onSelected: (action) => _onAction(context, action),
+            itemBuilder: (context) => [
+              const PopupMenuItem(
+                value: _SignalAction.delete,
+                child: Text('Delete'),
+              ),
+            ],
+          ),
         ],
       ),
       body: view == SignalView.calendar
           ? FractionallySizedBox(
               heightFactor: 0.8,
-              child: _SignalContent(
+              child: SignalCalendar(
                 id: id,
               ),
             )
@@ -171,82 +211,6 @@ class __EditSignalDialogState extends ConsumerState<_EditSignalDialog> {
           child: const Text('Save'),
         ),
       ],
-    );
-  }
-}
-
-class _SignalContent extends ConsumerStatefulWidget {
-  const _SignalContent({
-    required this.id,
-  });
-
-  final String id;
-
-  @override
-  ConsumerState<_SignalContent> createState() => _SignalContentState();
-}
-
-class _SignalContentState extends ConsumerState<_SignalContent> {
-  var calendarFormat = CalendarFormat.month;
-
-  @override
-  Widget build(BuildContext context) {
-    final now = DateTime.now();
-    const range = Duration(days: 100);
-    final points = ref
-            .watch(
-              pointsProvider(widget.id),
-            )
-            .asData
-            ?.value ??
-        const [];
-    Widget? builder(BuildContext context, DateTime day, DateTime _) {
-      final point = points.firstWhereOrNull(
-        (element) => element.date.isSameDayAs(day),
-      );
-      final CalendarDayState calendarDayState;
-      if (point == null) {
-        calendarDayState = CalendarDayState.none;
-      } else {
-        if (point.state) {
-          calendarDayState = CalendarDayState.activated;
-        } else {
-          calendarDayState = CalendarDayState.deactivated;
-        }
-      }
-      return CalendarDay(
-        date: day,
-        state: calendarDayState,
-        onPressed: () {
-          PointDialog.show(
-            context: context,
-            signalId: widget.id,
-            point: point ??
-                Point(
-                  id: '',
-                  date: day,
-                ),
-          );
-        },
-      );
-    }
-
-    return TableCalendar(
-      startingDayOfWeek: StartingDayOfWeek.monday,
-      focusedDay: now,
-      firstDay: now.subtract(range),
-      lastDay: now.add(range),
-      calendarFormat: calendarFormat,
-      shouldFillViewport: true,
-      onFormatChanged: (format) {
-        setState(() {
-          calendarFormat = format;
-        });
-      },
-      calendarBuilders: CalendarBuilders(
-        todayBuilder: builder,
-        defaultBuilder: builder,
-      ),
     );
   }
 }

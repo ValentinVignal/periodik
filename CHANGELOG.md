@@ -1,3 +1,7 @@
+## Unreleased
+
+- Adds the possibility to delete a signal.
+
 ## 0.9.0
 
 - Allows the edition of a point.

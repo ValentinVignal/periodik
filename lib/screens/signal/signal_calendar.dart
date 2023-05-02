@@ -1,7 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:periodik/models/point.dart';
 import 'package:periodik/providers/points_provider.dart';
+import 'package:periodik/screens/point/point_dialog.dart';
 import 'package:periodik/utils/date_time.dart';
 import 'package:periodik/widgets/calendar/calendar_day.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -15,10 +17,10 @@ class SignalCalendar extends ConsumerStatefulWidget {
   final String id;
 
   @override
-  ConsumerState<SignalCalendar> createState() => _SignalCalendarState();
+  ConsumerState<SignalCalendar> createState() => _SignalContentState();
 }
 
-class _SignalCalendarState extends ConsumerState<SignalCalendar> {
+class _SignalContentState extends ConsumerState<SignalCalendar> {
   var calendarFormat = CalendarFormat.month;
 
   @override
@@ -50,12 +52,21 @@ class _SignalCalendarState extends ConsumerState<SignalCalendar> {
         date: day,
         state: calendarDayState,
         onPressed: () {
-          // TODO
+          PointDialog.show(
+            context: context,
+            signalId: widget.id,
+            point: point ??
+                Point(
+                  id: '',
+                  date: day,
+                ),
+          );
         },
       );
     }
 
     return TableCalendar(
+      startingDayOfWeek: StartingDayOfWeek.monday,
       focusedDay: now,
       firstDay: now.subtract(range),
       lastDay: now.add(range),
