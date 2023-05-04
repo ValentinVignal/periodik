@@ -1,3 +1,7 @@
+## Unreleased
+
+- Makes sure there is no duplicate point in a signal when creating a new point.
+
 ## 0.11.0
 
 - Adds the all signals calendar view.

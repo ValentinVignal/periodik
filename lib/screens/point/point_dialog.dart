@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:periodik/models/point.dart';
+import 'package:periodik/providers/points_provider.dart';
 import 'package:periodik/utils/collections.dart';
+import 'package:periodik/utils/date_time.dart';
 
-class PointDialog extends StatefulWidget {
+class PointDialog extends ConsumerStatefulWidget {
   const PointDialog({
     super.key,
     required this.signalId,
@@ -32,10 +35,10 @@ class PointDialog extends StatefulWidget {
   }
 
   @override
-  State<PointDialog> createState() => _PointDialogState();
+  ConsumerState<PointDialog> createState() => _PointDialogState();
 }
 
-class _PointDialogState extends State<PointDialog> {
+class _PointDialogState extends ConsumerState<PointDialog> {
   late var _point = widget.point;
   @override
   Widget build(BuildContext context) {
@@ -102,6 +105,22 @@ class _PointDialogState extends State<PointDialog> {
         ),
         ElevatedButton(
           onPressed: () async {
+            final points =
+                ref.read(pointsProvider(widget.signalId)).asData?.value ??
+                    const [];
+            if (points.any(
+                  (otherPoint) =>
+                      otherPoint.date.isSameDayAs(_point.date) &&
+                      otherPoint.id != _point.id,
+                ) &&
+                mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('Point already exists for date ${_point.date}'),
+                ),
+              );
+              return;
+            }
             if (_point.id.isEmpty) {
               await Collections.points(widget.signalId).add(_point.toJson());
             } else {
