@@ -35,7 +35,7 @@ class _SignalContentState extends ConsumerState<SignalCalendar> {
             .asData
             ?.value ??
         const [];
-    Widget? builder(BuildContext context, DateTime day, DateTime _) {
+    Widget? builder(BuildContext context, DateTime day, DateTime focusedDay) {
       final point = points.firstWhereOrNull(
         (element) => element.date.isSameDayAs(day),
       );
@@ -51,6 +51,7 @@ class _SignalContentState extends ConsumerState<SignalCalendar> {
       }
       return CalendarDay(
         date: day,
+        focusedDate: focusedDay,
         state: calendarDayState,
         onPressed: () {
           PointDialog.show(
@@ -88,6 +89,7 @@ class _SignalContentState extends ConsumerState<SignalCalendar> {
       calendarBuilders: CalendarBuilders(
         todayBuilder: builder,
         defaultBuilder: builder,
+        outsideBuilder: builder,
       ),
     );
   }
