@@ -1,4 +1,4 @@
-## Unreleased
+## 0.11.0
 
 - Adds the all signals calendar view.
 - Displays and allow interaction with days outside of the viewed month.
