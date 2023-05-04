@@ -100,8 +100,20 @@ RouteBase get $signalsRoute => GoRouteData.$route(
       factory: $SignalsRouteExtension._fromState,
       routes: [
         GoRouteData.$route(
+          path: 'calendar',
+          factory: $SignalsCalendarRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
           path: ':id',
           factory: $SignalRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
+          path: ':id/calendar',
+          factory: $SignalCalendarRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
+          path: ':id/list',
+          factory: $SignalListRouteExtension._fromState,
         ),
       ],
     );
@@ -121,19 +133,12 @@ extension $SignalsRouteExtension on SignalsRoute {
       context.pushReplacement(location);
 }
 
-extension $SignalRouteExtension on SignalRoute {
-  static SignalRoute _fromState(GoRouterState state) => SignalRoute(
-        id: state.params['id']!,
-        view: _$convertMapValue(
-                'view', state.queryParams, _$SignalViewEnumMap._$fromName) ??
-            SignalView.calendar,
-      );
+extension $SignalsCalendarRouteExtension on SignalsCalendarRoute {
+  static SignalsCalendarRoute _fromState(GoRouterState state) =>
+      const SignalsCalendarRoute();
 
   String get location => GoRouteData.$location(
-        '/signals/${Uri.encodeComponent(id)}',
-        queryParams: {
-          if (view != SignalView.calendar) 'view': _$SignalViewEnumMap[view],
-        },
+        '/signals/calendar',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -144,21 +149,54 @@ extension $SignalRouteExtension on SignalRoute {
       context.pushReplacement(location);
 }
 
-const _$SignalViewEnumMap = {
-  SignalView.calendar: 'calendar',
-  SignalView.list: 'list',
-};
+extension $SignalRouteExtension on SignalRoute {
+  static SignalRoute _fromState(GoRouterState state) => SignalRoute(
+        id: state.params['id']!,
+      );
 
-T? _$convertMapValue<T>(
-  String key,
-  Map<String, String> map,
-  T Function(String) converter,
-) {
-  final value = map[key];
-  return value == null ? null : converter(value);
+  String get location => GoRouteData.$location(
+        '/signals/${Uri.encodeComponent(id)}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  void push(BuildContext context) => context.push(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
 }
 
-extension<T extends Enum> on Map<T, String> {
-  T _$fromName(String value) =>
-      entries.singleWhere((element) => element.value == value).key;
+extension $SignalCalendarRouteExtension on SignalCalendarRoute {
+  static SignalCalendarRoute _fromState(GoRouterState state) =>
+      SignalCalendarRoute(
+        id: state.params['id']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/signals/${Uri.encodeComponent(id)}/calendar',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  void push(BuildContext context) => context.push(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+}
+
+extension $SignalListRouteExtension on SignalListRoute {
+  static SignalListRoute _fromState(GoRouterState state) => SignalListRoute(
+        id: state.params['id']!,
+      );
+
+  String get location => GoRouteData.$location(
+        '/signals/${Uri.encodeComponent(id)}/list',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  void push(BuildContext context) => context.push(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
 }

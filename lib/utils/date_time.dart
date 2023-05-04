@@ -1,5 +1,7 @@
 extension DateTimeX on DateTime {
   bool isSameDayAs(DateTime other) {
-    return year == other.year && month == other.month && day == other.day;
+    return rounded == other.rounded;
   }
+
+  DateTime get rounded => DateTime(year, month, day);
 }

@@ -6,6 +6,7 @@ import 'package:periodik/router/redirect.dart';
 import 'package:periodik/screens/login_screen.dart';
 import 'package:periodik/screens/sign_up_screen.dart';
 import 'package:periodik/screens/signal/signal_view.dart';
+import 'package:periodik/screens/signals_calendar_screen.dart';
 import 'package:periodik/screens/signals_screen.dart';
 import 'package:periodik/screens/verify_email_screen.dart';
 
@@ -60,7 +61,10 @@ class SignUpRoute extends GoRouteData {
 @TypedGoRoute<SignalsRoute>(
   path: '/signals',
   routes: [
+    TypedGoRoute<SignalsCalendarRoute>(path: 'calendar'),
     TypedGoRoute<SignalRoute>(path: ':id'),
+    TypedGoRoute<SignalCalendarRoute>(path: ':id/calendar'),
+    TypedGoRoute<SignalListRoute>(path: ':id/list'),
   ],
 )
 class SignalsRoute extends GoRouteData {
@@ -72,21 +76,56 @@ class SignalsRoute extends GoRouteData {
   }
 }
 
+class SignalsCalendarRoute extends GoRouteData {
+  const SignalsCalendarRoute();
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return const SignalsCalendarScreen();
+  }
+}
+
 class SignalRoute extends GoRouteData {
   const SignalRoute({
     required this.id,
-    this.view = SignalView.calendar,
   });
 
   final String id;
 
-  final SignalView view;
+  @override
+  FutureOr<String?> redirect(BuildContext context, GoRouterState state) {
+    return SignalCalendarRoute(id: id).location;
+  }
+}
+
+class SignalCalendarRoute extends GoRouteData {
+  const SignalCalendarRoute({
+    required this.id,
+  });
+
+  final String id;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
     return SignalScreen(
       id: id,
-      view: view,
+      view: SignalView.calendar,
+    );
+  }
+}
+
+class SignalListRoute extends GoRouteData {
+  const SignalListRoute({
+    required this.id,
+  });
+
+  final String id;
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return SignalScreen(
+      id: id,
+      view: SignalView.list,
     );
   }
 }

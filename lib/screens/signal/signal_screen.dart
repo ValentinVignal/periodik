@@ -71,12 +71,9 @@ class SignalScreen extends StatelessWidget {
           IconButton(
             onPressed: () {
               GoRouter.of(context).go(
-                SignalRoute(
-                  id: id,
-                  view: view == SignalView.calendar
-                      ? SignalView.list
-                      : SignalView.calendar,
-                ).location,
+                view == SignalView.calendar
+                    ? SignalListRoute(id: id).location
+                    : SignalCalendarRoute(id: id).location,
               );
             },
             icon: Icon(

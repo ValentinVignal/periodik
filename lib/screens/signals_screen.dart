@@ -21,6 +21,12 @@ class SignalsScreen extends StatelessWidget {
         title: const Text('Signals'),
         actions: [
           IconButton(
+            onPressed: () {
+              GoRouter.of(context).go(const SignalsCalendarRoute().location);
+            },
+            icon: const Icon(Icons.calendar_month),
+          ),
+          IconButton(
             onPressed: FirebaseAuth.instance.signOut,
             icon: const Icon(Icons.logout),
           ),
