@@ -1,3 +1,7 @@
+## Unreleased
+
+- Adds the all signals calendar view.
+
 ## 0.10.0
 
 - Adds the possibility to delete a signal.

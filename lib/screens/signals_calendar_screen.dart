@@ -39,11 +39,13 @@ class __SignalCalendarContentState
     final now = DateTime.now();
     const range = Duration(days: 100);
 
-    Widget? builder(BuildContext context, DateTime day, DateTime _) {
+    Widget? builder(BuildContext context, DateTime day, DateTime focusedDay) {
       final points = ref.watch(
         signalPointsPerDayProvider(day.rounded),
       );
       return SignalsCalendarDay(
+        date: day,
+        focusedDate: focusedDay,
         points: points,
       );
     }
@@ -63,6 +65,7 @@ class __SignalCalendarContentState
       calendarBuilders: CalendarBuilders(
         todayBuilder: builder,
         defaultBuilder: builder,
+        outsideBuilder: builder,
       ),
     );
   }
