@@ -1,3 +1,7 @@
+## 0.13.0
+
+- Adds logo on web.
+
 ## 0.12.0
 
 - Makes sure there is no duplicate point in a signal when creating a new point.
