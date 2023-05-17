@@ -1,3 +1,7 @@
+## Unreleased
+
+- Supports android.
+
 ## 0.13.0
 
 - Adds logo on web.
