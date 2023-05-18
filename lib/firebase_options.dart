@@ -67,8 +67,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '883959527648',
     projectId: 'period-ik',
     storageBucket: 'period-ik.appspot.com',
-    iosClientId: '883959527648-o2ophmu834iuaoc6jvu8tvr2m2o53982.apps.googleusercontent.com',
-    iosBundleId: 'com.example.periodik',
+    iosClientId:
+        '883959527648-o2ophmu834iuaoc6jvu8tvr2m2o53982.apps.googleusercontent.com',
+    iosBundleId: 'com.valentinvignal.periodik',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -77,7 +78,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '883959527648',
     projectId: 'period-ik',
     storageBucket: 'period-ik.appspot.com',
-    iosClientId: '883959527648-o2ophmu834iuaoc6jvu8tvr2m2o53982.apps.googleusercontent.com',
-    iosBundleId: 'com.example.periodik',
+    iosClientId:
+        '883959527648-o2ophmu834iuaoc6jvu8tvr2m2o53982.apps.googleusercontent.com',
+    iosBundleId: 'com.valentinvignal.periodik',
   );
 }

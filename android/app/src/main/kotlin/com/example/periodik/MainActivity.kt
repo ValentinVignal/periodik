@@ -1,4 +1,4 @@
-package com.example.periodik
+package com.valentinvignal.periodik
 
 import io.flutter.embedding.android.FlutterActivity
 

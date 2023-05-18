@@ -7,14 +7,14 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:883959527648:android:678b5ab4ac42798a04b885",
+        "mobilesdk_app_id": "1:883959527648:android:c51ab160cdce291804b885",
         "android_client_info": {
-          "package_name": "com.example.periodik"
+          "package_name": "com.valentinvignal.periodik"
         }
       },
       "oauth_client": [
         {
-          "client_id": "883959527648-l3un1med5051gu10gco6gn6qtkk99b5f.apps.googleusercontent.com",
+          "client_id": "883959527648-ntqj2b49kb4680ovjj6m8vn14r0lbbmj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -29,6 +29,13 @@
             {
               "client_id": "883959527648-l3un1med5051gu10gco6gn6qtkk99b5f.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "883959527648-o2ophmu834iuaoc6jvu8tvr2m2o53982.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.periodik"
+              }
             }
           ]
         }
