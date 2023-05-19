@@ -4,6 +4,7 @@
 - Supports google login on android.
 - Adds the custom icon on android.
 - Adds macos icon.
+- Updates icon for web.
 
 ## 0.13.0
 
