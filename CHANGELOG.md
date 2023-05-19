@@ -1,8 +1,9 @@
 ## Unreleased
 
 - Supports android.
-- Supports google login on android
-- Adds the custom icon on android
+- Supports google login on android.
+- Adds the custom icon on android.
+- Adds macos icon.
 
 ## 0.13.0
 
