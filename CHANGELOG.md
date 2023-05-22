@@ -1,4 +1,4 @@
-## Unreleased
+## 0.14.0
 
 - Supports android.
 - Supports google login on android.
