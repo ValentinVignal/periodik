@@ -1,7 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:periodik/router/routes.dart';
-import 'package:periodik/utils/k_verify_email.dart';
+
+import '../utils/emails.dart';
+import '../utils/k_verify_email.dart';
+import 'routes.dart';
 
 String? guardRedirect([String? location]) {
   final uri = location == null ? null : Uri.parse(location);
@@ -11,7 +13,9 @@ String? guardRedirect([String? location]) {
     if (firstSegment == 'login') {
       return const HomeRoute().location;
     }
-    if (!user.emailVerified && kVerifyEmail) {
+    if (!authorizedEmails.contains(user.email) &&
+        !user.emailVerified &&
+        kVerifyEmail) {
       if (firstSegment != 'verify-email') {
         return const VerifyEmailRoute().location;
       }

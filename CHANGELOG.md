@@ -1,3 +1,7 @@
+## 0.15.0
+
+- Adds authorized emails for the google team.
+
 ## 0.14.0
 
 - Supports android.
