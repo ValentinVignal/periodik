@@ -1,3 +1,7 @@
+## 0.15.1
+
+- New release for the android play store.
+
 ## 0.15.0
 
 - Adds authorized emails for the google team.
