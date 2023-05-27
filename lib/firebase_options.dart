@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDBX-Z87gjH16je18cqr3Tsv3f9wPCug_U',
-    appId: '1:883959527648:android:678b5ab4ac42798a04b885',
+    appId: '1:883959527648:android:c51ab160cdce291804b885',
     messagingSenderId: '883959527648',
     projectId: 'period-ik',
     storageBucket: 'period-ik.appspot.com',
@@ -63,23 +63,23 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyD98CbtdYITZL9qPUPX0X7VAWV2yz_n-9w',
-    appId: '1:883959527648:ios:b237b79f6188bb8804b885',
+    appId: '1:883959527648:ios:147e83497cdeeae004b885',
     messagingSenderId: '883959527648',
     projectId: 'period-ik',
     storageBucket: 'period-ik.appspot.com',
-    iosClientId:
-        '883959527648-o2ophmu834iuaoc6jvu8tvr2m2o53982.apps.googleusercontent.com',
+    androidClientId: '883959527648-t8gq899rgv6r53r0ncioif6346aa6bpj.apps.googleusercontent.com',
+    iosClientId: '883959527648-bd3vth4qi80j0jdtgt6f1naggnb0db8i.apps.googleusercontent.com',
     iosBundleId: 'com.valentinvignal.periodik',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyD98CbtdYITZL9qPUPX0X7VAWV2yz_n-9w',
-    appId: '1:883959527648:ios:b237b79f6188bb8804b885',
+    appId: '1:883959527648:ios:147e83497cdeeae004b885',
     messagingSenderId: '883959527648',
     projectId: 'period-ik',
     storageBucket: 'period-ik.appspot.com',
-    iosClientId:
-        '883959527648-o2ophmu834iuaoc6jvu8tvr2m2o53982.apps.googleusercontent.com',
+    androidClientId: '883959527648-t8gq899rgv6r53r0ncioif6346aa6bpj.apps.googleusercontent.com',
+    iosClientId: '883959527648-bd3vth4qi80j0jdtgt6f1naggnb0db8i.apps.googleusercontent.com',
     iosBundleId: 'com.valentinvignal.periodik',
   );
 }

@@ -1,3 +1,7 @@
+## 0.15.2
+
+- Adds crash firebase_crashlytics
+
 ## 0.15.1
 
 - New release for the android play store.
