@@ -1,3 +1,7 @@
+## Unreleased
+
+- Fixes google sign in on android.
+
 ## 0.15.2
 
 - Adds crash firebase_crashlytics

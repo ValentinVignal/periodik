@@ -1,26 +1,29 @@
 {
-  "project_info": {
-    "project_number": "883959527648",
-    "project_id": "period-ik",
-    "storage_bucket": "period-ik.appspot.com"
-  },
   "client": [
     {
-      "client_info": {
-        "mobilesdk_app_id": "1:883959527648:android:c51ab160cdce291804b885",
-        "android_client_info": {
-          "package_name": "com.valentinvignal.periodik"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "883959527648-ntqj2b49kb4680ovjj6m8vn14r0lbbmj.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
       "api_key": [
         {
           "current_key": "AIzaSyDBX-Z87gjH16je18cqr3Tsv3f9wPCug_U"
+        }
+      ],
+      "client_info": {
+        "android_client_info": {
+          "package_name": "com.valentinvignal.periodik"
+        },
+        "mobilesdk_app_id": "1:883959527648:android:c51ab160cdce291804b885"
+      },
+      "oauth_client": [
+        {
+          "android_info": {
+            "certificate_hash": "c043b842b799f5270944e3dc6de4d7fa2a0cee27",
+            "package_name": "com.valentinvignal.periodik"
+          },
+          "client_id": "883959527648-5astk55m3pnfc735c2jtehq3j1kjce7d.apps.googleusercontent.com",
+          "client_type": 1
+        },
+        {
+          "client_id": "883959527648-ntqj2b49kb4680ovjj6m8vn14r0lbbmj.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "services": {
@@ -31,10 +34,10 @@
               "client_type": 3
             },
             {
-              "client_id": "883959527648-o2ophmu834iuaoc6jvu8tvr2m2o53982.apps.googleusercontent.com",
+              "client_id": "883959527648-bd3vth4qi80j0jdtgt6f1naggnb0db8i.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.periodik"
+                "bundle_id": "com.valentinvignal.periodik"
               }
             }
           ]
@@ -42,5 +45,10 @@
       }
     }
   ],
-  "configuration_version": "1"
+  "configuration_version": "1",
+  "project_info": {
+    "project_id": "period-ik",
+    "project_number": "883959527648",
+    "storage_bucket": "period-ik.appspot.com"
+  }
 }
