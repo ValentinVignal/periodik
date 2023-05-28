@@ -1,4 +1,4 @@
-## Unreleased
+## 0.15.3
 
 - Fixes google sign in on android.
 
