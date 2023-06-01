@@ -1,10 +1,14 @@
+## Unreleased
+
+- Fix macos build with firebase_crashlytics
+
 ## 0.15.3
 
 - Fixes google sign in on android.
 
 ## 0.15.2
 
-- Adds crash firebase_crashlytics
+- Adds crash firebase_crashlytics.
 
 ## 0.15.1
 
