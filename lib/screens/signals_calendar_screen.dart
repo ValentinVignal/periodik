@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:periodik/providers/signal_points_per_day_privoder.dart';
 import 'package:periodik/screens/signals_calendar_day.dart';
 import 'package:periodik/utils/date_time.dart';
-import 'package:table_calendar/table_calendar.dart';
+import 'package:periodik/widgets/calendar/calendar.dart';
 
 class SignalsCalendarScreen extends StatelessWidget {
   const SignalsCalendarScreen({
@@ -23,50 +23,23 @@ class SignalsCalendarScreen extends StatelessWidget {
   }
 }
 
-class _SignalCalendarContent extends ConsumerStatefulWidget {
+class _SignalCalendarContent extends ConsumerWidget {
   const _SignalCalendarContent();
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() =>
-      __SignalCalendarContentState();
-}
-
-class __SignalCalendarContentState
-    extends ConsumerState<_SignalCalendarContent> {
-  var calendarFormat = CalendarFormat.month;
-  @override
-  Widget build(BuildContext context) {
-    final now = DateTime.now();
-    const range = Duration(days: 100);
-
-    Widget? builder(BuildContext context, DateTime day, DateTime focusedDay) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    Widget builder(BuildContext context, DateTime day) {
       final points = ref.watch(
         signalPointsPerDayProvider(day.rounded),
       );
       return SignalsCalendarDay(
         date: day,
-        focusedDate: focusedDay,
         points: points,
       );
     }
 
-    return TableCalendar(
-      startingDayOfWeek: StartingDayOfWeek.monday,
-      focusedDay: now,
-      firstDay: now.subtract(range),
-      lastDay: now.add(range),
-      calendarFormat: calendarFormat,
-      shouldFillViewport: true,
-      onFormatChanged: (format) {
-        setState(() {
-          calendarFormat = format;
-        });
-      },
-      calendarBuilders: CalendarBuilders(
-        todayBuilder: builder,
-        defaultBuilder: builder,
-        outsideBuilder: builder,
-      ),
+    return Calendar(
+      builder: builder,
     );
   }
 }

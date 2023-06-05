@@ -1,6 +1,7 @@
 ## Unreleased
 
 - Fix macos build with firebase_crashlytics
+- Change the calendar to a vertical scroll view.
 
 ## 0.15.3
 

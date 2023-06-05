@@ -92,11 +92,8 @@ class SignalScreen extends StatelessWidget {
         ],
       ),
       body: view == SignalView.calendar
-          ? FractionallySizedBox(
-              heightFactor: 0.8,
-              child: SignalCalendar(
-                id: id,
-              ),
+          ? SignalCalendar(
+              id: id,
             )
           : SignalList(
               id: id,

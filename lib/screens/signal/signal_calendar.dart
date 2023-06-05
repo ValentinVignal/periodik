@@ -7,9 +7,10 @@ import 'package:periodik/screens/point/delete_point.dart';
 import 'package:periodik/screens/point/point_dialog.dart';
 import 'package:periodik/utils/date_time.dart';
 import 'package:periodik/widgets/calendar/calendar_day.dart';
-import 'package:table_calendar/table_calendar.dart';
 
-class SignalCalendar extends ConsumerStatefulWidget {
+import '../../widgets/calendar/calendar.dart';
+
+class SignalCalendar extends ConsumerWidget {
   const SignalCalendar({
     super.key,
     required this.id,
@@ -18,24 +19,15 @@ class SignalCalendar extends ConsumerStatefulWidget {
   final String id;
 
   @override
-  ConsumerState<SignalCalendar> createState() => _SignalContentState();
-}
-
-class _SignalContentState extends ConsumerState<SignalCalendar> {
-  var calendarFormat = CalendarFormat.month;
-
-  @override
-  Widget build(BuildContext context) {
-    final now = DateTime.now();
-    const range = Duration(days: 100);
+  Widget build(BuildContext context, WidgetRef ref) {
     final points = ref
             .watch(
-              pointsProvider(widget.id),
+              pointsProvider(id),
             )
             .asData
             ?.value ??
         const [];
-    Widget? builder(BuildContext context, DateTime day, DateTime focusedDay) {
+    Widget builder(BuildContext context, DateTime day) {
       final point = points.firstWhereOrNull(
         (element) => element.date.isSameDayAs(day),
       );
@@ -51,12 +43,11 @@ class _SignalContentState extends ConsumerState<SignalCalendar> {
       }
       return CalendarDay(
         date: day,
-        focusedDate: focusedDay,
         state: calendarDayState,
         onPressed: () {
           PointDialog.show(
             context: context,
-            signalId: widget.id,
+            signalId: id,
             point: point ??
                 Point(
                   id: '',
@@ -67,30 +58,15 @@ class _SignalContentState extends ConsumerState<SignalCalendar> {
         onLongPressed: point != null
             ? () => deletePoint(
                   context: context,
-                  signalId: widget.id,
+                  signalId: id,
                   pointId: point.id,
                 )
             : null,
       );
     }
 
-    return TableCalendar(
-      startingDayOfWeek: StartingDayOfWeek.monday,
-      focusedDay: now,
-      firstDay: now.subtract(range),
-      lastDay: now.add(range),
-      calendarFormat: calendarFormat,
-      shouldFillViewport: true,
-      onFormatChanged: (format) {
-        setState(() {
-          calendarFormat = format;
-        });
-      },
-      calendarBuilders: CalendarBuilders(
-        todayBuilder: builder,
-        defaultBuilder: builder,
-        outsideBuilder: builder,
-      ),
+    return Calendar(
+      builder: builder,
     );
   }
 }
