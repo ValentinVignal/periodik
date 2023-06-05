@@ -5,6 +5,7 @@
 - Makes the signal names more compact in the signals calendar screen.
 - Redirects from the signals calendar screen to the signal points screen when clicking on a signal name.
 - Adds a button to reset the calendar view.
+- Adds a more compact view for the signal calendar.
 
 ## 0.16.0
 

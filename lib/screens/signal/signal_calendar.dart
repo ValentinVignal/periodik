@@ -87,6 +87,7 @@ class __SignalCalendarState extends ConsumerState<SignalCalendar> {
       ),
       child: Calendar(
         controller: _controller,
+        view: CalendarView.compact,
         builder: builder,
       ),
     );

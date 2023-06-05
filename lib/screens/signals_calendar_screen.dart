@@ -37,6 +37,7 @@ class __SignalsCalendarScreenState
       body: Center(
         child: Calendar(
           controller: _controller,
+          view: CalendarView.cozy,
           builder: builder,
         ),
       ),

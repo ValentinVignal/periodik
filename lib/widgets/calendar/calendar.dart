@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:periodik/utils/date_time.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+enum CalendarView {
+  compact,
+  cozy,
+}
+
 class CalendarController {
   CalendarController();
 
@@ -31,11 +36,14 @@ class Calendar extends StatefulWidget {
   const Calendar({
     required this.builder,
     required this.controller,
+    required this.view,
     super.key,
   });
   final Widget Function(BuildContext, DateTime) builder;
 
   final CalendarController controller;
+
+  final CalendarView view;
 
   @override
   State<Calendar> createState() => _CalendarState();
@@ -82,11 +90,16 @@ class _CalendarState extends State<Calendar> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final minHeight = max(constraints.minHeight / 6, _minHeight);
+        var minHeight = max(constraints.minHeight / 6, _minHeight);
+        var maxHeight = _maxHeight;
+        if (widget.view == CalendarView.compact) {
+          minHeight /= 2;
+          maxHeight /= 2;
+        }
         final boxConstraints = BoxConstraints(
           minHeight: minHeight,
           maxHeight: min(
-            _maxHeight.toDouble(),
+            maxHeight,
             max(constraints.maxHeight / 6, minHeight),
           ),
         ).normalize();

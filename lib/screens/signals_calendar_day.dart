@@ -36,13 +36,21 @@ class SignalsCalendarDay extends StatelessWidget {
           // shrinkWrap: true,
           itemCount: points.length + 1,
           itemBuilder: (context, index) {
+            final theme = Theme.of(context);
             if (index == 0) {
               return Padding(
                 padding: const EdgeInsets.all(2.0),
-                child: Text(date.day.toString()),
+                child: Text(
+                  date.day.toString(),
+                  style: isToday
+                      ? TextStyle(
+                          color: theme.colorScheme.primary,
+                          fontWeight: FontWeight.bold,
+                        )
+                      : null,
+                ),
               );
             }
-            final theme = Theme.of(context);
             final point = points[index - 1];
             return Material(
               color: point.point.state
