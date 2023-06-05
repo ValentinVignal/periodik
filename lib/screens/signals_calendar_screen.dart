@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:periodik/providers/signal_points_per_day_privoder.dart';
+import 'package:periodik/providers/signal_points_per_day_provider.dart';
 import 'package:periodik/screens/signals_calendar_day.dart';
 import 'package:periodik/utils/date_time.dart';
 import 'package:periodik/widgets/calendar/calendar.dart';
