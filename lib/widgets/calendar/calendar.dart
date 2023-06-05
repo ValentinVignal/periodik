@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:periodik/utils/date_time.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
-// https://www.youtube.com/watch?v=Mz3kHQxBjGg
-
 class Calendar extends StatefulWidget {
   const Calendar({
     required this.builder,
@@ -29,7 +27,7 @@ class _CalendarState extends State<Calendar> {
   @override
   void initState() {
     super.initState();
-    final now = DateTime.now();
+    final now = DateTime.now().rounded;
     final lastMonday = now.subtract(Duration(days: now.weekday - 1));
     _firstCalendarDay = lastMonday
         .subtract(
@@ -37,7 +35,10 @@ class _CalendarState extends State<Calendar> {
             days: _daysPerWeek * _initialWeekIndex,
           ),
         )
-        .rounded;
+        // So the current day is kind of in the middle of the screen.
+        .subtract(
+          const Duration(days: _daysPerWeek * 3),
+        );
   }
 
   @override
@@ -93,21 +94,6 @@ class _Week extends StatelessWidget {
   final Widget Function(BuildContext, DateTime) builder;
   final BoxConstraints constraints;
 
-  static const _months = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sept',
-    'Oct',
-    'Nov',
-    'Dec',
-  ];
-
   @override
   Widget build(BuildContext context) {
     final weekDays = List.generate(
@@ -145,8 +131,11 @@ class _Week extends StatelessWidget {
             ),
           ),
         if (sunday.day <= 7)
-          Text(
-            _months[sunday.month - 1],
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Text(
+              MaterialLocalizations.of(context).formatMonthYear(sunday),
+            ),
           ),
         ConstrainedBox(
           constraints: constraints,
