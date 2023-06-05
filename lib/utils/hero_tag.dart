@@ -1,3 +1,0 @@
-class EditHeroTag {
-  const EditHeroTag();
-}

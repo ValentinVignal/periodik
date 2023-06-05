@@ -1,7 +1,11 @@
+## Unreleased
+
+- Moves the edit signal button in the popup menu button in the app bar.
+
 ## 0.16.0
 
-- Fix macos build with firebase_crashlytics
-- Change the calendar to a vertical scroll view.
+- Fixes macos build with firebase_crashlytics
+- Changes the calendar to a vertical scroll view.
 
 ## 0.15.3
 

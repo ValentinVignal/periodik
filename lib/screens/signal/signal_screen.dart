@@ -8,10 +8,10 @@ import 'package:periodik/screens/signal/signal_calendar.dart';
 import 'package:periodik/screens/signal/signal_list.dart';
 import 'package:periodik/screens/signal/signal_view.dart';
 import 'package:periodik/utils/collections.dart';
-import 'package:periodik/utils/hero_tag.dart';
 import 'package:periodik/widgets/signal_name_widget.dart';
 
 enum _SignalAction {
+  edit,
   delete,
 }
 
@@ -28,6 +28,11 @@ class SignalScreen extends StatelessWidget {
 
   Future<void> _onAction(BuildContext context, _SignalAction action) async {
     switch (action) {
+      case _SignalAction.edit:
+        return showDialog(
+          context: context,
+          builder: (context) => _EditSignalDialog(id: id),
+        );
       case _SignalAction.delete:
         final delete = await showDialog<bool>(
               context: context,
@@ -84,6 +89,10 @@ class SignalScreen extends StatelessWidget {
             onSelected: (action) => _onAction(context, action),
             itemBuilder: (context) => [
               const PopupMenuItem(
+                value: _SignalAction.edit,
+                child: Text('Edit'),
+              ),
+              const PopupMenuItem(
                 value: _SignalAction.delete,
                 child: Text('Delete'),
               ),
@@ -127,29 +136,11 @@ class _FAB extends StatelessWidget {
 
   final String id;
 
-  void _onEdit(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => _EditSignalDialog(id: id),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        FloatingActionButton(
-          heroTag: const EditHeroTag(),
-          onPressed: () => _onEdit(context),
-          child: const Icon(Icons.edit),
-        ),
-        const SizedBox(height: 8),
-        FloatingActionButton(
-          onPressed: () => PointDialog.show(context: context, signalId: id),
-          child: const Icon(Icons.add),
-        ),
-      ],
+    return FloatingActionButton(
+      onPressed: () => PointDialog.show(context: context, signalId: id),
+      child: const Icon(Icons.add),
     );
   }
 }
