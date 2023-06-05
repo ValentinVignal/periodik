@@ -4,19 +4,45 @@ import 'package:flutter/material.dart';
 import 'package:periodik/utils/date_time.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
+class CalendarController {
+  CalendarController();
+
+  ItemScrollController? _pageController;
+
+  void _initialize(ItemScrollController pageController) {
+    _pageController = pageController;
+  }
+
+  void _dispose() {
+    _pageController = null;
+  }
+
+  Future<void> resetView() {
+    assert(_pageController != null);
+    return _pageController!.scrollTo(
+      index: _CalendarState._initialWeekIndex,
+      duration: const Duration(milliseconds: 100),
+      curve: Curves.easeInOut,
+    );
+  }
+}
+
 class Calendar extends StatefulWidget {
   const Calendar({
     required this.builder,
+    required this.controller,
     super.key,
   });
   final Widget Function(BuildContext, DateTime) builder;
+
+  final CalendarController controller;
 
   @override
   State<Calendar> createState() => _CalendarState();
 }
 
 class _CalendarState extends State<Calendar> {
-  final _controller = PageController(initialPage: _initialWeekIndex);
+  final _itemScrollController = ItemScrollController();
 
   static const _initialWeekIndex = 100;
 
@@ -39,11 +65,13 @@ class _CalendarState extends State<Calendar> {
         .subtract(
           const Duration(days: _daysPerWeek * 3),
         );
+
+    widget.controller._initialize(_itemScrollController);
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    widget.controller._dispose();
     super.dispose();
   }
 
@@ -65,6 +93,7 @@ class _CalendarState extends State<Calendar> {
         return ScrollablePositionedList.builder(
           itemCount: _initialWeekIndex * 2,
           initialScrollIndex: _initialWeekIndex,
+          itemScrollController: _itemScrollController,
           itemBuilder: (context, weekIndex) {
             final monday = _firstCalendarDay.add(
               Duration(

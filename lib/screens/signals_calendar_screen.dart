@@ -5,29 +5,21 @@ import 'package:periodik/screens/signals_calendar_day.dart';
 import 'package:periodik/utils/date_time.dart';
 import 'package:periodik/widgets/calendar/calendar.dart';
 
-class SignalsCalendarScreen extends StatelessWidget {
-  const SignalsCalendarScreen({
-    super.key,
-  });
+import '../utils/hero_tags.dart';
+
+class SignalsCalendarScreen extends ConsumerStatefulWidget {
+  const SignalsCalendarScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Signals Calendar'),
-      ),
-      body: const Center(
-        child: _SignalCalendarContent(),
-      ),
-    );
-  }
+  ConsumerState<ConsumerStatefulWidget> createState() =>
+      __SignalsCalendarScreenState();
 }
 
-class _SignalCalendarContent extends ConsumerWidget {
-  const _SignalCalendarContent();
-
+class __SignalsCalendarScreenState
+    extends ConsumerState<SignalsCalendarScreen> {
+  final _controller = CalendarController();
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     Widget builder(BuildContext context, DateTime day) {
       final points = ref.watch(
         signalPointsPerDayProvider(day.rounded),
@@ -38,8 +30,23 @@ class _SignalCalendarContent extends ConsumerWidget {
       );
     }
 
-    return Calendar(
-      builder: builder,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Signals Calendar'),
+      ),
+      body: Center(
+        child: Calendar(
+          controller: _controller,
+          builder: builder,
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        heroTag: const ResetViewHeroTag(),
+        onPressed: () {
+          _controller.resetView();
+        },
+        child: const Icon(Icons.my_location),
+      ),
     );
   }
 }

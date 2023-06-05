@@ -1,0 +1,3 @@
+class ResetViewHeroTag {
+  const ResetViewHeroTag();
+}
