@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:periodik/models/point_with_signal.dart';
+import 'package:periodik/router/routes.dart';
 import 'package:periodik/utils/date_time.dart';
 
 class SignalsCalendarDay extends StatelessWidget {
@@ -42,17 +44,24 @@ class SignalsCalendarDay extends StatelessWidget {
             }
             final theme = Theme.of(context);
             final point = points[index - 1];
-            return ColoredBox(
+            return Material(
               color: point.point.state
                   ? theme.colorScheme.errorContainer
                   : theme.colorScheme.secondaryContainer,
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
-                child: Text(point.signal.name,
-                    style: TextStyle(
-                        color: point.point.state
-                            ? theme.colorScheme.onErrorContainer
-                            : theme.colorScheme.onSecondaryContainer)),
+                child: InkWell(
+                  onTap: () {
+                    GoRouter.of(context).push(
+                      SignalRoute(id: point.signal.id).location,
+                    );
+                  },
+                  child: Text(point.signal.name,
+                      style: TextStyle(
+                          color: point.point.state
+                              ? theme.colorScheme.onErrorContainer
+                              : theme.colorScheme.onSecondaryContainer)),
+                ),
               ),
             );
           },
