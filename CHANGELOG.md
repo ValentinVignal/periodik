@@ -2,6 +2,7 @@
 
 - Moves the edit signal button in the popup menu button in the app bar.
 - Initializes the calendar with the current day around the middle of the screen.
+- Makes the signal names more compact in the signals calendar screen.
 
 ## 0.16.0
 

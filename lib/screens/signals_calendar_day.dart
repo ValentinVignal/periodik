@@ -46,11 +46,14 @@ class SignalsCalendarDay extends StatelessWidget {
               color: point.point.state
                   ? theme.colorScheme.errorContainer
                   : theme.colorScheme.secondaryContainer,
-              child: Text(point.signal.name,
-                  style: TextStyle(
-                      color: point.point.state
-                          ? theme.colorScheme.onErrorContainer
-                          : theme.colorScheme.onSecondaryContainer)),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Text(point.signal.name,
+                    style: TextStyle(
+                        color: point.point.state
+                            ? theme.colorScheme.onErrorContainer
+                            : theme.colorScheme.onSecondaryContainer)),
+              ),
             );
           },
         ),
