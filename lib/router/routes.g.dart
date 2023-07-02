@@ -27,10 +27,12 @@ extension $HomeRouteExtension on HomeRoute {
 
   void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
 
 RouteBase get $verifyEmailRoute => GoRouteData.$route(
@@ -48,10 +50,12 @@ extension $VerifyEmailRouteExtension on VerifyEmailRoute {
 
   void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
 
 RouteBase get $loginRoute => GoRouteData.$route(
@@ -74,10 +78,12 @@ extension $LoginRouteExtension on LoginRoute {
 
   void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
 
 extension $SignUpRouteExtension on SignUpRoute {
@@ -89,10 +95,12 @@ extension $SignUpRouteExtension on SignUpRoute {
 
   void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
 
 RouteBase get $signalsRoute => GoRouteData.$route(
@@ -127,10 +135,12 @@ extension $SignalsRouteExtension on SignalsRoute {
 
   void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
 
 extension $SignalsCalendarRouteExtension on SignalsCalendarRoute {
@@ -143,15 +153,17 @@ extension $SignalsCalendarRouteExtension on SignalsCalendarRoute {
 
   void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
 
 extension $SignalRouteExtension on SignalRoute {
   static SignalRoute _fromState(GoRouterState state) => SignalRoute(
-        id: state.params['id']!,
+        id: state.pathParameters['id']!,
       );
 
   String get location => GoRouteData.$location(
@@ -160,16 +172,18 @@ extension $SignalRouteExtension on SignalRoute {
 
   void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
 
 extension $SignalCalendarRouteExtension on SignalCalendarRoute {
   static SignalCalendarRoute _fromState(GoRouterState state) =>
       SignalCalendarRoute(
-        id: state.params['id']!,
+        id: state.pathParameters['id']!,
       );
 
   String get location => GoRouteData.$location(
@@ -178,15 +192,17 @@ extension $SignalCalendarRouteExtension on SignalCalendarRoute {
 
   void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
 
 extension $SignalListRouteExtension on SignalListRoute {
   static SignalListRoute _fromState(GoRouterState state) => SignalListRoute(
-        id: state.params['id']!,
+        id: state.pathParameters['id']!,
       );
 
   String get location => GoRouteData.$location(
@@ -195,8 +211,10 @@ extension $SignalListRouteExtension on SignalListRoute {
 
   void go(BuildContext context) => context.go(location);
 
-  void push(BuildContext context) => context.push(location);
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
 }
