@@ -1,3 +1,7 @@
+## Unreleased
+
+- Adds a very dummy estimation of a single single from its points.
+
 ## 0.17.0
 
 - Moves the edit signal button in the popup menu button in the app bar.

@@ -5,6 +5,8 @@ enum CalendarDayState {
   none,
   activated,
   deactivated,
+  possiblyActivated,
+  possiblyDeactivated,
 }
 
 class CalendarDay extends StatelessWidget {
@@ -40,6 +42,12 @@ class CalendarDay extends StatelessWidget {
         break;
       case CalendarDayState.deactivated:
         backgroundColor = theme.colorScheme.secondaryContainer.withOpacity(0.8);
+        break;
+      case CalendarDayState.possiblyActivated:
+        backgroundColor = theme.colorScheme.errorContainer.withOpacity(0.2);
+        break;
+      case CalendarDayState.possiblyDeactivated:
+        backgroundColor = theme.colorScheme.secondaryContainer.withOpacity(0.2);
         break;
     }
     return InkWell(
