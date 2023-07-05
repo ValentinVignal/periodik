@@ -4,4 +4,12 @@ extension DateTimeX on DateTime {
   }
 
   DateTime get rounded => DateTime(year, month, day);
+
+  bool isBeforeOrSameAs(DateTime other) {
+    return rounded.isBefore(other) || isSameDayAs(other);
+  }
+
+  bool isAfterOrSameAs(DateTime other) {
+    return rounded.isAfter(other) || isSameDayAs(other);
+  }
 }

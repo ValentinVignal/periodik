@@ -1,10 +1,8 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../models/point.dart';
 import '../../providers/points_provider.dart';
-import '../../utils/date_time.dart';
 import '../../utils/hero_tags.dart';
 import '../../widgets/calendar/calendar.dart';
 import '../../widgets/calendar/calendar_day.dart';
@@ -30,27 +28,10 @@ class __SignalCalendarState extends ConsumerState<SignalCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    final points = ref
-            .watch(
-              pointsProvider(widget.id),
-            )
-            .asData
-            ?.value ??
-        const [];
+    final cycles = ref.watch(estimatedCyclesProvider(widget.id)).valueOrNull;
     Widget builder(BuildContext context, DateTime day) {
-      final point = points.firstWhereOrNull(
-        (element) => element.date.isSameDayAs(day),
-      );
-      final CalendarDayState calendarDayState;
-      if (point == null) {
-        calendarDayState = CalendarDayState.none;
-      } else {
-        if (point.state) {
-          calendarDayState = CalendarDayState.activated;
-        } else {
-          calendarDayState = CalendarDayState.deactivated;
-        }
-      }
+      final point = cycles?.mapPoints[day];
+      final calendarDayState = cycles?.estimate(day) ?? CalendarDayState.none;
       return CalendarDay(
         date: day,
         state: calendarDayState,
