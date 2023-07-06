@@ -23,4 +23,19 @@ extension PointStateColor on PointState {
         return theme.colorScheme.secondaryContainer.withOpacity(0.2);
     }
   }
+
+  Color? onContainerColor(ThemeData theme) {
+    switch (this) {
+      case PointState.none:
+        return null;
+      case PointState.activated:
+        return theme.colorScheme.onErrorContainer;
+      case PointState.deactivated:
+        return theme.colorScheme.onSecondaryContainer;
+      case PointState.possiblyActivated:
+        return theme.colorScheme.onErrorContainer;
+      case PointState.possiblyDeactivated:
+        return theme.colorScheme.onSecondaryContainer;
+    }
+  }
 }

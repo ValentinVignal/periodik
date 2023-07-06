@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'point_with_signal.dart';
+part of 'signal_with_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,37 +14,31 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-PointWithSignal _$PointWithSignalFromJson(Map<String, dynamic> json) {
-  return _PointWithSignal.fromJson(json);
-}
-
 /// @nodoc
-mixin _$PointWithSignal {
+mixin _$SignalWithState {
   Signal get signal => throw _privateConstructorUsedError;
-  Point get point => throw _privateConstructorUsedError;
+  PointState get point => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $PointWithSignalCopyWith<PointWithSignal> get copyWith =>
+  $SignalWithStateCopyWith<SignalWithState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $PointWithSignalCopyWith<$Res> {
-  factory $PointWithSignalCopyWith(
-          PointWithSignal value, $Res Function(PointWithSignal) then) =
-      _$PointWithSignalCopyWithImpl<$Res, PointWithSignal>;
+abstract class $SignalWithStateCopyWith<$Res> {
+  factory $SignalWithStateCopyWith(
+          SignalWithState value, $Res Function(SignalWithState) then) =
+      _$SignalWithStateCopyWithImpl<$Res, SignalWithState>;
   @useResult
-  $Res call({Signal signal, Point point});
+  $Res call({Signal signal, PointState point});
 
   $SignalCopyWith<$Res> get signal;
-  $PointCopyWith<$Res> get point;
 }
 
 /// @nodoc
-class _$PointWithSignalCopyWithImpl<$Res, $Val extends PointWithSignal>
-    implements $PointWithSignalCopyWith<$Res> {
-  _$PointWithSignalCopyWithImpl(this._value, this._then);
+class _$SignalWithStateCopyWithImpl<$Res, $Val extends SignalWithState>
+    implements $SignalWithStateCopyWith<$Res> {
+  _$SignalWithStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -65,7 +59,7 @@ class _$PointWithSignalCopyWithImpl<$Res, $Val extends PointWithSignal>
       point: null == point
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
-              as Point,
+              as PointState,
     ) as $Val);
   }
 
@@ -76,38 +70,28 @@ class _$PointWithSignalCopyWithImpl<$Res, $Val extends PointWithSignal>
       return _then(_value.copyWith(signal: value) as $Val);
     });
   }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PointCopyWith<$Res> get point {
-    return $PointCopyWith<$Res>(_value.point, (value) {
-      return _then(_value.copyWith(point: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$$_PointWithSignalCopyWith<$Res>
-    implements $PointWithSignalCopyWith<$Res> {
-  factory _$$_PointWithSignalCopyWith(
-          _$_PointWithSignal value, $Res Function(_$_PointWithSignal) then) =
-      __$$_PointWithSignalCopyWithImpl<$Res>;
+abstract class _$$_SignalWithStateCopyWith<$Res>
+    implements $SignalWithStateCopyWith<$Res> {
+  factory _$$_SignalWithStateCopyWith(
+          _$_SignalWithState value, $Res Function(_$_SignalWithState) then) =
+      __$$_SignalWithStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Signal signal, Point point});
+  $Res call({Signal signal, PointState point});
 
   @override
   $SignalCopyWith<$Res> get signal;
-  @override
-  $PointCopyWith<$Res> get point;
 }
 
 /// @nodoc
-class __$$_PointWithSignalCopyWithImpl<$Res>
-    extends _$PointWithSignalCopyWithImpl<$Res, _$_PointWithSignal>
-    implements _$$_PointWithSignalCopyWith<$Res> {
-  __$$_PointWithSignalCopyWithImpl(
-      _$_PointWithSignal _value, $Res Function(_$_PointWithSignal) _then)
+class __$$_SignalWithStateCopyWithImpl<$Res>
+    extends _$SignalWithStateCopyWithImpl<$Res, _$_SignalWithState>
+    implements _$$_SignalWithStateCopyWith<$Res> {
+  __$$_SignalWithStateCopyWithImpl(
+      _$_SignalWithState _value, $Res Function(_$_SignalWithState) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -116,7 +100,7 @@ class __$$_PointWithSignalCopyWithImpl<$Res>
     Object? signal = null,
     Object? point = null,
   }) {
-    return _then(_$_PointWithSignal(
+    return _then(_$_SignalWithState(
       signal: null == signal
           ? _value.signal
           : signal // ignore: cast_nullable_to_non_nullable
@@ -124,72 +108,56 @@ class __$$_PointWithSignalCopyWithImpl<$Res>
       point: null == point
           ? _value.point
           : point // ignore: cast_nullable_to_non_nullable
-              as Point,
+              as PointState,
     ));
   }
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_PointWithSignal extends _PointWithSignal {
-  const _$_PointWithSignal({required this.signal, required this.point})
-      : super._();
 
-  factory _$_PointWithSignal.fromJson(Map<String, dynamic> json) =>
-      _$$_PointWithSignalFromJson(json);
+class _$_SignalWithState implements _SignalWithState {
+  const _$_SignalWithState({required this.signal, required this.point});
 
   @override
   final Signal signal;
   @override
-  final Point point;
+  final PointState point;
 
   @override
   String toString() {
-    return 'PointWithSignal(signal: $signal, point: $point)';
+    return 'SignalWithState(signal: $signal, point: $point)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_PointWithSignal &&
+            other is _$_SignalWithState &&
             (identical(other.signal, signal) || other.signal == signal) &&
             (identical(other.point, point) || other.point == point));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, signal, point);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PointWithSignalCopyWith<_$_PointWithSignal> get copyWith =>
-      __$$_PointWithSignalCopyWithImpl<_$_PointWithSignal>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_PointWithSignalToJson(
-      this,
-    );
-  }
+  _$$_SignalWithStateCopyWith<_$_SignalWithState> get copyWith =>
+      __$$_SignalWithStateCopyWithImpl<_$_SignalWithState>(this, _$identity);
 }
 
-abstract class _PointWithSignal extends PointWithSignal {
-  const factory _PointWithSignal(
+abstract class _SignalWithState implements SignalWithState {
+  const factory _SignalWithState(
       {required final Signal signal,
-      required final Point point}) = _$_PointWithSignal;
-  const _PointWithSignal._() : super._();
-
-  factory _PointWithSignal.fromJson(Map<String, dynamic> json) =
-      _$_PointWithSignal.fromJson;
+      required final PointState point}) = _$_SignalWithState;
 
   @override
   Signal get signal;
   @override
-  Point get point;
+  PointState get point;
   @override
   @JsonKey(ignore: true)
-  _$$_PointWithSignalCopyWith<_$_PointWithSignal> get copyWith =>
+  _$$_SignalWithStateCopyWith<_$_SignalWithState> get copyWith =>
       throw _privateConstructorUsedError;
 }

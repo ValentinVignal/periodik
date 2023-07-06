@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:periodik/models/point_with_signal.dart';
+import 'package:periodik/models/signal_with_state.dart';
 import 'package:periodik/router/routes.dart';
 import 'package:periodik/utils/date_time.dart';
+
+import '../models/point_state.dart';
 
 class SignalsCalendarDay extends StatelessWidget {
   const SignalsCalendarDay({
@@ -12,7 +14,7 @@ class SignalsCalendarDay extends StatelessWidget {
   });
 
   final DateTime date;
-  final List<PointWithSignal> points;
+  final List<SignalWithState> points;
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +55,7 @@ class SignalsCalendarDay extends StatelessWidget {
             }
             final point = points[index - 1];
             return Material(
-              color: point.point.state
-                  ? theme.colorScheme.errorContainer
-                  : theme.colorScheme.secondaryContainer,
+              color: point.point.containerColor(theme),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: InkWell(
@@ -64,11 +64,12 @@ class SignalsCalendarDay extends StatelessWidget {
                       SignalRoute(id: point.signal.id).location,
                     );
                   },
-                  child: Text(point.signal.name,
-                      style: TextStyle(
-                          color: point.point.state
-                              ? theme.colorScheme.onErrorContainer
-                              : theme.colorScheme.onSecondaryContainer)),
+                  child: Text(
+                    point.signal.name,
+                    style: TextStyle(
+                      color: point.point.onContainerColor(theme),
+                    ),
+                  ),
                 ),
               ),
             );
