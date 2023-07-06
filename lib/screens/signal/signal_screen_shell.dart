@@ -8,12 +8,15 @@ import 'package:periodik/screens/signal/signal_view.dart';
 import 'package:periodik/utils/collections.dart';
 import 'package:periodik/widgets/signal_name_widget.dart';
 
+import '../../providers/display_predictions_provider.dart';
+
 enum _SignalAction {
   edit,
   delete,
+  displayPredictions,
 }
 
-class SignalScreenShell extends StatelessWidget {
+class SignalScreenShell extends ConsumerWidget {
   const SignalScreenShell({
     required this.id,
     required this.child,
@@ -30,8 +33,11 @@ class SignalScreenShell extends StatelessWidget {
 
   final Widget? floatingActionButton;
 
-  Future<void> _onAction(BuildContext context, _SignalAction action) async {
+  Future<void> _onAction(
+      BuildContext context, WidgetRef ref, _SignalAction action) async {
     switch (action) {
+      case _SignalAction.displayPredictions:
+        ref.read(displayPredictionsProvider.notifier).update((state) => !state);
       case _SignalAction.edit:
         return showDialog(
           context: context,
@@ -70,7 +76,7 @@ class SignalScreenShell extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: _SignalAppBar(
@@ -90,8 +96,18 @@ class SignalScreenShell extends StatelessWidget {
             ),
           ),
           PopupMenuButton(
-            onSelected: (action) => _onAction(context, action),
+            onSelected: (action) => _onAction(context, ref, action),
             itemBuilder: (context) => [
+              PopupMenuItem(
+                value: _SignalAction.displayPredictions,
+                child: Consumer(builder: (context, ref, child) {
+                  final displayPredictions =
+                      ref.watch(displayPredictionsProvider);
+                  return Text(
+                    '${displayPredictions ? 'Hide' : 'Display'} predictions',
+                  );
+                }),
+              ),
               const PopupMenuItem(
                 value: _SignalAction.edit,
                 child: Text('Edit'),

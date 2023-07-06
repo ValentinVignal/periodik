@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:periodik/models/point.dart';
+import 'package:periodik/providers/display_predictions_provider.dart';
 import 'package:periodik/utils/collections.dart';
 
 import '../models/cycles.dart';
@@ -23,10 +24,15 @@ final estimatedCyclesProvider =
     Provider.autoDispose.family<AsyncValue<Cycles>, String>(
   (ref, signalId) {
     return ref.watch(pointsProvider(signalId)).whenData((points) {
-      return Cycles(points: points)..compute();
+      if (ref.watch(displayPredictionsProvider)) {
+        return Cycles(points: points)..compute();
+      } else {
+        return Cycles.unpredictive(points: points);
+      }
     });
   },
   dependencies: [
     pointsProvider,
+    displayPredictionsProvider,
   ],
 );
