@@ -3,19 +3,36 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:logging/logging.dart';
+import 'package:periodik/models/point_state.dart';
 import 'package:periodik/models/signal.dart';
 import 'package:periodik/providers/signals_provider.dart';
 import 'package:periodik/router/routes.dart';
 import 'package:periodik/utils/collections.dart';
 import 'package:periodik/widgets/signal_name_widget.dart';
 
+import '../providers/display_predictions_provider.dart';
+import '../providers/points_provider.dart';
+
 final _logger = Logger('HomeScreen');
 
-class SignalsScreen extends StatelessWidget {
+enum _SignalsAction { displayPredictions, logout }
+
+class SignalsScreen extends ConsumerWidget {
   const SignalsScreen({super.key});
 
+  Future<void> _onAction(
+      BuildContext context, WidgetRef ref, _SignalsAction action) async {
+    switch (action) {
+      case _SignalsAction.displayPredictions:
+        ref.read(displayPredictionsProvider.notifier).update((state) => !state);
+      case _SignalsAction.logout:
+        await FirebaseAuth.instance.signOut();
+        break;
+    }
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Signals'),
@@ -26,9 +43,24 @@ class SignalsScreen extends StatelessWidget {
             },
             icon: const Icon(Icons.calendar_month),
           ),
-          IconButton(
-            onPressed: FirebaseAuth.instance.signOut,
-            icon: const Icon(Icons.logout),
+          PopupMenuButton<_SignalsAction>(
+            onSelected: (action) => _onAction(context, ref, action),
+            itemBuilder: (context) => [
+              PopupMenuItem(
+                value: _SignalsAction.displayPredictions,
+                child: Consumer(builder: (context, ref, child) {
+                  final displayPredictions =
+                      ref.watch(displayPredictionsProvider);
+                  return Text(
+                    '${displayPredictions ? 'Hide' : 'Display'} predictions',
+                  );
+                }),
+              ),
+              const PopupMenuItem(
+                value: _SignalsAction.logout,
+                child: Text('Logout'),
+              ),
+            ],
           ),
         ],
       ),
@@ -49,15 +81,28 @@ class _Signals extends ConsumerWidget {
               itemCount: signals.length,
               itemBuilder: (context, index) {
                 final signal = signals[index];
-                return ListTile(
-                  onTap: () {
-                    GoRouter.of(context).go(
-                      SignalRoute(id: signal.id).location,
+                return Consumer(
+                  builder: (context, ref, child) {
+                    var state = PointState.none;
+                    if (ref.watch(displayPredictionsProvider)) {
+                      state = ref
+                              .watch(estimatedCyclesProvider(signal.id))
+                              .value
+                              ?.estimate(DateTime.now()) ??
+                          PointState.none;
+                    }
+                    return ListTile(
+                      tileColor: state.containerColor(Theme.of(context)),
+                      onTap: () {
+                        GoRouter.of(context).go(
+                          SignalRoute(id: signal.id).location,
+                        );
+                      },
+                      title: SignalNameWidget(
+                        signal: signal,
+                      ),
                     );
                   },
-                  title: SignalNameWidget(
-                    signal: signal,
-                  ),
                 );
               },
             );

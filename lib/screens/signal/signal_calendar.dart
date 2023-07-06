@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../models/point.dart';
+import '../../models/point_state.dart';
 import '../../providers/points_provider.dart';
 import '../../utils/hero_tags.dart';
 import '../../widgets/calendar/calendar.dart';
@@ -31,7 +32,7 @@ class __SignalCalendarState extends ConsumerState<SignalCalendar> {
     final cycles = ref.watch(estimatedCyclesProvider(widget.id)).valueOrNull;
     Widget builder(BuildContext context, DateTime day) {
       final point = cycles?.mapPoints[day];
-      final calendarDayState = cycles?.estimate(day) ?? CalendarDayState.none;
+      final calendarDayState = cycles?.estimate(day) ?? PointState.none;
       return CalendarDay(
         date: day,
         state: calendarDayState,

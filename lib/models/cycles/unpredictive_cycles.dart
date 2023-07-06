@@ -1,7 +1,6 @@
-import 'package:periodik/widgets/calendar/calendar_day.dart';
-
-import '../cycles.dart';
 import '../point.dart';
+import '../point_state.dart';
+import 'cycles.dart';
 
 class UnpredictiveCycles implements Cycles {
   UnpredictiveCycles({
@@ -25,12 +24,12 @@ class UnpredictiveCycles implements Cycles {
   }
 
   @override
-  CalendarDayState estimate(DateTime date) {
+  PointState estimate(DateTime date) {
     if (mapPoints.containsKey(date)) {
       return mapPoints[date]!.state
-          ? CalendarDayState.activated
-          : CalendarDayState.deactivated;
+          ? PointState.activated
+          : PointState.deactivated;
     }
-    return CalendarDayState.none;
+    return PointState.none;
   }
 }

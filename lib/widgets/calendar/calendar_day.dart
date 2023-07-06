@@ -1,20 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:periodik/utils/date_time.dart';
 
-enum CalendarDayState {
-  none,
-  activated,
-  deactivated,
-  possiblyActivated,
-  possiblyDeactivated,
-}
+import '../../models/point_state.dart';
 
 class CalendarDay extends StatelessWidget {
   const CalendarDay({
     required this.date,
     required this.onPressed,
     this.onLongPressed,
-    this.state = CalendarDayState.none,
+    this.state = PointState.none,
     super.key,
   });
 
@@ -24,7 +18,7 @@ class CalendarDay extends StatelessWidget {
 
   final VoidCallback? onLongPressed;
 
-  final CalendarDayState state;
+  final PointState state;
 
   @override
   Widget build(BuildContext context) {
@@ -32,24 +26,7 @@ class CalendarDay extends StatelessWidget {
     final isToday = today.isSameDayAs(date);
     final theme = Theme.of(context);
 
-    final Color? backgroundColor;
-    switch (state) {
-      case CalendarDayState.none:
-        backgroundColor = null;
-        break;
-      case CalendarDayState.activated:
-        backgroundColor = theme.colorScheme.errorContainer.withOpacity(0.8);
-        break;
-      case CalendarDayState.deactivated:
-        backgroundColor = theme.colorScheme.secondaryContainer.withOpacity(0.8);
-        break;
-      case CalendarDayState.possiblyActivated:
-        backgroundColor = theme.colorScheme.errorContainer.withOpacity(0.2);
-        break;
-      case CalendarDayState.possiblyDeactivated:
-        backgroundColor = theme.colorScheme.secondaryContainer.withOpacity(0.2);
-        break;
-    }
+    final backgroundColor = state.containerColor(theme);
     return InkWell(
       onTap: onPressed,
       onLongPress: onLongPressed,

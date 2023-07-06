@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:periodik/providers/points_provider.dart';
-import 'package:periodik/screens/point/delete_point.dart';
-import 'package:periodik/screens/point/point_dialog.dart';
+
+import '../../providers/points_provider.dart';
+import '../point/delete_point.dart';
+import '../point/point_dialog.dart';
 
 class SignalList extends ConsumerWidget {
   const SignalList({

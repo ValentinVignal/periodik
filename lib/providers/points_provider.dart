@@ -3,7 +3,7 @@ import 'package:periodik/models/point.dart';
 import 'package:periodik/providers/display_predictions_provider.dart';
 import 'package:periodik/utils/collections.dart';
 
-import '../models/cycles.dart';
+import '../models/cycles/cycles.dart';
 
 final pointsProvider = StreamProvider.autoDispose.family<List<Point>, String>(
   (ref, signalId) async* {

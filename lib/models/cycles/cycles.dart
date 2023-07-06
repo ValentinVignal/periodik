@@ -1,9 +1,9 @@
 import 'package:collection/collection.dart';
+import 'package:periodik/models/point_state.dart';
 
-import '../utils/date_time.dart';
-import '../widgets/calendar/calendar_day.dart';
-import 'cycles/unpredictive_cycles.dart';
-import 'point.dart';
+import '../../utils/date_time.dart';
+import '../point.dart';
+import 'unpredictive_cycles.dart';
 
 class Cycles {
   Cycles({
@@ -96,31 +96,31 @@ class Cycles {
         .round();
   }
 
-  CalendarDayState estimate(DateTime date) {
+  PointState estimate(DateTime date) {
     if (mapPoints.containsKey(date)) {
       return mapPoints[date]!.state
-          ? CalendarDayState.activated
-          : CalendarDayState.deactivated;
+          ? PointState.activated
+          : PointState.deactivated;
     } else if (date.isBefore(_cycles.first.start)) {
-      return CalendarDayState.none;
+      return PointState.none;
     } else if (date.isBefore(_lastDate)) {
       final cycle =
           _cycles.lastWhere((cycle) => cycle.start.isBeforeOrSameAs(date));
       if (date.isBefore(cycle.end)) {
-        return CalendarDayState.possiblyActivated;
+        return PointState.possiblyActivated;
       } else {
-        return CalendarDayState.possiblyDeactivated;
+        return PointState.possiblyDeactivated;
       }
     } else if (date.isBefore(_cycles.last.end)) {
-      return CalendarDayState.possiblyActivated;
+      return PointState.possiblyActivated;
     } else {
       final lastCycleStartDate = _cycles.last.start;
       final offsetInCycle =
           date.difference(lastCycleStartDate).inDays % _averageCycleLength;
       if (offsetInCycle < _averageCycleActivationLength) {
-        return CalendarDayState.possiblyActivated;
+        return PointState.possiblyActivated;
       } else {
-        return CalendarDayState.possiblyDeactivated;
+        return PointState.possiblyDeactivated;
       }
     }
   }

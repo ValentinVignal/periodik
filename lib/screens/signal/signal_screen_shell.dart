@@ -11,9 +11,9 @@ import 'package:periodik/widgets/signal_name_widget.dart';
 import '../../providers/display_predictions_provider.dart';
 
 enum _SignalAction {
+  displayPredictions,
   edit,
   delete,
-  displayPredictions,
 }
 
 class SignalScreenShell extends ConsumerWidget {

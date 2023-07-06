@@ -2,6 +2,7 @@
 
 - Adds a very dummy estimation of a single single from its points.
 - Adds an option on the signal points screen to display the predictions.
+- Displays the prediction on the signals list screen.
 
 ## 0.17.0
 
