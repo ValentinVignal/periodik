@@ -4,8 +4,8 @@ import '../point.dart';
 import '../point_state.dart';
 import 'cycles.dart';
 
-class UnpredictiveCycles implements Cycles {
-  UnpredictiveCycles({
+class NonPredictiveCycles implements Cycles {
+  NonPredictiveCycles({
     required this.points,
   });
 

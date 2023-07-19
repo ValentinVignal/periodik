@@ -27,7 +27,7 @@ final estimatedCyclesProvider =
       if (ref.watch(displayPredictionsProvider)) {
         return Cycles(points: points)..compute();
       } else {
-        return Cycles.unpredictive(points: points);
+        return Cycles.nonPredictive(points: points);
       }
     });
   },

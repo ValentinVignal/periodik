@@ -3,16 +3,16 @@ import 'package:periodik/models/point_state.dart';
 
 import '../../utils/date_time.dart';
 import '../point.dart';
-import 'unpredictive_cycles.dart';
+import 'non_predictive_cycles.dart';
 
 class Cycles {
   Cycles({
     required this.points,
   });
 
-  factory Cycles.unpredictive({
+  factory Cycles.nonPredictive({
     required List<Point> points,
-  }) = UnpredictiveCycles;
+  }) = NonPredictiveCycles;
 
   final List<Point> points;
   Map<DateTime, Point>? _mapPoints;
