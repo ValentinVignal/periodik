@@ -1,3 +1,7 @@
+## Unreleased
+
+- Upgrades packages.
+
 ## 0.18.0
 
 - Adds a very dummy estimation of a single single from its points.
