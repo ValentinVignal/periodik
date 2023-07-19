@@ -1,4 +1,4 @@
-## Unreleased
+## 0.18.0
 
 - Adds a very dummy estimation of a single single from its points.
 - Adds an option on the signal points screen to display the predictions.
