@@ -1,6 +1,7 @@
 ## Unreleased
 
 - Upgrades packages.
+- Fix some points that were not getting displayed.
 
 ## 0.18.0
 

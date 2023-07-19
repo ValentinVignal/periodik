@@ -16,10 +16,8 @@ class Cycles {
 
   final List<Point> points;
   Map<DateTime, Point>? _mapPoints;
-  Map<DateTime, Point> get mapPoints =>
-      _mapPoints ??
-      Map.fromEntries(
-        points.map((point) => MapEntry(point.date, point)),
+  Map<DateTime, Point> get mapPoints => _mapPoints ??= Map.fromEntries(
+        points.map((point) => MapEntry(point.date.rounded, point)),
       );
 
   final _cycles = <Cycle>[];
