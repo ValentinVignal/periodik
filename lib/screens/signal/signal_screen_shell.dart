@@ -8,10 +8,7 @@ import 'package:periodik/screens/signal/signal_view.dart';
 import 'package:periodik/utils/collections.dart';
 import 'package:periodik/widgets/signal_name_widget.dart';
 
-import '../../providers/display_predictions_provider.dart';
-
 enum _SignalAction {
-  displayPredictions,
   edit,
   delete,
 }
@@ -36,8 +33,6 @@ class SignalScreenShell extends ConsumerWidget {
   Future<void> _onAction(
       BuildContext context, WidgetRef ref, _SignalAction action) async {
     switch (action) {
-      case _SignalAction.displayPredictions:
-        ref.read(displayPredictionsProvider.notifier).update((state) => !state);
       case _SignalAction.edit:
         return showDialog(
           context: context,
@@ -98,23 +93,19 @@ class SignalScreenShell extends ConsumerWidget {
           PopupMenuButton(
             onSelected: (action) => _onAction(context, ref, action),
             itemBuilder: (context) => [
-              PopupMenuItem(
-                value: _SignalAction.displayPredictions,
-                child: Consumer(builder: (context, ref, child) {
-                  final displayPredictions =
-                      ref.watch(displayPredictionsProvider);
-                  return Text(
-                    '${displayPredictions ? 'Hide' : 'Display'} predictions',
-                  );
-                }),
-              ),
               const PopupMenuItem(
                 value: _SignalAction.edit,
-                child: Text('Edit'),
+                child: ListTile(
+                  leading: Icon(Icons.edit),
+                  title: Text('Edit'),
+                ),
               ),
               const PopupMenuItem(
                 value: _SignalAction.delete,
-                child: Text('Delete'),
+                child: ListTile(
+                  leading: Icon(Icons.delete),
+                  title: Text('Delete'),
+                ),
               ),
             ],
           ),

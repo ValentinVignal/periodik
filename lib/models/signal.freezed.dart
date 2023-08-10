@@ -26,6 +26,7 @@ mixin _$Signal {
   @JsonKey(includeToJson: false)
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  bool get hidden => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +38,8 @@ abstract class $SignalCopyWith<$Res> {
   factory $SignalCopyWith(Signal value, $Res Function(Signal) then) =
       _$SignalCopyWithImpl<$Res, Signal>;
   @useResult
-  $Res call({@JsonKey(includeToJson: false) String id, String name});
+  $Res call(
+      {@JsonKey(includeToJson: false) String id, String name, bool hidden});
 }
 
 /// @nodoc
@@ -55,6 +57,7 @@ class _$SignalCopyWithImpl<$Res, $Val extends Signal>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? hidden = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -65,6 +68,10 @@ class _$SignalCopyWithImpl<$Res, $Val extends Signal>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      hidden: null == hidden
+          ? _value.hidden
+          : hidden // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -75,7 +82,8 @@ abstract class _$$_SignalCopyWith<$Res> implements $SignalCopyWith<$Res> {
       __$$_SignalCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(includeToJson: false) String id, String name});
+  $Res call(
+      {@JsonKey(includeToJson: false) String id, String name, bool hidden});
 }
 
 /// @nodoc
@@ -90,6 +98,7 @@ class __$$_SignalCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? hidden = null,
   }) {
     return _then(_$_Signal(
       id: null == id
@@ -100,6 +109,10 @@ class __$$_SignalCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      hidden: null == hidden
+          ? _value.hidden
+          : hidden // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -108,7 +121,9 @@ class __$$_SignalCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Signal extends _Signal {
   const _$_Signal(
-      {@JsonKey(includeToJson: false) required this.id, required this.name})
+      {@JsonKey(includeToJson: false) required this.id,
+      required this.name,
+      this.hidden = false})
       : super._();
 
   factory _$_Signal.fromJson(Map<String, dynamic> json) =>
@@ -122,10 +137,13 @@ class _$_Signal extends _Signal {
   final String id;
   @override
   final String name;
+  @override
+  @JsonKey()
+  final bool hidden;
 
   @override
   String toString() {
-    return 'Signal(id: $id, name: $name)';
+    return 'Signal(id: $id, name: $name, hidden: $hidden)';
   }
 
   @override
@@ -134,12 +152,13 @@ class _$_Signal extends _Signal {
         (other.runtimeType == runtimeType &&
             other is _$_Signal &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.hidden, hidden) || other.hidden == hidden));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, hidden);
 
   @JsonKey(ignore: true)
   @override
@@ -158,7 +177,8 @@ class _$_Signal extends _Signal {
 abstract class _Signal extends Signal {
   const factory _Signal(
       {@JsonKey(includeToJson: false) required final String id,
-      required final String name}) = _$_Signal;
+      required final String name,
+      final bool hidden}) = _$_Signal;
   const _Signal._() : super._();
 
   factory _Signal.fromJson(Map<String, dynamic> json) = _$_Signal.fromJson;
@@ -170,6 +190,8 @@ abstract class _Signal extends Signal {
   String get id;
   @override
   String get name;
+  @override
+  bool get hidden;
   @override
   @JsonKey(ignore: true)
   _$$_SignalCopyWith<_$_Signal> get copyWith =>

@@ -15,7 +15,7 @@ import '../providers/points_provider.dart';
 
 final _logger = Logger('HomeScreen');
 
-enum _SignalsAction { displayPredictions, logout }
+enum _SignalsAction { settings, logout }
 
 class SignalsScreen extends ConsumerWidget {
   const SignalsScreen({super.key});
@@ -23,8 +23,8 @@ class SignalsScreen extends ConsumerWidget {
   Future<void> _onAction(
       BuildContext context, WidgetRef ref, _SignalsAction action) async {
     switch (action) {
-      case _SignalsAction.displayPredictions:
-        ref.read(displayPredictionsProvider.notifier).update((state) => !state);
+      case _SignalsAction.settings:
+        GoRouter.of(context).push(const SettingsRoute().location);
       case _SignalsAction.logout:
         await FirebaseAuth.instance.signOut();
         break;
@@ -46,19 +46,21 @@ class SignalsScreen extends ConsumerWidget {
           PopupMenuButton<_SignalsAction>(
             onSelected: (action) => _onAction(context, ref, action),
             itemBuilder: (context) => [
-              PopupMenuItem(
-                value: _SignalsAction.displayPredictions,
-                child: Consumer(builder: (context, ref, child) {
-                  final displayPredictions =
-                      ref.watch(displayPredictionsProvider);
-                  return Text(
-                    '${displayPredictions ? 'Hide' : 'Display'} predictions',
-                  );
-                }),
+              const PopupMenuItem(
+                value: _SignalsAction.settings,
+                child: ListTile(
+                  leading: Icon(Icons.settings),
+                  title: Text(
+                    'Settings',
+                  ),
+                ),
               ),
               const PopupMenuItem(
                 value: _SignalsAction.logout,
-                child: Text('Logout'),
+                child: ListTile(
+                  leading: Icon(Icons.logout),
+                  title: Text('Logout'),
+                ),
               ),
             ],
           ),

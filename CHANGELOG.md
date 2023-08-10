@@ -1,3 +1,7 @@
+## Unreleased
+
+- Adds a settings screen.
+
 ## 0.18.1
 
 - Upgrades packages.

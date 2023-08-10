@@ -12,6 +12,7 @@ class Signal with _$Signal {
     // ignore: invalid_annotation_target
     @JsonKey(includeToJson: false) required String id,
     required String name,
+    @Default(false) bool hidden,
   }) = _Signal;
 
   factory Signal.fromJson(Json json) => _$SignalFromJson(json);
