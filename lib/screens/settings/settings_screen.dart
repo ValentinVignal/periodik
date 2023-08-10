@@ -27,6 +27,17 @@ class SettingsScreen extends ConsumerWidget {
                     );
                   },
           ),
+          SwitchListTile.adaptive(
+            title: const Text('Display hidden signals'),
+            value: settings?.displayHiddenSignals ?? false,
+            onChanged: settings == null
+                ? null
+                : (value) {
+                    Collections.settings.set(
+                      settings.copyWith(displayHiddenSignals: value).toJson(),
+                    );
+                  },
+          ),
         ],
       ),
     );

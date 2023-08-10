@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:periodik/models/signal.dart';
 import 'package:periodik/providers/signal_provider.dart';
 import 'package:periodik/router/routes.dart';
 import 'package:periodik/screens/point/point_dialog.dart';
@@ -178,13 +179,22 @@ class _EditSignalDialog extends ConsumerStatefulWidget {
 
 class __EditSignalDialogState extends ConsumerState<_EditSignalDialog> {
   late final TextEditingController _textController;
+  late Signal _modifiedSignal;
 
   @override
   void initState() {
     super.initState();
+
+    _modifiedSignal = ref.read(signalProvider(widget.id)).requireValue;
     _textController = TextEditingController(
-      text: ref.read(signalProvider(widget.id)).asData?.value.name,
-    );
+      text: _modifiedSignal.name,
+    )..addListener(() {
+        setState(() {
+          _modifiedSignal = _modifiedSignal.copyWith(
+            name: _textController.text,
+          );
+        });
+      });
   }
 
   @override
@@ -197,8 +207,22 @@ class __EditSignalDialogState extends ConsumerState<_EditSignalDialog> {
   Widget build(BuildContext context) {
     return AlertDialog(
       title: const Text('Edit Signal'),
-      content: TextFormField(
-        controller: _textController,
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextFormField(
+            controller: _textController,
+          ),
+          SwitchListTile.adaptive(
+            title: const Text('Hidden'),
+            value: _modifiedSignal.hidden,
+            onChanged: (value) {
+              setState(() {
+                _modifiedSignal = _modifiedSignal.copyWith(hidden: value);
+              });
+            },
+          ),
+        ],
       ),
       actions: [
         TextButton(
@@ -206,14 +230,17 @@ class __EditSignalDialogState extends ConsumerState<_EditSignalDialog> {
           child: const Text('Cancel'),
         ),
         ElevatedButton(
-          onPressed: () async {
-            await Collections.signals.doc(widget.id).update({
-              'name': _textController.text,
-            });
-            if (mounted) {
-              Navigator.of(context).pop();
-            }
-          },
+          onPressed: _modifiedSignal ==
+                  ref.watch(signalProvider(widget.id)).valueOrNull
+              ? null
+              : () async {
+                  await Collections.signals
+                      .doc(widget.id)
+                      .update(_modifiedSignal.toJson());
+                  if (mounted) {
+                    Navigator.of(context).pop();
+                  }
+                },
           child: const Text('Save'),
         ),
       ],
