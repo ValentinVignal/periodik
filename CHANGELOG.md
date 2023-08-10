@@ -1,4 +1,4 @@
-## Unreleased
+## 0.18.1
 
 - Upgrades packages.
 - Fix some points that were not getting displayed.
