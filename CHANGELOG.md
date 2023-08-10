@@ -1,4 +1,4 @@
-## Unreleased
+## 0.19.0
 
 - Adds a settings screen.
 - Adds the possibility to hide signals.
