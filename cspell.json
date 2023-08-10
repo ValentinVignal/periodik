@@ -3,5 +3,9 @@
         "firestore",
         "Periodik",
         "riverpod"
+    ],
+    "ignorePaths": [
+      "**/*.freezed.dart",
+      "**/*.g.dart"
     ]
 }
