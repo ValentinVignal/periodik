@@ -10,8 +10,8 @@ import 'package:periodik/router/routes.dart';
 import 'package:periodik/utils/collections.dart';
 import 'package:periodik/widgets/signal_name_widget.dart';
 
-import '../providers/display_predictions_provider.dart';
 import '../providers/points_provider.dart';
+import '../providers/settings_provider.dart';
 
 final _logger = Logger('HomeScreen');
 
@@ -86,7 +86,11 @@ class _Signals extends ConsumerWidget {
                 return Consumer(
                   builder: (context, ref, child) {
                     var state = PointState.none;
-                    if (ref.watch(displayPredictionsProvider)) {
+                    if (ref
+                            .watch(settingsProvider)
+                            .valueOrNull
+                            ?.displayPredictions ??
+                        false) {
                       state = ref
                               .watch(estimatedCyclesProvider(signal.id))
                               .value

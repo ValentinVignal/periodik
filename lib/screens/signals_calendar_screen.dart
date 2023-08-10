@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:periodik/models/signal_with_state.dart';
 import 'package:periodik/providers/points_provider.dart';
+import 'package:periodik/providers/settings_provider.dart';
 import 'package:periodik/providers/signal_points_per_day_provider.dart';
 import 'package:periodik/providers/signals_provider.dart';
 import 'package:periodik/screens/signals_calendar_day.dart';
@@ -9,7 +10,6 @@ import 'package:periodik/utils/date_time.dart';
 import 'package:periodik/widgets/calendar/calendar.dart';
 
 import '../models/point_state.dart';
-import '../providers/display_predictions_provider.dart';
 import '../utils/hero_tags.dart';
 
 class SignalsCalendarScreen extends ConsumerStatefulWidget {
@@ -28,7 +28,8 @@ class __SignalsCalendarScreenState
   Widget build(BuildContext context) {
     Widget builder(BuildContext context, DateTime day) {
       final List<SignalWithState> points;
-      if (ref.watch(displayPredictionsProvider)) {
+      if (ref.watch(settingsProvider).valueOrNull?.displayPredictions ??
+          false) {
         points = ref.watch(signalsProvider).valueOrNull?.map((signal) {
               final cycle =
                   ref.watch(estimatedCyclesProvider(signal.id)).valueOrNull;

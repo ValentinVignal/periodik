@@ -15,4 +15,11 @@ mixin Collections {
 
   static CollectionReference<Map<String, dynamic>> points(String signalId) =>
       signals.doc(signalId).collection('points');
+
+  static DocumentReference<Map<String, dynamic>> get settings =>
+      FirebaseFirestore.instance
+          .collection(
+            'settings',
+          )
+          .doc(FirebaseAuth.instance.currentUser!.uid);
 }
