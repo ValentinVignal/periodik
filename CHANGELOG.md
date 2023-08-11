@@ -1,4 +1,4 @@
-## Unreleased
+## 0.20.0
 
 - Upgrades dependencies.
 - Makes the calendar infinite.
