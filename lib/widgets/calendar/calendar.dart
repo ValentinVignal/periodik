@@ -2,34 +2,10 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:periodik/utils/date_time.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 enum CalendarView {
   compact,
   cozy,
-}
-
-class CalendarController {
-  CalendarController();
-
-  ItemScrollController? _pageController;
-
-  void _initialize(ItemScrollController pageController) {
-    _pageController = pageController;
-  }
-
-  void _dispose() {
-    _pageController = null;
-  }
-
-  Future<void> resetView() {
-    assert(_pageController != null);
-    return _pageController!.scrollTo(
-      index: _CalendarState._initialWeekIndex,
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.easeInOut,
-    );
-  }
 }
 
 class Calendar extends StatefulWidget {
@@ -41,7 +17,7 @@ class Calendar extends StatefulWidget {
   });
   final Widget Function(BuildContext, DateTime) builder;
 
-  final CalendarController controller;
+  final ScrollController controller;
 
   final CalendarView view;
 
@@ -50,37 +26,17 @@ class Calendar extends StatefulWidget {
 }
 
 class _CalendarState extends State<Calendar> {
-  final _itemScrollController = ItemScrollController();
-
-  static const _initialWeekIndex = 100;
-
   static const _daysPerWeek = 7;
 
-  late final DateTime _firstCalendarDay;
+  late final DateTime _lastMonday;
+
+  final UniqueKey _center = UniqueKey();
 
   @override
   void initState() {
     super.initState();
     final now = DateTime.now().rounded;
-    final lastMonday = now.subtract(Duration(days: now.weekday - 1));
-    _firstCalendarDay = lastMonday
-        .subtract(
-          const Duration(
-            days: _daysPerWeek * _initialWeekIndex,
-          ),
-        )
-        // So the current day is kind of in the middle of the screen.
-        .subtract(
-          const Duration(days: _daysPerWeek * 3),
-        );
-
-    widget.controller._initialize(_itemScrollController);
-  }
-
-  @override
-  void dispose() {
-    widget.controller._dispose();
-    super.dispose();
+    _lastMonday = now.subtract(Duration(days: now.weekday - 1));
   }
 
   static const _minHeight = 80.0;
@@ -103,22 +59,46 @@ class _CalendarState extends State<Calendar> {
             max(constraints.maxHeight / 6, minHeight),
           ),
         ).normalize();
-        return ScrollablePositionedList.builder(
-          itemCount: _initialWeekIndex * 2,
-          initialScrollIndex: _initialWeekIndex,
-          itemScrollController: _itemScrollController,
-          itemBuilder: (context, weekIndex) {
-            final monday = _firstCalendarDay.add(
-              Duration(
-                days: weekIndex * _daysPerWeek,
-              ),
-            );
-            return _Week(
-              constraints: boxConstraints,
-              monday: monday,
-              builder: widget.builder,
-            );
-          },
+        return CustomScrollView(
+          controller: widget.controller,
+          anchor: 0.5,
+          center: _center,
+          slivers: [
+            SliverList.builder(
+              itemBuilder: (context, weekIndex) {
+                final monday = _lastMonday.subtract(
+                  Duration(
+                    days: (weekIndex + 1) * _daysPerWeek,
+                  ),
+                );
+                return _Week(
+                  constraints: boxConstraints,
+                  monday: monday,
+                  builder: widget.builder,
+                );
+              },
+            ),
+            SliverToBoxAdapter(
+              // This sliver will be located at the anchor. The scroll position
+              // will progress in either direction from this point.
+              key: _center,
+              child: const SizedBox.shrink(),
+            ),
+            SliverList.builder(
+              itemBuilder: (context, weekIndex) {
+                final monday = _lastMonday.add(
+                  Duration(
+                    days: weekIndex * _daysPerWeek,
+                  ),
+                );
+                return _Week(
+                  constraints: boxConstraints,
+                  monday: monday,
+                  builder: widget.builder,
+                );
+              },
+            ),
+          ],
         );
       },
     );

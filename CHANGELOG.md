@@ -1,6 +1,7 @@
 ## Unreleased
 
 - Upgrades dependencies.
+- Makes the calendar infinite.
 
 ## 0.19.0
 

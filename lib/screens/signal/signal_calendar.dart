@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:periodik/utils/date_time.dart';
+import 'package:periodik/utils/scroll_controller.dart';
 
 import '../../models/point.dart';
 import '../../models/point_state.dart';
@@ -26,7 +27,13 @@ class SignalCalendar extends ConsumerStatefulWidget {
 }
 
 class __SignalCalendarState extends ConsumerState<SignalCalendar> {
-  final _controller = CalendarController();
+  final _controller = ScrollController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,9 +70,7 @@ class __SignalCalendarState extends ConsumerState<SignalCalendar> {
       view: SignalView.calendar,
       floatingActionButton: FloatingActionButton(
         heroTag: const ResetViewHeroTag(),
-        onPressed: () {
-          _controller.resetView();
-        },
+        onPressed: _controller.scrollToCenter,
         child: const Icon(Icons.my_location),
       ),
       child: Calendar(

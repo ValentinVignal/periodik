@@ -7,6 +7,7 @@ import 'package:periodik/providers/signal_points_per_day_provider.dart';
 import 'package:periodik/providers/signals_provider.dart';
 import 'package:periodik/screens/signals_calendar_day.dart';
 import 'package:periodik/utils/date_time.dart';
+import 'package:periodik/utils/scroll_controller.dart';
 import 'package:periodik/widgets/calendar/calendar.dart';
 
 import '../models/point_state.dart';
@@ -22,7 +23,13 @@ class SignalsCalendarScreen extends ConsumerStatefulWidget {
 
 class __SignalsCalendarScreenState
     extends ConsumerState<SignalsCalendarScreen> {
-  final _controller = CalendarController();
+  final _controller = ScrollController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +68,7 @@ class __SignalsCalendarScreenState
       ),
       floatingActionButton: FloatingActionButton(
         heroTag: const ResetViewHeroTag(),
-        onPressed: () {
-          _controller.resetView();
-        },
+        onPressed: _controller.scrollToCenter,
         child: const Icon(Icons.my_location),
       ),
     );
