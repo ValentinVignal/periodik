@@ -11,7 +11,7 @@ GoRouter _getRouter() {
   return GoRouter(
     refreshListenable: userNotifier,
     redirect: (BuildContext context, GoRouterState state) {
-      return guardRedirect(state.location);
+      return guardRedirect(state.uri);
     },
     routes: $appRoutes,
   );

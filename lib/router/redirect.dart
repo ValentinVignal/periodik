@@ -5,8 +5,7 @@ import '../utils/emails.dart';
 import '../utils/k_verify_email.dart';
 import 'routes.dart';
 
-String? guardRedirect([String? location]) {
-  final uri = location == null ? null : Uri.parse(location);
+String? guardRedirect([Uri? uri]) {
   final firstSegment = uri?.pathSegments.firstOrNull;
   final user = FirebaseAuth.instance.currentUser;
   if (user != null) {

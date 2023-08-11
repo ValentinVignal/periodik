@@ -1,3 +1,7 @@
+## Unreleased
+
+- Upgrades dependencies.
+
 ## 0.19.0
 
 - Adds a settings screen.
