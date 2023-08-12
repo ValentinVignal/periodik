@@ -19,7 +19,7 @@ jobs:
       - name: Run tests
         run: flutter test --coverage
       - name: Upload to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
   spelling:
     # Verifies there is no spelling errors in the code.
     runs-on: ubuntu-latest
