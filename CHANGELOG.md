@@ -1,6 +1,7 @@
 # Unreleased
 
 - Adds a simple test on the login screen.
+- Adds a simple test on the signals screen.
 
 ## 0.20.0
 
