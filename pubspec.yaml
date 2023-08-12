@@ -48,6 +48,7 @@ dependencies:
   flutter_svg: ^2.0.5
   equatable: ^2.0.5
   firebase_crashlytics: ^3.3.0 # https://github.com/firebase/flutterfire/issues/10994#issuecomment-1554320808 and https://github.com/firebase/flutterfire/issues/10994
+  meta: ^1.9.1
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +64,8 @@ dev_dependencies:
   go_router_builder: ^2.2.0
   freezed: ^2.3.2
   json_serializable: ^6.6.1
+  fake_cloud_firestore: ^2.4.1+1
+  mocktail: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

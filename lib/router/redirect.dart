@@ -1,13 +1,13 @@
 import 'package:collection/collection.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
+import '../utils/auth.dart';
 import '../utils/emails.dart';
 import '../utils/k_verify_email.dart';
 import 'routes.dart';
 
 String? guardRedirect([Uri? uri]) {
   final firstSegment = uri?.pathSegments.firstOrNull;
-  final user = FirebaseAuth.instance.currentUser;
+  final user = Auth.instance.currentUser;
   if (user != null) {
     if (firstSegment == 'login') {
       return const HomeRoute().location;

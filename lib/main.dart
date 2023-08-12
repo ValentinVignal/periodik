@@ -26,11 +26,11 @@ Future<void> main() async {
 
   setPathUrlStrategy();
   GoRouter.optionURLReflectsImperativeAPIs = true;
-  runApp(const MyApp());
+  runApp(const Periodik());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Periodik extends StatelessWidget {
+  const Periodik({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -7,6 +7,8 @@ import 'package:periodik/utils/iterable_extension.dart';
 import 'package:periodik/widgets/animated_visibility.dart';
 import 'package:periodik/widgets/google_sign_in.dart';
 
+import '../utils/auth.dart';
+
 final _logger = Logger('LoginScreen');
 
 class LoginScreen extends StatelessWidget {
@@ -50,7 +52,7 @@ class __LoginScreenContentState extends State<_LoginScreenContent> {
     });
     if (!_formKey.currentState!.validate()) return;
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      await Auth.instance.signInWithEmailAndPassword(
         email: _emailController.text,
         password: _passwordController.text,
       );

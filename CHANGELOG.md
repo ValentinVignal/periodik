@@ -1,3 +1,7 @@
+# Unreleased
+
+- Adds a simple test on the login screen.
+
 ## 0.20.0
 
 - Upgrades dependencies.

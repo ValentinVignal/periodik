@@ -6,6 +6,8 @@ import 'package:periodik/router/routes.dart';
 import 'package:periodik/utils/iterable_extension.dart';
 import 'package:periodik/widgets/animated_visibility.dart';
 
+import '../utils/auth.dart';
+
 final _logger = Logger('SignUpScreen');
 
 class SignUpScreen extends StatelessWidget {
@@ -53,11 +55,11 @@ class _SignUpScreenContentState extends State<_SignUpScreenContent> {
     });
     if (!_formKey.currentState!.validate()) return;
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await Auth.instance.createUserWithEmailAndPassword(
         email: _emailController.text,
         password: _passwordController0.text,
       );
-      final user = FirebaseAuth.instance.currentUser!;
+      final user = Auth.instance.currentUser!;
 
       if (user.emailVerified) {
         // Go router should refresh the page.

@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -12,6 +11,7 @@ import 'package:periodik/widgets/signal_name_widget.dart';
 
 import '../providers/points_provider.dart';
 import '../providers/settings_provider.dart';
+import '../utils/auth.dart';
 
 final _logger = Logger('HomeScreen');
 
@@ -26,7 +26,7 @@ class SignalsScreen extends ConsumerWidget {
       case _SignalsAction.settings:
         GoRouter.of(context).push(const SettingsRoute().location);
       case _SignalsAction.logout:
-        await FirebaseAuth.instance.signOut();
+        await Auth.instance.signOut();
         break;
     }
   }

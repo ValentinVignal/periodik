@@ -1,11 +1,12 @@
 import 'dart:async';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 import 'package:periodik/utils/iterable_extension.dart';
 import 'package:periodik/utils/user_notifier.dart';
 import 'package:periodik/widgets/animated_visibility.dart';
+
+import '../utils/auth.dart';
 
 final _logger = Logger('VerifyEmailScreen');
 
@@ -25,7 +26,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
     super.initState();
     _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
       if (mounted) {
-        FirebaseAuth.instance.currentUser!.reload();
+        Auth.instance.currentUser!.reload();
       }
     });
   }
@@ -43,7 +44,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
         title: const Text('Verify your email'),
         actions: [
           IconButton(
-            onPressed: FirebaseAuth.instance.signOut,
+            onPressed: Auth.instance.signOut,
             icon: const Icon(Icons.logout),
           ),
         ],
@@ -68,7 +69,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
           Center(
             child: ElevatedButton(
               onPressed: () {
-                FirebaseAuth.instance.currentUser!.reload();
+                Auth.instance.currentUser!.reload();
               },
               child: const Text('I have verified my email'),
             ),
@@ -80,8 +81,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   _error = '';
                 });
                 try {
-                  await FirebaseAuth.instance.currentUser!
-                      .sendEmailVerification();
+                  await Auth.instance.currentUser!.sendEmailVerification();
                 } catch (error, stackTrace) {
                   _logger.severe(
                     'Could not send the email verification',

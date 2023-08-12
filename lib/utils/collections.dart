@@ -1,12 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:meta/meta.dart';
+
+import 'auth.dart';
 
 mixin Collections {
-  static DocumentReference get _userDocument => FirebaseFirestore.instance
+  @visibleForTesting
+  static FirebaseFirestore? mockInstance;
+
+  static FirebaseFirestore get _instance {
+    return mockInstance ?? FirebaseFirestore.instance;
+  }
+
+  static DocumentReference get _userDocument => _instance
       .collection(
         'users',
       )
-      .doc(FirebaseAuth.instance.currentUser!.uid);
+      .doc(Auth.instance.currentUser!.uid);
 
   static CollectionReference<Map<String, dynamic>> get signals =>
       _userDocument.collection(
@@ -16,10 +25,9 @@ mixin Collections {
   static CollectionReference<Map<String, dynamic>> points(String signalId) =>
       signals.doc(signalId).collection('points');
 
-  static DocumentReference<Map<String, dynamic>> get settings =>
-      FirebaseFirestore.instance
-          .collection(
-            'settings',
-          )
-          .doc(FirebaseAuth.instance.currentUser!.uid);
+  static DocumentReference<Map<String, dynamic>> get settings => _instance
+      .collection(
+        'settings',
+      )
+      .doc(Auth.instance.currentUser!.uid);
 }

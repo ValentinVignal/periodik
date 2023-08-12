@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
+import '../utils/auth.dart';
+
 class GoogleSignInWidget extends StatelessWidget {
   const GoogleSignInWidget({super.key});
 
@@ -21,7 +23,7 @@ class GoogleSignInWidget extends StatelessWidget {
     );
 
     // Once signed in, return the UserCredential
-    await FirebaseAuth.instance.signInWithCredential(credential);
+    await Auth.instance.signInWithCredential(credential);
   }
 
   @override
