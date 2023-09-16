@@ -1,3 +1,7 @@
+# 0.20.2
+
+- Fixes a bug by catching a `FirebaseException` on logout.
+
 # 0.20.1
 
 - Adds a simple test on the login screen.
