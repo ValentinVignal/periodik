@@ -1,12 +1,12 @@
 import 'dart:async';
 
+import 'package:animated_collection/animated_collection.dart';
 import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
-import 'package:periodik/utils/iterable_extension.dart';
-import 'package:periodik/utils/user_notifier.dart';
-import 'package:periodik/widgets/animated_visibility.dart';
 
 import '../utils/auth.dart';
+import '../utils/iterable_extension.dart';
+import '../utils/user_notifier.dart';
 
 final _logger = Logger('VerifyEmailScreen');
 
