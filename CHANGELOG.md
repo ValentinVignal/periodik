@@ -1,7 +1,9 @@
-# Unreleased
+# 0.20.1
 
 - Adds a simple test on the login screen.
 - Adds a simple test on the signals screen.
+- Adds `animated_collection`.
+- Upgrades to Fluter `3.13.4`.
 
 ## 0.20.0
 
