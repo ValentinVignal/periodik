@@ -78,11 +78,11 @@ class _$SignalWithPointsCopyWithImpl<$Res, $Val extends SignalWithPoints>
 }
 
 /// @nodoc
-abstract class _$$_SignalWithPointsCopyWith<$Res>
+abstract class _$$SignalWithPointsImplCopyWith<$Res>
     implements $SignalWithPointsCopyWith<$Res> {
-  factory _$$_SignalWithPointsCopyWith(
-          _$_SignalWithPoints value, $Res Function(_$_SignalWithPoints) then) =
-      __$$_SignalWithPointsCopyWithImpl<$Res>;
+  factory _$$SignalWithPointsImplCopyWith(_$SignalWithPointsImpl value,
+          $Res Function(_$SignalWithPointsImpl) then) =
+      __$$SignalWithPointsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Signal signal, List<Point> points});
@@ -92,11 +92,11 @@ abstract class _$$_SignalWithPointsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SignalWithPointsCopyWithImpl<$Res>
-    extends _$SignalWithPointsCopyWithImpl<$Res, _$_SignalWithPoints>
-    implements _$$_SignalWithPointsCopyWith<$Res> {
-  __$$_SignalWithPointsCopyWithImpl(
-      _$_SignalWithPoints _value, $Res Function(_$_SignalWithPoints) _then)
+class __$$SignalWithPointsImplCopyWithImpl<$Res>
+    extends _$SignalWithPointsCopyWithImpl<$Res, _$SignalWithPointsImpl>
+    implements _$$SignalWithPointsImplCopyWith<$Res> {
+  __$$SignalWithPointsImplCopyWithImpl(_$SignalWithPointsImpl _value,
+      $Res Function(_$SignalWithPointsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -105,7 +105,7 @@ class __$$_SignalWithPointsCopyWithImpl<$Res>
     Object? signal = null,
     Object? points = null,
   }) {
-    return _then(_$_SignalWithPoints(
+    return _then(_$SignalWithPointsImpl(
       signal: null == signal
           ? _value.signal
           : signal // ignore: cast_nullable_to_non_nullable
@@ -120,14 +120,14 @@ class __$$_SignalWithPointsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SignalWithPoints extends _SignalWithPoints {
-  const _$_SignalWithPoints(
+class _$SignalWithPointsImpl extends _SignalWithPoints {
+  const _$SignalWithPointsImpl(
       {required this.signal, required final List<Point> points})
       : _points = points,
         super._();
 
-  factory _$_SignalWithPoints.fromJson(Map<String, dynamic> json) =>
-      _$$_SignalWithPointsFromJson(json);
+  factory _$SignalWithPointsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SignalWithPointsImplFromJson(json);
 
   @override
   final Signal signal;
@@ -148,7 +148,7 @@ class _$_SignalWithPoints extends _SignalWithPoints {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SignalWithPoints &&
+            other is _$SignalWithPointsImpl &&
             (identical(other.signal, signal) || other.signal == signal) &&
             const DeepCollectionEquality().equals(other._points, _points));
   }
@@ -161,12 +161,13 @@ class _$_SignalWithPoints extends _SignalWithPoints {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SignalWithPointsCopyWith<_$_SignalWithPoints> get copyWith =>
-      __$$_SignalWithPointsCopyWithImpl<_$_SignalWithPoints>(this, _$identity);
+  _$$SignalWithPointsImplCopyWith<_$SignalWithPointsImpl> get copyWith =>
+      __$$SignalWithPointsImplCopyWithImpl<_$SignalWithPointsImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SignalWithPointsToJson(
+    return _$$SignalWithPointsImplToJson(
       this,
     );
   }
@@ -175,11 +176,11 @@ class _$_SignalWithPoints extends _SignalWithPoints {
 abstract class _SignalWithPoints extends SignalWithPoints {
   const factory _SignalWithPoints(
       {required final Signal signal,
-      required final List<Point> points}) = _$_SignalWithPoints;
+      required final List<Point> points}) = _$SignalWithPointsImpl;
   const _SignalWithPoints._() : super._();
 
   factory _SignalWithPoints.fromJson(Map<String, dynamic> json) =
-      _$_SignalWithPoints.fromJson;
+      _$SignalWithPointsImpl.fromJson;
 
   @override
   Signal get signal;
@@ -187,6 +188,6 @@ abstract class _SignalWithPoints extends SignalWithPoints {
   List<Point> get points;
   @override
   @JsonKey(ignore: true)
-  _$$_SignalWithPointsCopyWith<_$_SignalWithPoints> get copyWith =>
+  _$$SignalWithPointsImplCopyWith<_$SignalWithPointsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

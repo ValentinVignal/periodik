@@ -1,3 +1,7 @@
+## NEXT
+
+- Upgrade dependencies.
+
 # 0.20.2
 
 - Fixes a bug by catching a `FirebaseException` on logout.

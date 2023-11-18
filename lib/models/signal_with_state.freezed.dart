@@ -73,11 +73,11 @@ class _$SignalWithStateCopyWithImpl<$Res, $Val extends SignalWithState>
 }
 
 /// @nodoc
-abstract class _$$_SignalWithStateCopyWith<$Res>
+abstract class _$$SignalWithStateImplCopyWith<$Res>
     implements $SignalWithStateCopyWith<$Res> {
-  factory _$$_SignalWithStateCopyWith(
-          _$_SignalWithState value, $Res Function(_$_SignalWithState) then) =
-      __$$_SignalWithStateCopyWithImpl<$Res>;
+  factory _$$SignalWithStateImplCopyWith(_$SignalWithStateImpl value,
+          $Res Function(_$SignalWithStateImpl) then) =
+      __$$SignalWithStateImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({Signal signal, PointState point});
@@ -87,11 +87,11 @@ abstract class _$$_SignalWithStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_SignalWithStateCopyWithImpl<$Res>
-    extends _$SignalWithStateCopyWithImpl<$Res, _$_SignalWithState>
-    implements _$$_SignalWithStateCopyWith<$Res> {
-  __$$_SignalWithStateCopyWithImpl(
-      _$_SignalWithState _value, $Res Function(_$_SignalWithState) _then)
+class __$$SignalWithStateImplCopyWithImpl<$Res>
+    extends _$SignalWithStateCopyWithImpl<$Res, _$SignalWithStateImpl>
+    implements _$$SignalWithStateImplCopyWith<$Res> {
+  __$$SignalWithStateImplCopyWithImpl(
+      _$SignalWithStateImpl _value, $Res Function(_$SignalWithStateImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +100,7 @@ class __$$_SignalWithStateCopyWithImpl<$Res>
     Object? signal = null,
     Object? point = null,
   }) {
-    return _then(_$_SignalWithState(
+    return _then(_$SignalWithStateImpl(
       signal: null == signal
           ? _value.signal
           : signal // ignore: cast_nullable_to_non_nullable
@@ -115,8 +115,8 @@ class __$$_SignalWithStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SignalWithState implements _SignalWithState {
-  const _$_SignalWithState({required this.signal, required this.point});
+class _$SignalWithStateImpl implements _SignalWithState {
+  const _$SignalWithStateImpl({required this.signal, required this.point});
 
   @override
   final Signal signal;
@@ -132,7 +132,7 @@ class _$_SignalWithState implements _SignalWithState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SignalWithState &&
+            other is _$SignalWithStateImpl &&
             (identical(other.signal, signal) || other.signal == signal) &&
             (identical(other.point, point) || other.point == point));
   }
@@ -143,14 +143,15 @@ class _$_SignalWithState implements _SignalWithState {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SignalWithStateCopyWith<_$_SignalWithState> get copyWith =>
-      __$$_SignalWithStateCopyWithImpl<_$_SignalWithState>(this, _$identity);
+  _$$SignalWithStateImplCopyWith<_$SignalWithStateImpl> get copyWith =>
+      __$$SignalWithStateImplCopyWithImpl<_$SignalWithStateImpl>(
+          this, _$identity);
 }
 
 abstract class _SignalWithState implements SignalWithState {
   const factory _SignalWithState(
       {required final Signal signal,
-      required final PointState point}) = _$_SignalWithState;
+      required final PointState point}) = _$SignalWithStateImpl;
 
   @override
   Signal get signal;
@@ -158,6 +159,6 @@ abstract class _SignalWithState implements SignalWithState {
   PointState get point;
   @override
   @JsonKey(ignore: true)
-  _$$_SignalWithStateCopyWith<_$_SignalWithState> get copyWith =>
+  _$$SignalWithStateImplCopyWith<_$SignalWithStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

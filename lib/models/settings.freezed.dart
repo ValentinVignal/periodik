@@ -67,21 +67,22 @@ class _$SettingsCopyWithImpl<$Res, $Val extends Settings>
 }
 
 /// @nodoc
-abstract class _$$_SettingsCopyWith<$Res> implements $SettingsCopyWith<$Res> {
-  factory _$$_SettingsCopyWith(
-          _$_Settings value, $Res Function(_$_Settings) then) =
-      __$$_SettingsCopyWithImpl<$Res>;
+abstract class _$$SettingsImplCopyWith<$Res>
+    implements $SettingsCopyWith<$Res> {
+  factory _$$SettingsImplCopyWith(
+          _$SettingsImpl value, $Res Function(_$SettingsImpl) then) =
+      __$$SettingsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({bool displayPredictions, bool displayHiddenSignals});
 }
 
 /// @nodoc
-class __$$_SettingsCopyWithImpl<$Res>
-    extends _$SettingsCopyWithImpl<$Res, _$_Settings>
-    implements _$$_SettingsCopyWith<$Res> {
-  __$$_SettingsCopyWithImpl(
-      _$_Settings _value, $Res Function(_$_Settings) _then)
+class __$$SettingsImplCopyWithImpl<$Res>
+    extends _$SettingsCopyWithImpl<$Res, _$SettingsImpl>
+    implements _$$SettingsImplCopyWith<$Res> {
+  __$$SettingsImplCopyWithImpl(
+      _$SettingsImpl _value, $Res Function(_$SettingsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -90,7 +91,7 @@ class __$$_SettingsCopyWithImpl<$Res>
     Object? displayPredictions = null,
     Object? displayHiddenSignals = null,
   }) {
-    return _then(_$_Settings(
+    return _then(_$SettingsImpl(
       displayPredictions: null == displayPredictions
           ? _value.displayPredictions
           : displayPredictions // ignore: cast_nullable_to_non_nullable
@@ -105,13 +106,13 @@ class __$$_SettingsCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Settings extends _Settings {
-  const _$_Settings(
+class _$SettingsImpl extends _Settings {
+  const _$SettingsImpl(
       {this.displayPredictions = false, this.displayHiddenSignals = false})
       : super._();
 
-  factory _$_Settings.fromJson(Map<String, dynamic> json) =>
-      _$$_SettingsFromJson(json);
+  factory _$SettingsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SettingsImplFromJson(json);
 
   @override
   @JsonKey()
@@ -129,7 +130,7 @@ class _$_Settings extends _Settings {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Settings &&
+            other is _$SettingsImpl &&
             (identical(other.displayPredictions, displayPredictions) ||
                 other.displayPredictions == displayPredictions) &&
             (identical(other.displayHiddenSignals, displayHiddenSignals) ||
@@ -144,12 +145,12 @@ class _$_Settings extends _Settings {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SettingsCopyWith<_$_Settings> get copyWith =>
-      __$$_SettingsCopyWithImpl<_$_Settings>(this, _$identity);
+  _$$SettingsImplCopyWith<_$SettingsImpl> get copyWith =>
+      __$$SettingsImplCopyWithImpl<_$SettingsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SettingsToJson(
+    return _$$SettingsImplToJson(
       this,
     );
   }
@@ -158,10 +159,11 @@ class _$_Settings extends _Settings {
 abstract class _Settings extends Settings {
   const factory _Settings(
       {final bool displayPredictions,
-      final bool displayHiddenSignals}) = _$_Settings;
+      final bool displayHiddenSignals}) = _$SettingsImpl;
   const _Settings._() : super._();
 
-  factory _Settings.fromJson(Map<String, dynamic> json) = _$_Settings.fromJson;
+  factory _Settings.fromJson(Map<String, dynamic> json) =
+      _$SettingsImpl.fromJson;
 
   @override
   bool get displayPredictions;
@@ -169,6 +171,6 @@ abstract class _Settings extends Settings {
   bool get displayHiddenSignals;
   @override
   @JsonKey(ignore: true)
-  _$$_SettingsCopyWith<_$_Settings> get copyWith =>
+  _$$SettingsImplCopyWith<_$SettingsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -80,9 +80,10 @@ class _$PointCopyWithImpl<$Res, $Val extends Point>
 }
 
 /// @nodoc
-abstract class _$$_PointCopyWith<$Res> implements $PointCopyWith<$Res> {
-  factory _$$_PointCopyWith(_$_Point value, $Res Function(_$_Point) then) =
-      __$$_PointCopyWithImpl<$Res>;
+abstract class _$$PointImplCopyWith<$Res> implements $PointCopyWith<$Res> {
+  factory _$$PointImplCopyWith(
+          _$PointImpl value, $Res Function(_$PointImpl) then) =
+      __$$PointImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -92,9 +93,11 @@ abstract class _$$_PointCopyWith<$Res> implements $PointCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_PointCopyWithImpl<$Res> extends _$PointCopyWithImpl<$Res, _$_Point>
-    implements _$$_PointCopyWith<$Res> {
-  __$$_PointCopyWithImpl(_$_Point _value, $Res Function(_$_Point) _then)
+class __$$PointImplCopyWithImpl<$Res>
+    extends _$PointCopyWithImpl<$Res, _$PointImpl>
+    implements _$$PointImplCopyWith<$Res> {
+  __$$PointImplCopyWithImpl(
+      _$PointImpl _value, $Res Function(_$PointImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -104,7 +107,7 @@ class __$$_PointCopyWithImpl<$Res> extends _$PointCopyWithImpl<$Res, _$_Point>
     Object? date = null,
     Object? state = null,
   }) {
-    return _then(_$_Point(
+    return _then(_$PointImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -123,15 +126,15 @@ class __$$_PointCopyWithImpl<$Res> extends _$PointCopyWithImpl<$Res, _$_Point>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Point extends _Point {
-  const _$_Point(
+class _$PointImpl extends _Point {
+  const _$PointImpl(
       {@JsonKey(includeToJson: false) required this.id,
       @TimestampDateTimeConverter() required this.date,
       this.state = false})
       : super._();
 
-  factory _$_Point.fromJson(Map<String, dynamic> json) =>
-      _$$_PointFromJson(json);
+  factory _$PointImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PointImplFromJson(json);
 
 // It is what freezed recommends.
 //
@@ -155,7 +158,7 @@ class _$_Point extends _Point {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Point &&
+            other is _$PointImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.state, state) || other.state == state));
@@ -168,12 +171,12 @@ class _$_Point extends _Point {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_PointCopyWith<_$_Point> get copyWith =>
-      __$$_PointCopyWithImpl<_$_Point>(this, _$identity);
+  _$$PointImplCopyWith<_$PointImpl> get copyWith =>
+      __$$PointImplCopyWithImpl<_$PointImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_PointToJson(
+    return _$$PointImplToJson(
       this,
     );
   }
@@ -183,10 +186,10 @@ abstract class _Point extends Point {
   const factory _Point(
       {@JsonKey(includeToJson: false) required final String id,
       @TimestampDateTimeConverter() required final DateTime date,
-      final bool state}) = _$_Point;
+      final bool state}) = _$PointImpl;
   const _Point._() : super._();
 
-  factory _Point.fromJson(Map<String, dynamic> json) = _$_Point.fromJson;
+  factory _Point.fromJson(Map<String, dynamic> json) = _$PointImpl.fromJson;
 
   @override // It is what freezed recommends.
 //
@@ -200,6 +203,6 @@ abstract class _Point extends Point {
   bool get state;
   @override
   @JsonKey(ignore: true)
-  _$$_PointCopyWith<_$_Point> get copyWith =>
+  _$$PointImplCopyWith<_$PointImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

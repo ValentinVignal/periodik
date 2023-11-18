@@ -6,12 +6,13 @@ part of 'settings.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Settings _$$_SettingsFromJson(Map<String, dynamic> json) => _$_Settings(
+_$SettingsImpl _$$SettingsImplFromJson(Map<String, dynamic> json) =>
+    _$SettingsImpl(
       displayPredictions: json['displayPredictions'] as bool? ?? false,
       displayHiddenSignals: json['displayHiddenSignals'] as bool? ?? false,
     );
 
-Map<String, dynamic> _$$_SettingsToJson(_$_Settings instance) =>
+Map<String, dynamic> _$$SettingsImplToJson(_$SettingsImpl instance) =>
     <String, dynamic>{
       'displayPredictions': instance.displayPredictions,
       'displayHiddenSignals': instance.displayHiddenSignals,

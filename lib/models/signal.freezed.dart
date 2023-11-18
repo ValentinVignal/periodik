@@ -77,9 +77,10 @@ class _$SignalCopyWithImpl<$Res, $Val extends Signal>
 }
 
 /// @nodoc
-abstract class _$$_SignalCopyWith<$Res> implements $SignalCopyWith<$Res> {
-  factory _$$_SignalCopyWith(_$_Signal value, $Res Function(_$_Signal) then) =
-      __$$_SignalCopyWithImpl<$Res>;
+abstract class _$$SignalImplCopyWith<$Res> implements $SignalCopyWith<$Res> {
+  factory _$$SignalImplCopyWith(
+          _$SignalImpl value, $Res Function(_$SignalImpl) then) =
+      __$$SignalImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -87,10 +88,11 @@ abstract class _$$_SignalCopyWith<$Res> implements $SignalCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SignalCopyWithImpl<$Res>
-    extends _$SignalCopyWithImpl<$Res, _$_Signal>
-    implements _$$_SignalCopyWith<$Res> {
-  __$$_SignalCopyWithImpl(_$_Signal _value, $Res Function(_$_Signal) _then)
+class __$$SignalImplCopyWithImpl<$Res>
+    extends _$SignalCopyWithImpl<$Res, _$SignalImpl>
+    implements _$$SignalImplCopyWith<$Res> {
+  __$$SignalImplCopyWithImpl(
+      _$SignalImpl _value, $Res Function(_$SignalImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +102,7 @@ class __$$_SignalCopyWithImpl<$Res>
     Object? name = null,
     Object? hidden = null,
   }) {
-    return _then(_$_Signal(
+    return _then(_$SignalImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -119,15 +121,15 @@ class __$$_SignalCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Signal extends _Signal {
-  const _$_Signal(
+class _$SignalImpl extends _Signal {
+  const _$SignalImpl(
       {@JsonKey(includeToJson: false) required this.id,
       required this.name,
       this.hidden = false})
       : super._();
 
-  factory _$_Signal.fromJson(Map<String, dynamic> json) =>
-      _$$_SignalFromJson(json);
+  factory _$SignalImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SignalImplFromJson(json);
 
 // It is what freezed recommends.
 //
@@ -150,7 +152,7 @@ class _$_Signal extends _Signal {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Signal &&
+            other is _$SignalImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.hidden, hidden) || other.hidden == hidden));
@@ -163,12 +165,12 @@ class _$_Signal extends _Signal {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SignalCopyWith<_$_Signal> get copyWith =>
-      __$$_SignalCopyWithImpl<_$_Signal>(this, _$identity);
+  _$$SignalImplCopyWith<_$SignalImpl> get copyWith =>
+      __$$SignalImplCopyWithImpl<_$SignalImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SignalToJson(
+    return _$$SignalImplToJson(
       this,
     );
   }
@@ -178,10 +180,10 @@ abstract class _Signal extends Signal {
   const factory _Signal(
       {@JsonKey(includeToJson: false) required final String id,
       required final String name,
-      final bool hidden}) = _$_Signal;
+      final bool hidden}) = _$SignalImpl;
   const _Signal._() : super._();
 
-  factory _Signal.fromJson(Map<String, dynamic> json) = _$_Signal.fromJson;
+  factory _Signal.fromJson(Map<String, dynamic> json) = _$SignalImpl.fromJson;
 
   @override // It is what freezed recommends.
 //
@@ -194,6 +196,6 @@ abstract class _Signal extends Signal {
   bool get hidden;
   @override
   @JsonKey(ignore: true)
-  _$$_SignalCopyWith<_$_Signal> get copyWith =>
+  _$$SignalImplCopyWith<_$SignalImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
