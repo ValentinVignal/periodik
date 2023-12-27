@@ -1,4 +1,4 @@
-## NEXT
+## 0.22.0
 
 - Upgrade dependencies.
 
