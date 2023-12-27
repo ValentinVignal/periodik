@@ -37,7 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^2.14.0 # https://github.com/firebase/flutterfire/issues/10994#issuecomment-1554320808 and https://github.com/firebase/flutterfire/issues/10994
   flutter_riverpod: ^2.3.4
-  go_router: ^12.1.1
+  go_router: ^13.0.1
   freezed_annotation: ^2.2.0
   url_strategy: ^0.2.0
   firebase_auth: ^4.4.0
