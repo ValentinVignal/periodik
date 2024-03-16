@@ -105,6 +105,8 @@ class __LoginScreenContentState extends State<_LoginScreenContent> {
               ),
               controller: _passwordController,
               obscureText: _obscure,
+              textInputAction: TextInputAction.done,
+              onFieldSubmitted: (_) => _login(),
               validator: (value) =>
                   (value?.isNotEmpty ?? false) ? null : 'Required',
             ),
