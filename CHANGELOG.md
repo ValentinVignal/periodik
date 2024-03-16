@@ -1,3 +1,7 @@
+## NEXT
+
+- Upgrades to Flutter 3.19.3.
+
 ## 0.22.0
 
 - Upgrade dependencies.
@@ -112,4 +116,4 @@
 ## 0.6.0
 
 - Displays the list of points of a signal.
-- Allows the edition of a signal name. 
+- Allows the edition of a signal name.
