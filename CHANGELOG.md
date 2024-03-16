@@ -1,6 +1,7 @@
-## NEXT
+## 0.23.0
 
 - Upgrades to Flutter 3.19.3.
+- Triggers the login when pressing enter.
 
 ## 0.22.0
 
