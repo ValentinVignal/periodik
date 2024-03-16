@@ -237,9 +237,8 @@ class __EditSignalDialogState extends ConsumerState<_EditSignalDialog> {
                   await Collections.signals
                       .doc(widget.id)
                       .update(_modifiedSignal.toJson());
-                  if (mounted) {
-                    Navigator.of(context).pop();
-                  }
+                  if (!context.mounted) return;
+                  Navigator.of(context).pop();
                 },
           child: const Text('Save'),
         ),
