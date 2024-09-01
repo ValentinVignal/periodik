@@ -28,8 +28,12 @@ mixin _$Signal {
   String get name => throw _privateConstructorUsedError;
   bool get hidden => throw _privateConstructorUsedError;
 
+  /// Serializes this Signal to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Signal
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SignalCopyWith<Signal> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -52,6 +56,8 @@ class _$SignalCopyWithImpl<$Res, $Val extends Signal>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Signal
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -95,6 +101,8 @@ class __$$SignalImplCopyWithImpl<$Res>
       _$SignalImpl _value, $Res Function(_$SignalImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Signal
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -158,11 +166,13 @@ class _$SignalImpl extends _Signal {
             (identical(other.hidden, hidden) || other.hidden == hidden));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, hidden);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Signal
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SignalImplCopyWith<_$SignalImpl> get copyWith =>
@@ -185,17 +195,21 @@ abstract class _Signal extends Signal {
 
   factory _Signal.fromJson(Map<String, dynamic> json) = _$SignalImpl.fromJson;
 
-  @override // It is what freezed recommends.
+// It is what freezed recommends.
 //
 // ignore: invalid_annotation_target
+  @override
   @JsonKey(includeToJson: false)
   String get id;
   @override
   String get name;
   @override
   bool get hidden;
+
+  /// Create a copy of Signal
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SignalImplCopyWith<_$SignalImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

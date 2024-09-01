@@ -19,7 +19,9 @@ mixin _$SignalWithState {
   Signal get signal => throw _privateConstructorUsedError;
   PointState get point => throw _privateConstructorUsedError;
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SignalWithState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SignalWithStateCopyWith<SignalWithState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -45,6 +47,8 @@ class _$SignalWithStateCopyWithImpl<$Res, $Val extends SignalWithState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SignalWithState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -63,6 +67,8 @@ class _$SignalWithStateCopyWithImpl<$Res, $Val extends SignalWithState>
     ) as $Val);
   }
 
+  /// Create a copy of SignalWithState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SignalCopyWith<$Res> get signal {
@@ -94,6 +100,8 @@ class __$$SignalWithStateImplCopyWithImpl<$Res>
       _$SignalWithStateImpl _value, $Res Function(_$SignalWithStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SignalWithState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -140,7 +148,9 @@ class _$SignalWithStateImpl implements _SignalWithState {
   @override
   int get hashCode => Object.hash(runtimeType, signal, point);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SignalWithState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SignalWithStateImplCopyWith<_$SignalWithStateImpl> get copyWith =>
@@ -157,8 +167,11 @@ abstract class _SignalWithState implements SignalWithState {
   Signal get signal;
   @override
   PointState get point;
+
+  /// Create a copy of SignalWithState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SignalWithStateImplCopyWith<_$SignalWithStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

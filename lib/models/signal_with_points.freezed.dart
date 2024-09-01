@@ -23,8 +23,12 @@ mixin _$SignalWithPoints {
   Signal get signal => throw _privateConstructorUsedError;
   List<Point> get points => throw _privateConstructorUsedError;
 
+  /// Serializes this SignalWithPoints to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SignalWithPoints
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SignalWithPointsCopyWith<SignalWithPoints> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +54,8 @@ class _$SignalWithPointsCopyWithImpl<$Res, $Val extends SignalWithPoints>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SignalWithPoints
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -68,6 +74,8 @@ class _$SignalWithPointsCopyWithImpl<$Res, $Val extends SignalWithPoints>
     ) as $Val);
   }
 
+  /// Create a copy of SignalWithPoints
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $SignalCopyWith<$Res> get signal {
@@ -99,6 +107,8 @@ class __$$SignalWithPointsImplCopyWithImpl<$Res>
       $Res Function(_$SignalWithPointsImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SignalWithPoints
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -153,12 +163,14 @@ class _$SignalWithPointsImpl extends _SignalWithPoints {
             const DeepCollectionEquality().equals(other._points, _points));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, signal, const DeepCollectionEquality().hash(_points));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SignalWithPoints
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SignalWithPointsImplCopyWith<_$SignalWithPointsImpl> get copyWith =>
@@ -186,8 +198,11 @@ abstract class _SignalWithPoints extends SignalWithPoints {
   Signal get signal;
   @override
   List<Point> get points;
+
+  /// Create a copy of SignalWithPoints
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SignalWithPointsImplCopyWith<_$SignalWithPointsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
