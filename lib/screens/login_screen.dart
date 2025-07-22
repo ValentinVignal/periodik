@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:animated_collection/animated_collection.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -68,72 +70,86 @@ class __LoginScreenContentState extends State<_LoginScreenContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: ListView(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: TextFormField(
-              decoration: const InputDecoration(label: Text('Email')),
-              controller: _emailController,
-              validator: (value) =>
-                  (value?.isNotEmpty ?? false) ? null : 'Required',
+    return Center(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return SizedBox(
+            width: min(
+              max(2 * constraints.maxWidth / 5, 600),
+              constraints.maxWidth,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                label: const Text('Password'),
-                suffixIcon: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _obscure = !_obscure;
-                    });
-                  },
-                  icon: Icon(
-                    _obscure ? Icons.visibility : Icons.visibility_off,
+            child: Form(
+              key: _formKey,
+              child: ListView(
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: TextFormField(
+                      decoration: const InputDecoration(label: Text('Email')),
+                      controller: _emailController,
+                      validator: (value) =>
+                          (value?.isNotEmpty ?? false) ? null : 'Required',
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        label: const Text('Password'),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _obscure = !_obscure;
+                            });
+                          },
+                          icon: Icon(
+                            _obscure ? Icons.visibility : Icons.visibility_off,
+                          ),
+                        ),
+                      ),
+                      controller: _passwordController,
+                      obscureText: _obscure,
+                      textInputAction: TextInputAction.done,
+                      onFieldSubmitted: (_) => _login(),
+                      validator: (value) =>
+                          (value?.isNotEmpty ?? false) ? null : 'Required',
+                    ),
+                  ),
+                  AnimatedVisibility(
+                    visible: _error.isNotEmpty,
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Text(
+                          _error,
+                          style: TextStyle(
+                            color: Theme.of(context).colorScheme.error,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: _login,
+                      child: const Text('Login'),
+                    ),
+                  ),
+                  const Center(child: GoogleSignInWidget()),
+                  const SizedBox(height: 8),
+                  Center(
+                    child: TextButton(
+                      onPressed: () {
+                        GoRouter.of(context).go(const SignUpRoute().location);
+                      },
+                      child: const Text('Sign Up'),
+                    ),
+                  ),
+                ].separated(const SizedBox(height: 8)).toList(),
               ),
-              controller: _passwordController,
-              obscureText: _obscure,
-              textInputAction: TextInputAction.done,
-              onFieldSubmitted: (_) => _login(),
-              validator: (value) =>
-                  (value?.isNotEmpty ?? false) ? null : 'Required',
             ),
-          ),
-          AnimatedVisibility(
-            visible: _error.isNotEmpty,
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Text(
-                  _error,
-                  style: TextStyle(color: Theme.of(context).colorScheme.error),
-                ),
-              ),
-            ),
-          ),
-          Center(
-            child: ElevatedButton(
-              onPressed: _login,
-              child: const Text('Login'),
-            ),
-          ),
-          const Center(child: GoogleSignInWidget()),
-          const SizedBox(height: 8),
-          Center(
-            child: TextButton(
-              onPressed: () {
-                GoRouter.of(context).go(const SignUpRoute().location);
-              },
-              child: const Text('Sign Up'),
-            ),
-          ),
-        ].separated(const SizedBox(height: 8)).toList(),
+          );
+        },
       ),
     );
   }

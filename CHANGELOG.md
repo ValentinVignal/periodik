@@ -1,6 +1,8 @@
 ## NEXT
 
 - Upgrades to flutter 3.24.
+- Upgrades to flutter 3.32.
+- Better UI on the login screen for big screens.
 
 ## 0.24.0
 
