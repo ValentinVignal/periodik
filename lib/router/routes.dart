@@ -16,7 +16,7 @@ import '../screens/signal/signal_screen.dart';
 part 'routes.g.dart';
 
 @TypedGoRoute<HomeRoute>(path: '/')
-class HomeRoute extends GoRouteData {
+class HomeRoute extends GoRouteData with _$HomeRoute {
   const HomeRoute();
 
   @override
@@ -26,7 +26,7 @@ class HomeRoute extends GoRouteData {
 }
 
 @TypedGoRoute<VerifyEmailRoute>(path: '/verify-email')
-class VerifyEmailRoute extends GoRouteData {
+class VerifyEmailRoute extends GoRouteData with _$VerifyEmailRoute {
   const VerifyEmailRoute();
 
   @override
@@ -37,11 +37,9 @@ class VerifyEmailRoute extends GoRouteData {
 
 @TypedGoRoute<LoginRoute>(
   path: '/login',
-  routes: [
-    TypedGoRoute<SignUpRoute>(path: 'sign-up'),
-  ],
+  routes: [TypedGoRoute<SignUpRoute>(path: 'sign-up')],
 )
-class LoginRoute extends GoRouteData {
+class LoginRoute extends GoRouteData with _$LoginRoute {
   const LoginRoute();
 
   @override
@@ -50,7 +48,7 @@ class LoginRoute extends GoRouteData {
   }
 }
 
-class SignUpRoute extends GoRouteData {
+class SignUpRoute extends GoRouteData with _$SignUpRoute {
   const SignUpRoute();
 
   @override
@@ -68,7 +66,7 @@ class SignUpRoute extends GoRouteData {
     TypedGoRoute<SignalListRoute>(path: ':id/list'),
   ],
 )
-class SignalsRoute extends GoRouteData {
+class SignalsRoute extends GoRouteData with _$SignalsRoute {
   const SignalsRoute();
 
   @override
@@ -77,7 +75,7 @@ class SignalsRoute extends GoRouteData {
   }
 }
 
-class SignalsCalendarRoute extends GoRouteData {
+class SignalsCalendarRoute extends GoRouteData with _$SignalsCalendarRoute {
   const SignalsCalendarRoute();
 
   @override
@@ -86,10 +84,8 @@ class SignalsCalendarRoute extends GoRouteData {
   }
 }
 
-class SignalRoute extends GoRouteData {
-  const SignalRoute({
-    required this.id,
-  });
+class SignalRoute extends GoRouteData with _$SignalRoute {
+  const SignalRoute({required this.id});
 
   final String id;
 
@@ -99,40 +95,30 @@ class SignalRoute extends GoRouteData {
   }
 }
 
-class SignalCalendarRoute extends GoRouteData {
-  const SignalCalendarRoute({
-    required this.id,
-  });
+class SignalCalendarRoute extends GoRouteData with _$SignalCalendarRoute {
+  const SignalCalendarRoute({required this.id});
 
   final String id;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return SignalScreen(
-      id: id,
-      view: SignalView.calendar,
-    );
+    return SignalScreen(id: id, view: SignalView.calendar);
   }
 }
 
-class SignalListRoute extends GoRouteData {
-  const SignalListRoute({
-    required this.id,
-  });
+class SignalListRoute extends GoRouteData with _$SignalListRoute {
+  const SignalListRoute({required this.id});
 
   final String id;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return SignalScreen(
-      id: id,
-      view: SignalView.list,
-    );
+    return SignalScreen(id: id, view: SignalView.list);
   }
 }
 
 @TypedGoRoute<SettingsRoute>(path: '/settings')
-class SettingsRoute extends GoRouteData {
+class SettingsRoute extends GoRouteData with _$SettingsRoute {
   const SettingsRoute();
 
   @override

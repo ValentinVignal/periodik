@@ -6,11 +6,7 @@ import 'package:periodik/utils/collections.dart';
 import 'package:periodik/utils/date_time.dart';
 
 class PointDialog extends ConsumerStatefulWidget {
-  const PointDialog({
-    super.key,
-    required this.signalId,
-    required this.point,
-  });
+  const PointDialog({super.key, required this.signalId, required this.point});
 
   final String signalId;
 
@@ -25,11 +21,7 @@ class PointDialog extends ConsumerStatefulWidget {
       context: context,
       builder: (context) => PointDialog(
         signalId: signalId,
-        point: point ??
-            Point(
-              id: '',
-              date: DateTime.now(),
-            ),
+        point: point ?? Point(id: '', date: DateTime.now()),
       ),
     );
   }
@@ -91,9 +83,7 @@ class _PointDialogState extends ConsumerState<PointDialog> {
                   });
                 },
               ),
-              const Flexible(
-                child: Text('State'),
-              ),
+              const Flexible(child: Text('State')),
             ],
           ),
         ],
@@ -107,7 +97,7 @@ class _PointDialogState extends ConsumerState<PointDialog> {
           onPressed: () async {
             final points =
                 ref.read(pointsProvider(widget.signalId)).asData?.value ??
-                    const [];
+                const [];
             if (points.any(
                   (otherPoint) =>
                       otherPoint.date.isSameDayAs(_point.date) &&
@@ -124,9 +114,9 @@ class _PointDialogState extends ConsumerState<PointDialog> {
             if (_point.id.isEmpty) {
               await Collections.points(widget.signalId).add(_point.toJson());
             } else {
-              await Collections.points(widget.signalId)
-                  .doc(_point.id)
-                  .update(_point.toJson());
+              await Collections.points(
+                widget.signalId,
+              ).doc(_point.id).update(_point.toJson());
             }
             if (context.mounted) {
               Navigator.of(context).pop();

@@ -1,4 +1,1 @@
-enum SignalView {
-  calendar,
-  list,
-}
+enum SignalView { calendar, list }

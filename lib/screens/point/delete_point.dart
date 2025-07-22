@@ -6,7 +6,8 @@ Future<void> deletePoint({
   required String signalId,
   required String pointId,
 }) async {
-  final delete = await showDialog<bool>(
+  final delete =
+      await showDialog<bool>(
         context: context,
         builder: (context) => AlertDialog(
           title: const Text('Delete point?'),
@@ -28,9 +29,9 @@ Future<void> deletePoint({
   if (delete) {
     await Collections.points(signalId).doc(pointId).delete();
     if (context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Deleted')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Deleted')));
     }
   }
 }

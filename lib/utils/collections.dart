@@ -11,23 +11,15 @@ mixin Collections {
     return mockInstance ?? FirebaseFirestore.instance;
   }
 
-  static DocumentReference get _userDocument => _instance
-      .collection(
-        'users',
-      )
-      .doc(Auth.instance.currentUser!.uid);
+  static DocumentReference get _userDocument =>
+      _instance.collection('users').doc(Auth.instance.currentUser!.uid);
 
   static CollectionReference<Map<String, dynamic>> get signals =>
-      _userDocument.collection(
-        'signals',
-      );
+      _userDocument.collection('signals');
 
   static CollectionReference<Map<String, dynamic>> points(String signalId) =>
       signals.doc(signalId).collection('points');
 
-  static DocumentReference<Map<String, dynamic>> get settings => _instance
-      .collection(
-        'settings',
-      )
-      .doc(Auth.instance.currentUser!.uid);
+  static DocumentReference<Map<String, dynamic>> get settings =>
+      _instance.collection('settings').doc(Auth.instance.currentUser!.uid);
 }

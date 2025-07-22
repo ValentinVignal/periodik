@@ -19,16 +19,12 @@ class SignalScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (view) {
       case SignalView.calendar:
-        return SignalCalendar(
-          id: id,
-        );
+        return SignalCalendar(id: id);
       case SignalView.list:
         return SignalScreenShell(
           id: id,
           view: SignalView.list,
-          child: SignalList(
-            id: id,
-          ),
+          child: SignalList(id: id),
         );
     }
   }

@@ -16,9 +16,7 @@ void main() {
   testWidgets('It should display the login screen', (tester) async {
     Auth.mockInstance = _MockFirebaseAuth();
     final user = _MockUser();
-    when(Auth.instance.userChanges).thenAnswer(
-      (_) => Stream.value(user),
-    );
+    when(Auth.instance.userChanges).thenAnswer((_) => Stream.value(user));
     when(() => Auth.instance.currentUser).thenReturn(user);
     when(() => user.emailVerified).thenReturn(true);
     when(() => user.uid).thenReturn('uid');

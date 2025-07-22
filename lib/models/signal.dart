@@ -5,7 +5,7 @@ part 'signal.freezed.dart';
 part 'signal.g.dart';
 
 @freezed
-class Signal with _$Signal {
+abstract class Signal with _$Signal {
   const factory Signal({
     // It is what freezed recommends.
     //
@@ -17,10 +17,8 @@ class Signal with _$Signal {
 
   factory Signal.fromJson(Json json) => _$SignalFromJson(json);
 
-  factory Signal.fromJsonDocument(String id, Json document) => Signal.fromJson({
-        ...document,
-        'id': id,
-      });
+  factory Signal.fromJsonDocument(String id, Json document) =>
+      Signal.fromJson({...document, 'id': id});
 
   const Signal._();
 }

@@ -26,10 +26,7 @@ class SignalsCalendarDay extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
         border: isToday
-            ? Border.all(
-                color: theme.colorScheme.primary,
-                width: 2,
-              )
+            ? Border.all(color: theme.colorScheme.primary, width: 2)
             : null,
       ),
       child: Center(
@@ -60,9 +57,9 @@ class SignalsCalendarDay extends StatelessWidget {
                 scrollDirection: Axis.horizontal,
                 child: InkWell(
                   onTap: () {
-                    GoRouter.of(context).push(
-                      SignalRoute(id: point.signal.id).location,
-                    );
+                    GoRouter.of(
+                      context,
+                    ).push(SignalRoute(id: point.signal.id).location);
                   },
                   child: Text(
                     point.signal.name,

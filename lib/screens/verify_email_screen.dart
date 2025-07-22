@@ -54,9 +54,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
           AnimatedBuilder(
             animation: userNotifier,
             builder: (context, _) {
-              return Center(
-                child: Text(userNotifier.value?.email ?? ''),
-              );
+              return Center(child: Text(userNotifier.value?.email ?? ''));
             },
           ),
           AnimatedVisibility(

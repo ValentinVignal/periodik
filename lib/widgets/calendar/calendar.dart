@@ -3,10 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:periodik/utils/date_time.dart';
 
-enum CalendarView {
-  compact,
-  cozy,
-}
+enum CalendarView { compact, cozy }
 
 class Calendar extends StatefulWidget {
   const Calendar({
@@ -54,10 +51,7 @@ class _CalendarState extends State<Calendar> {
         }
         final boxConstraints = BoxConstraints(
           minHeight: minHeight,
-          maxHeight: min(
-            maxHeight,
-            max(constraints.maxHeight / 6, minHeight),
-          ),
+          maxHeight: min(maxHeight, max(constraints.maxHeight / 6, minHeight)),
         ).normalize();
         return CustomScrollView(
           controller: widget.controller,
@@ -67,9 +61,7 @@ class _CalendarState extends State<Calendar> {
             SliverList.builder(
               itemBuilder: (context, weekIndex) {
                 final monday = _lastMonday.subtract(
-                  Duration(
-                    days: (weekIndex + 1) * _daysPerWeek,
-                  ),
+                  Duration(days: (weekIndex + 1) * _daysPerWeek),
                 );
                 return _Week(
                   constraints: boxConstraints,
@@ -87,9 +79,7 @@ class _CalendarState extends State<Calendar> {
             SliverList.builder(
               itemBuilder: (context, weekIndex) {
                 final monday = _lastMonday.add(
-                  Duration(
-                    days: weekIndex * _daysPerWeek,
-                  ),
+                  Duration(days: weekIndex * _daysPerWeek),
                 );
                 return _Week(
                   constraints: boxConstraints,
@@ -120,20 +110,14 @@ class _Week extends StatelessWidget {
   Widget build(BuildContext context) {
     final weekDays = List.generate(
       _CalendarState._daysPerWeek,
-      (dayIndex) => monday.add(
-        Duration(
-          days: dayIndex,
-        ),
-      ),
+      (dayIndex) => monday.add(Duration(days: dayIndex)),
     );
 
     final sunday = weekDays.last;
     final previousMonthDays = weekDays.where(
       (day) => day.month != sunday.month,
     );
-    final nextMonthDays = weekDays.where(
-      (day) => day.month == sunday.month,
-    );
+    final nextMonthDays = weekDays.where((day) => day.month == sunday.month);
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,

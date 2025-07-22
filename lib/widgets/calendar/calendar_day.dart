@@ -36,10 +36,7 @@ class CalendarDay extends StatelessWidget {
           color: backgroundColor,
           borderRadius: BorderRadius.circular(4),
           border: isToday
-              ? Border.all(
-                  color: theme.colorScheme.primary,
-                  width: 2,
-                )
+              ? Border.all(color: theme.colorScheme.primary, width: 2)
               : null,
         ),
         child: SizedBox.expand(
@@ -47,8 +44,9 @@ class CalendarDay extends StatelessWidget {
             child: Text(
               date.day.toString(),
               style: isToday
-                  ? theme.textTheme.titleLarge!
-                      .copyWith(color: theme.colorScheme.primary)
+                  ? theme.textTheme.titleLarge!.copyWith(
+                      color: theme.colorScheme.primary,
+                    )
                   : null,
             ),
           ),

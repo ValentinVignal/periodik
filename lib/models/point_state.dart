@@ -14,13 +14,13 @@ extension PointStateColor on PointState {
       case PointState.none:
         return null;
       case PointState.activated:
-        return theme.colorScheme.errorContainer.withOpacity(0.8);
+        return theme.colorScheme.errorContainer.withValues(alpha: 0.8);
       case PointState.deactivated:
-        return theme.colorScheme.secondaryContainer.withOpacity(0.8);
+        return theme.colorScheme.secondaryContainer.withValues(alpha: 0.8);
       case PointState.possiblyActivated:
-        return theme.colorScheme.errorContainer.withOpacity(0.2);
+        return theme.colorScheme.errorContainer.withValues(alpha: 0.2);
       case PointState.possiblyDeactivated:
-        return theme.colorScheme.secondaryContainer.withOpacity(0.2);
+        return theme.colorScheme.secondaryContainer.withValues(alpha: 0.2);
     }
   }
 

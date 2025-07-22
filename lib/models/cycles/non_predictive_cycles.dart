@@ -5,9 +5,7 @@ import '../point_state.dart';
 import 'cycles.dart';
 
 class NonPredictiveCycles implements Cycles {
-  NonPredictiveCycles({
-    required this.points,
-  });
+  NonPredictiveCycles({required this.points});
 
   @override
   final List<Point> points;
@@ -15,8 +13,8 @@ class NonPredictiveCycles implements Cycles {
   Map<DateTime, Point>? _mapPoints;
   @override
   Map<DateTime, Point> get mapPoints => _mapPoints ??= Map.fromEntries(
-        points.map((point) => MapEntry(point.date.rounded, point)),
-      );
+    points.map((point) => MapEntry(point.date.rounded, point)),
+  );
 
   @override
   void compute() {

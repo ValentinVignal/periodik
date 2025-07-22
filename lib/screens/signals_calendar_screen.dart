@@ -37,28 +37,23 @@ class __SignalsCalendarScreenState
       final List<SignalWithState> points;
       if (ref.watch(settingsProvider).valueOrNull?.displayPredictions ??
           false) {
-        points = ref.watch(signalsProvider).valueOrNull?.map((signal) {
-              final cycle =
-                  ref.watch(estimatedCyclesProvider(signal.id)).valueOrNull;
+        points =
+            ref.watch(signalsProvider).valueOrNull?.map((signal) {
+              final cycle = ref
+                  .watch(estimatedCyclesProvider(signal.id))
+                  .valueOrNull;
               final point = cycle?.estimate(day) ?? PointState.none;
               return SignalWithState(signal: signal, point: point);
             }).toList() ??
             const [];
       } else {
-        points = ref.watch(
-          signalPointsPerDayProvider(day.rounded),
-        );
+        points = ref.watch(signalPointsPerDayProvider(day.rounded));
       }
-      return SignalsCalendarDay(
-        date: day,
-        points: points,
-      );
+      return SignalsCalendarDay(date: day, points: points);
     }
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Signals Calendar'),
-      ),
+      appBar: AppBar(title: const Text('Signals Calendar')),
       body: Center(
         child: Calendar(
           controller: _controller,

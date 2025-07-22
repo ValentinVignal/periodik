@@ -21,7 +21,10 @@ class SignalsScreen extends ConsumerWidget {
   const SignalsScreen({super.key});
 
   Future<void> _onAction(
-      BuildContext context, WidgetRef ref, _SignalsAction action) async {
+    BuildContext context,
+    WidgetRef ref,
+    _SignalsAction action,
+  ) async {
     switch (action) {
       case _SignalsAction.settings:
         GoRouter.of(context).push(const SettingsRoute().location);
@@ -50,9 +53,7 @@ class SignalsScreen extends ConsumerWidget {
                 value: _SignalsAction.settings,
                 child: ListTile(
                   leading: Icon(Icons.settings),
-                  title: Text(
-                    'Settings',
-                  ),
+                  title: Text('Settings'),
                 ),
               ),
               const PopupMenuItem(
@@ -77,7 +78,9 @@ class _Signals extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(signalsProvider).when(
+    return ref
+        .watch(signalsProvider)
+        .when(
           data: (signals) {
             return ListView.builder(
               itemCount: signals.length,
@@ -91,7 +94,8 @@ class _Signals extends ConsumerWidget {
                             .valueOrNull
                             ?.displayPredictions ??
                         false) {
-                      state = ref
+                      state =
+                          ref
                               .watch(estimatedCyclesProvider(signal.id))
                               .value
                               ?.estimate(DateTime.now()) ??
@@ -100,22 +104,18 @@ class _Signals extends ConsumerWidget {
                     return ListTile(
                       tileColor: state.containerColor(Theme.of(context)),
                       onTap: () {
-                        GoRouter.of(context).go(
-                          SignalRoute(id: signal.id).location,
-                        );
+                        GoRouter.of(
+                          context,
+                        ).go(SignalRoute(id: signal.id).location);
                       },
-                      title: SignalNameWidget(
-                        signal: signal,
-                      ),
+                      title: SignalNameWidget(signal: signal),
                     );
                   },
                 );
               },
             );
           },
-          loading: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
+          loading: () => const Center(child: CircularProgressIndicator()),
           error: (error, stack) {
             _logger.severe('Could not display the signals', error, stack);
             return Center(
@@ -140,9 +140,9 @@ class _FloatingActionButton extends StatelessWidget {
           const Signal(id: '', name: '').toJson(),
         );
         if (context.mounted) {
-          GoRouter.of(context).go(
-            SignalRoute(id: documentReference.id).location,
-          );
+          GoRouter.of(
+            context,
+          ).go(SignalRoute(id: documentReference.id).location);
         }
       },
       child: const Icon(Icons.add),

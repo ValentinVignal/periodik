@@ -7,7 +7,7 @@ import 'package:logging/logging.dart';
 import '../router/routes.dart';
 import '../utils/auth.dart';
 import '../utils/iterable_extension.dart';
-import '../widgets/google_sign_in.dart';
+import '../widgets/google_sign_in/google_sign_in.dart';
 
 final _logger = Logger('LoginScreen');
 
@@ -17,9 +17,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Login'),
-      ),
+      appBar: AppBar(title: const Text('Login')),
       body: const _LoginScreenContent(),
     );
   }
@@ -61,11 +59,7 @@ class __LoginScreenContentState extends State<_LoginScreenContent> {
         _error = e.message ?? 'Unknown error';
       });
     } catch (error, stackTrace) {
-      _logger.severe(
-        'Could not login',
-        error,
-        stackTrace,
-      );
+      _logger.severe('Could not login', error, stackTrace);
       setState(() {
         _error = 'Unknown error';
       });
@@ -118,9 +112,7 @@ class __LoginScreenContentState extends State<_LoginScreenContent> {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Text(
                   _error,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.error,
-                  ),
+                  style: TextStyle(color: Theme.of(context).colorScheme.error),
                 ),
               ),
             ),
@@ -131,9 +123,7 @@ class __LoginScreenContentState extends State<_LoginScreenContent> {
               child: const Text('Login'),
             ),
           ),
-          const Center(
-            child: GoogleSignInWidget(),
-          ),
+          const Center(child: GoogleSignInWidget()),
           const SizedBox(height: 8),
           Center(
             child: TextButton(
