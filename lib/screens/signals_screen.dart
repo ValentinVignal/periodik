@@ -97,7 +97,7 @@ class _Signals extends ConsumerWidget {
                       state =
                           ref
                               .watch(estimatedCyclesProvider(signal.id))
-                              .value
+                              .valueOrNull
                               ?.estimate(DateTime.now()) ??
                           PointState.none;
                     }
