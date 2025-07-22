@@ -16,9 +16,7 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sign Up'),
-      ),
+      appBar: AppBar(title: const Text('Sign Up')),
       body: const _SignUpScreenContent(),
     );
   }
@@ -74,11 +72,7 @@ class _SignUpScreenContentState extends State<_SignUpScreenContent> {
         _error = e.message ?? 'Unknown error';
       });
     } catch (error, stackTrace) {
-      _logger.severe(
-        'Could not sign up',
-        error,
-        stackTrace,
-      );
+      _logger.severe('Could not sign up', error, stackTrace);
       setState(() {
         _error = 'Unknown error';
       });

@@ -6,19 +6,16 @@ import '../point.dart';
 import 'non_predictive_cycles.dart';
 
 class Cycles {
-  Cycles({
-    required this.points,
-  });
+  Cycles({required this.points});
 
-  factory Cycles.nonPredictive({
-    required List<Point> points,
-  }) = NonPredictiveCycles;
+  factory Cycles.nonPredictive({required List<Point> points}) =
+      NonPredictiveCycles;
 
   final List<Point> points;
   Map<DateTime, Point>? _mapPoints;
   Map<DateTime, Point> get mapPoints => _mapPoints ??= Map.fromEntries(
-        points.map((point) => MapEntry(point.date.rounded, point)),
-      );
+    points.map((point) => MapEntry(point.date.rounded, point)),
+  );
 
   final _cycles = <Cycle>[];
   DateTime get _firstDate => points.first.date;
@@ -30,11 +27,11 @@ class Cycles {
   void compute() {
     _cycles.add(Cycle(start: _firstDate));
 
-    for (var day = _firstDate;
-        day.isBefore(_lastDate);
-        day = day.add(
-      const Duration(days: 1),
-    )) {
+    for (
+      var day = _firstDate;
+      day.isBefore(_lastDate);
+      day = day.add(const Duration(days: 1))
+    ) {
       final point = mapPoints[day];
       if (point != null) {
         if (point.state) {
@@ -49,9 +46,7 @@ class Cycles {
               _cycles.add(Cycle(start: day));
             } else {
               // We extends the cycle to the current day.
-              _cycles.last.end = day.add(
-                const Duration(days: 1),
-              );
+              _cycles.last.end = day.add(const Duration(days: 1));
             }
           }
         } else {
@@ -81,8 +76,9 @@ class Cycles {
     if (_cycles.length > 1) {
       var averageCycleLength = 0;
       for (var i = 0; i < _cycles.length - 1; i++) {
-        averageCycleLength +=
-            _cycles[i + 1].start.difference(_cycles[i].start).inDays;
+        averageCycleLength += _cycles[i + 1].start
+            .difference(_cycles[i].start)
+            .inDays;
       }
       _averageCycleLength = averageCycleLength ~/ (_cycles.length - 1);
     } else {
@@ -102,8 +98,9 @@ class Cycles {
     } else if (date.isBefore(_cycles.first.start)) {
       return PointState.none;
     } else if (date.isBefore(_lastDate)) {
-      final cycle =
-          _cycles.lastWhere((cycle) => cycle.start.isBeforeOrSameAs(date));
+      final cycle = _cycles.lastWhere(
+        (cycle) => cycle.start.isBeforeOrSameAs(date),
+      );
       if (date.isBefore(cycle.end)) {
         return PointState.possiblyActivated;
       } else {
@@ -125,10 +122,8 @@ class Cycles {
 }
 
 class Cycle {
-  Cycle({
-    required this.start,
-    DateTime? end,
-  }) : end = end ?? start.add(const Duration(days: 7));
+  Cycle({required this.start, DateTime? end})
+    : end = end ?? start.add(const Duration(days: 7));
 
   static const _defaultLength = 28;
   static const _defaultDuration = Duration(days: _defaultLength);

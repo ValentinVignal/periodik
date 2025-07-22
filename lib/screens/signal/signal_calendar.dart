@@ -15,10 +15,7 @@ import 'signal_screen_shell.dart';
 import 'signal_view.dart';
 
 class SignalCalendar extends ConsumerStatefulWidget {
-  const SignalCalendar({
-    super.key,
-    required this.id,
-  });
+  const SignalCalendar({super.key, required this.id});
 
   final String id;
   @override
@@ -48,19 +45,15 @@ class __SignalCalendarState extends ConsumerState<SignalCalendar> {
           PointDialog.show(
             context: context,
             signalId: widget.id,
-            point: point ??
-                Point(
-                  id: '',
-                  date: day,
-                ),
+            point: point ?? Point(id: '', date: day),
           );
         },
         onLongPressed: point != null
             ? () => deletePoint(
-                  context: context,
-                  signalId: widget.id,
-                  pointId: point.id,
-                )
+                context: context,
+                signalId: widget.id,
+                pointId: point.id,
+              )
             : null,
       );
     }

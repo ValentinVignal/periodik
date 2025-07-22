@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -49,7 +46,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '883959527648',
     projectId: 'period-ik',
     authDomain: 'period-ik.firebaseapp.com',
-    storageBucket: 'period-ik.appspot.com',
+    storageBucket: 'period-ik.firebasestorage.app',
     measurementId: 'G-7PDX0Y20YT',
   );
 
@@ -58,7 +55,7 @@ class DefaultFirebaseOptions {
     appId: '1:883959527648:android:c51ab160cdce291804b885',
     messagingSenderId: '883959527648',
     projectId: 'period-ik',
-    storageBucket: 'period-ik.appspot.com',
+    storageBucket: 'period-ik.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
@@ -66,9 +63,11 @@ class DefaultFirebaseOptions {
     appId: '1:883959527648:ios:147e83497cdeeae004b885',
     messagingSenderId: '883959527648',
     projectId: 'period-ik',
-    storageBucket: 'period-ik.appspot.com',
-    androidClientId: '883959527648-t8gq899rgv6r53r0ncioif6346aa6bpj.apps.googleusercontent.com',
-    iosClientId: '883959527648-bd3vth4qi80j0jdtgt6f1naggnb0db8i.apps.googleusercontent.com',
+    storageBucket: 'period-ik.firebasestorage.app',
+    androidClientId:
+        '883959527648-5astk55m3pnfc735c2jtehq3j1kjce7d.apps.googleusercontent.com',
+    iosClientId:
+        '883959527648-bd3vth4qi80j0jdtgt6f1naggnb0db8i.apps.googleusercontent.com',
     iosBundleId: 'com.valentinvignal.periodik',
   );
 
@@ -77,9 +76,21 @@ class DefaultFirebaseOptions {
     appId: '1:883959527648:ios:147e83497cdeeae004b885',
     messagingSenderId: '883959527648',
     projectId: 'period-ik',
-    storageBucket: 'period-ik.appspot.com',
-    androidClientId: '883959527648-t8gq899rgv6r53r0ncioif6346aa6bpj.apps.googleusercontent.com',
-    iosClientId: '883959527648-bd3vth4qi80j0jdtgt6f1naggnb0db8i.apps.googleusercontent.com',
+    storageBucket: 'period-ik.firebasestorage.app',
+    androidClientId:
+        '883959527648-5astk55m3pnfc735c2jtehq3j1kjce7d.apps.googleusercontent.com',
+    iosClientId:
+        '883959527648-bd3vth4qi80j0jdtgt6f1naggnb0db8i.apps.googleusercontent.com',
     iosBundleId: 'com.valentinvignal.periodik',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyDwyT9jH5N0zOInVjiYX1SgEl-6is8EWo0',
+    appId: '1:883959527648:web:5fa373b071d67ae704b885',
+    messagingSenderId: '883959527648',
+    projectId: 'period-ik',
+    authDomain: 'period-ik.firebaseapp.com',
+    storageBucket: 'period-ik.firebasestorage.app',
+    measurementId: 'G-XQJ3SXNRTY',
   );
 }

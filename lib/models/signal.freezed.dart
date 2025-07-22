@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,14 +9,8 @@ part of 'signal.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-Signal _$SignalFromJson(Map<String, dynamic> json) {
-  return _Signal.fromJson(json);
-}
 
 /// @nodoc
 mixin _$Signal {
@@ -24,82 +18,55 @@ mixin _$Signal {
 //
 // ignore: invalid_annotation_target
   @JsonKey(includeToJson: false)
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  bool get hidden => throw _privateConstructorUsedError;
-
-  /// Serializes this Signal to a JSON map.
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
+  bool get hidden;
 
   /// Create a copy of Signal
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $SignalCopyWith<Signal> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SignalCopyWith<$Res> {
-  factory $SignalCopyWith(Signal value, $Res Function(Signal) then) =
-      _$SignalCopyWithImpl<$Res, Signal>;
-  @useResult
-  $Res call(
-      {@JsonKey(includeToJson: false) String id, String name, bool hidden});
-}
-
-/// @nodoc
-class _$SignalCopyWithImpl<$Res, $Val extends Signal>
-    implements $SignalCopyWith<$Res> {
-  _$SignalCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Signal
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $SignalCopyWith<Signal> get copyWith =>
+      _$SignalCopyWithImpl<Signal>(this as Signal, _$identity);
+
+  /// Serializes this Signal to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? hidden = null,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      hidden: null == hidden
-          ? _value.hidden
-          : hidden // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Signal &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.hidden, hidden) || other.hidden == hidden));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name, hidden);
+
+  @override
+  String toString() {
+    return 'Signal(id: $id, name: $name, hidden: $hidden)';
   }
 }
 
 /// @nodoc
-abstract class _$$SignalImplCopyWith<$Res> implements $SignalCopyWith<$Res> {
-  factory _$$SignalImplCopyWith(
-          _$SignalImpl value, $Res Function(_$SignalImpl) then) =
-      __$$SignalImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $SignalCopyWith<$Res> {
+  factory $SignalCopyWith(Signal value, $Res Function(Signal) _then) =
+      _$SignalCopyWithImpl;
   @useResult
   $Res call(
       {@JsonKey(includeToJson: false) String id, String name, bool hidden});
 }
 
 /// @nodoc
-class __$$SignalImplCopyWithImpl<$Res>
-    extends _$SignalCopyWithImpl<$Res, _$SignalImpl>
-    implements _$$SignalImplCopyWith<$Res> {
-  __$$SignalImplCopyWithImpl(
-      _$SignalImpl _value, $Res Function(_$SignalImpl) _then)
-      : super(_value, _then);
+class _$SignalCopyWithImpl<$Res> implements $SignalCopyWith<$Res> {
+  _$SignalCopyWithImpl(this._self, this._then);
+
+  final Signal _self;
+  final $Res Function(Signal) _then;
 
   /// Create a copy of Signal
   /// with the given fields replaced by the non-null parameter values.
@@ -110,34 +77,195 @@ class __$$SignalImplCopyWithImpl<$Res>
     Object? name = null,
     Object? hidden = null,
   }) {
-    return _then(_$SignalImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       hidden: null == hidden
-          ? _value.hidden
+          ? _self.hidden
           : hidden // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
 }
 
+/// Adds pattern-matching-related methods to [Signal].
+extension SignalPatterns on Signal {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_Signal value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Signal() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_Signal value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Signal():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_Signal value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Signal() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            @JsonKey(includeToJson: false) String id, String name, bool hidden)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Signal() when $default != null:
+        return $default(_that.id, _that.name, _that.hidden);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            @JsonKey(includeToJson: false) String id, String name, bool hidden)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Signal():
+        return $default(_that.id, _that.name, _that.hidden);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            @JsonKey(includeToJson: false) String id, String name, bool hidden)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Signal() when $default != null:
+        return $default(_that.id, _that.name, _that.hidden);
+      case _:
+        return null;
+    }
+  }
+}
+
 /// @nodoc
 @JsonSerializable()
-class _$SignalImpl extends _Signal {
-  const _$SignalImpl(
+class _Signal extends Signal {
+  const _Signal(
       {@JsonKey(includeToJson: false) required this.id,
       required this.name,
       this.hidden = false})
       : super._();
-
-  factory _$SignalImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SignalImplFromJson(json);
+  factory _Signal.fromJson(Map<String, dynamic> json) => _$SignalFromJson(json);
 
 // It is what freezed recommends.
 //
@@ -151,16 +279,26 @@ class _$SignalImpl extends _Signal {
   @JsonKey()
   final bool hidden;
 
+  /// Create a copy of Signal
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  String toString() {
-    return 'Signal(id: $id, name: $name, hidden: $hidden)';
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$SignalCopyWith<_Signal> get copyWith =>
+      __$SignalCopyWithImpl<_Signal>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$SignalToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$SignalImpl &&
+            other is _Signal &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.hidden, hidden) || other.hidden == hidden));
@@ -170,46 +308,53 @@ class _$SignalImpl extends _Signal {
   @override
   int get hashCode => Object.hash(runtimeType, id, name, hidden);
 
-  /// Create a copy of Signal
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  @pragma('vm:prefer-inline')
-  _$$SignalImplCopyWith<_$SignalImpl> get copyWith =>
-      __$$SignalImplCopyWithImpl<_$SignalImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SignalImplToJson(
-      this,
-    );
+  String toString() {
+    return 'Signal(id: $id, name: $name, hidden: $hidden)';
   }
 }
 
-abstract class _Signal extends Signal {
-  const factory _Signal(
-      {@JsonKey(includeToJson: false) required final String id,
-      required final String name,
-      final bool hidden}) = _$SignalImpl;
-  const _Signal._() : super._();
+/// @nodoc
+abstract mixin class _$SignalCopyWith<$Res> implements $SignalCopyWith<$Res> {
+  factory _$SignalCopyWith(_Signal value, $Res Function(_Signal) _then) =
+      __$SignalCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(includeToJson: false) String id, String name, bool hidden});
+}
 
-  factory _Signal.fromJson(Map<String, dynamic> json) = _$SignalImpl.fromJson;
+/// @nodoc
+class __$SignalCopyWithImpl<$Res> implements _$SignalCopyWith<$Res> {
+  __$SignalCopyWithImpl(this._self, this._then);
 
-// It is what freezed recommends.
-//
-// ignore: invalid_annotation_target
-  @override
-  @JsonKey(includeToJson: false)
-  String get id;
-  @override
-  String get name;
-  @override
-  bool get hidden;
+  final _Signal _self;
+  final $Res Function(_Signal) _then;
 
   /// Create a copy of Signal
   /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$SignalImplCopyWith<_$SignalImpl> get copyWith =>
-      throw _privateConstructorUsedError;
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? hidden = null,
+  }) {
+    return _then(_Signal(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      hidden: null == hidden
+          ? _self.hidden
+          : hidden // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
 }
+
+// dart format on

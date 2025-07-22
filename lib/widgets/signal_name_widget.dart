@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:periodik/models/signal.dart';
 
 class SignalNameWidget extends StatelessWidget {
-  const SignalNameWidget({
-    required this.signal,
-    super.key,
-  });
+  const SignalNameWidget({required this.signal, super.key});
 
   final Signal? signal;
 
@@ -20,9 +17,7 @@ class SignalNameWidget extends StatelessWidget {
         child: AnimatedDefaultTextStyle(
           style: defaultTextStyle.style,
           duration: const Duration(milliseconds: 250),
-          child: Text(
-            signal?.name ?? '',
-          ),
+          child: Text(signal?.name ?? ''),
         ),
       ),
     );

@@ -4,7 +4,7 @@ part 'settings.freezed.dart';
 part 'settings.g.dart';
 
 @freezed
-class Settings with _$Settings {
+abstract class Settings with _$Settings {
   const factory Settings({
     @Default(false) bool displayPredictions,
     @Default(false) bool displayHiddenSignals,

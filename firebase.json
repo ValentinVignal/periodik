@@ -1,16 +1,1 @@
-{
-  "hosting": {
-    "public": "build/web",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
-}
+{"hosting":{"public":"build/web","ignore":["firebase.json","**/.*","**/node_modules/**"],"rewrites":[{"source":"**","destination":"/index.html"}]},"flutter":{"platforms":{"android":{"default":{"projectId":"period-ik","appId":"1:883959527648:android:c51ab160cdce291804b885","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"period-ik","appId":"1:883959527648:ios:147e83497cdeeae004b885","uploadDebugSymbols":true,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"macos":{"default":{"projectId":"period-ik","appId":"1:883959527648:ios:147e83497cdeeae004b885","uploadDebugSymbols":true,"fileOutput":"macos/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"period-ik","configurations":{"android":"1:883959527648:android:c51ab160cdce291804b885","ios":"1:883959527648:ios:147e83497cdeeae004b885","macos":"1:883959527648:ios:147e83497cdeeae004b885","web":"1:883959527648:web:fac288903219ec7304b885","windows":"1:883959527648:web:5fa373b071d67ae704b885"}}}}}}

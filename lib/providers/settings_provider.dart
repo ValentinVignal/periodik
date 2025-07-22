@@ -5,6 +5,6 @@ import '../models/settings.dart';
 
 final settingsProvider = StreamProvider<Settings>((ref) {
   return Collections.settings.snapshots().map(
-        (settings) => Settings.fromJson(settings.data() ?? const {}),
-      );
+    (settings) => Settings.fromJson(settings.data() ?? const {}),
+  );
 });

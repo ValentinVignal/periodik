@@ -9,10 +9,7 @@ import 'package:periodik/screens/signal/signal_view.dart';
 import 'package:periodik/utils/collections.dart';
 import 'package:periodik/widgets/signal_name_widget.dart';
 
-enum _SignalAction {
-  edit,
-  delete,
-}
+enum _SignalAction { edit, delete }
 
 class SignalScreenShell extends ConsumerWidget {
   const SignalScreenShell({
@@ -32,7 +29,10 @@ class SignalScreenShell extends ConsumerWidget {
   final Widget? floatingActionButton;
 
   Future<void> _onAction(
-      BuildContext context, WidgetRef ref, _SignalAction action) async {
+    BuildContext context,
+    WidgetRef ref,
+    _SignalAction action,
+  ) async {
     switch (action) {
       case _SignalAction.edit:
         return showDialog(
@@ -40,30 +40,18 @@ class SignalScreenShell extends ConsumerWidget {
           builder: (context) => _EditSignalDialog(id: id),
         );
       case _SignalAction.delete:
-        final delete = await showDialog<bool>(
+        final delete =
+            await showDialog<bool>(
               context: context,
-              builder: (context) => AlertDialog(
-                title: const Text('Delete Signal?'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('Cancel'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop(true);
-                    },
-                    child: const Text('Delete'),
-                  ),
-                ],
-              ),
+              builder: (context) => DeleteSignalConfirmationDialog(id: id),
             ) ??
             false;
         if (delete) {
           await Collections.signals.doc(id).delete();
           if (context.mounted) {
-            ScaffoldMessenger.of(context)
-                .showSnackBar(const SnackBar(content: Text('Deleted')));
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(const SnackBar(content: Text('Deleted')));
             GoRouter.of(context).pop();
           }
         }
@@ -75,9 +63,7 @@ class SignalScreenShell extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
-        title: _SignalAppBar(
-          id: id,
-        ),
+        title: _SignalAppBar(id: id),
         actions: [
           IconButton(
             onPressed: () {
@@ -96,10 +82,7 @@ class SignalScreenShell extends ConsumerWidget {
             itemBuilder: (context) => [
               const PopupMenuItem(
                 value: _SignalAction.edit,
-                child: ListTile(
-                  leading: Icon(Icons.edit),
-                  title: Text('Edit'),
-                ),
+                child: ListTile(leading: Icon(Icons.edit), title: Text('Edit')),
               ),
               const PopupMenuItem(
                 value: _SignalAction.delete,
@@ -122,9 +105,7 @@ class SignalScreenShell extends ConsumerWidget {
 }
 
 class _SignalAppBar extends ConsumerWidget {
-  const _SignalAppBar({
-    required this.id,
-  });
+  const _SignalAppBar({required this.id});
 
   final String id;
 
@@ -137,10 +118,7 @@ class _SignalAppBar extends ConsumerWidget {
 }
 
 class _FAB extends StatelessWidget {
-  const _FAB({
-    required this.id,
-    this.floatingActionButton,
-  });
+  const _FAB({required this.id, this.floatingActionButton});
 
   final String id;
 
@@ -156,19 +134,13 @@ class _FAB extends StatelessWidget {
 
     return Row(
       mainAxisSize: MainAxisSize.min,
-      children: [
-        floatingActionButton!,
-        const SizedBox(width: 8),
-        addButton,
-      ],
+      children: [floatingActionButton!, const SizedBox(width: 8), addButton],
     );
   }
 }
 
 class _EditSignalDialog extends ConsumerStatefulWidget {
-  const _EditSignalDialog({
-    required this.id,
-  });
+  const _EditSignalDialog({required this.id});
 
   final String id;
 
@@ -186,9 +158,8 @@ class __EditSignalDialogState extends ConsumerState<_EditSignalDialog> {
     super.initState();
 
     _modifiedSignal = ref.read(signalProvider(widget.id)).requireValue;
-    _textController = TextEditingController(
-      text: _modifiedSignal.name,
-    )..addListener(() {
+    _textController = TextEditingController(text: _modifiedSignal.name)
+      ..addListener(() {
         setState(() {
           _modifiedSignal = _modifiedSignal.copyWith(
             name: _textController.text,
@@ -210,9 +181,7 @@ class __EditSignalDialogState extends ConsumerState<_EditSignalDialog> {
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          TextFormField(
-            controller: _textController,
-          ),
+          TextFormField(controller: _textController),
           SwitchListTile.adaptive(
             title: const Text('Hidden'),
             value: _modifiedSignal.hidden,
@@ -230,7 +199,8 @@ class __EditSignalDialogState extends ConsumerState<_EditSignalDialog> {
           child: const Text('Cancel'),
         ),
         ElevatedButton(
-          onPressed: _modifiedSignal ==
+          onPressed:
+              _modifiedSignal ==
                   ref.watch(signalProvider(widget.id)).valueOrNull
               ? null
               : () async {
@@ -241,6 +211,58 @@ class __EditSignalDialogState extends ConsumerState<_EditSignalDialog> {
                   Navigator.of(context).pop();
                 },
           child: const Text('Save'),
+        ),
+      ],
+    );
+  }
+}
+
+@visibleForTesting
+class DeleteSignalConfirmationDialog extends ConsumerStatefulWidget {
+  const DeleteSignalConfirmationDialog({super.key, required this.id});
+
+  final String id;
+
+  @override
+  ConsumerState<DeleteSignalConfirmationDialog> createState() =>
+      __DeleteSignalConfirmationDialogState();
+}
+
+class __DeleteSignalConfirmationDialogState
+    extends ConsumerState<DeleteSignalConfirmationDialog> {
+  String _text = '';
+
+  @override
+  Widget build(BuildContext context) {
+    final signal = ref.watch(signalProvider(widget.id)).valueOrNull;
+    return AlertDialog(
+      title: const Text('Delete Signal?'),
+      content: TextField(
+        decoration: InputDecoration(
+          labelText: 'Type "${signal?.name}" to confirm',
+        ),
+        onChanged: (value) {
+          setState(() {
+            _text = value;
+          });
+        },
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Cancel'),
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Theme.of(context).colorScheme.errorContainer,
+            foregroundColor: Theme.of(context).colorScheme.onErrorContainer,
+          ),
+          onPressed: signal != null && _text == signal.name
+              ? () {
+                  Navigator.of(context).pop(true);
+                }
+              : null,
+          child: const Text('Delete'),
         ),
       ],
     );

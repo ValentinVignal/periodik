@@ -1,29 +1,50 @@
 {
+  "project_info": {
+    "project_number": "883959527648",
+    "project_id": "period-ik",
+    "storage_bucket": "period-ik.firebasestorage.app"
+  },
   "client": [
     {
-      "api_key": [
-        {
-          "current_key": "AIzaSyDBX-Z87gjH16je18cqr3Tsv3f9wPCug_U"
-        }
-      ],
       "client_info": {
+        "mobilesdk_app_id": "1:883959527648:android:c51ab160cdce291804b885",
         "android_client_info": {
           "package_name": "com.valentinvignal.periodik"
-        },
-        "mobilesdk_app_id": "1:883959527648:android:c51ab160cdce291804b885"
+        }
       },
       "oauth_client": [
         {
-          "android_info": {
-            "certificate_hash": "c043b842b799f5270944e3dc6de4d7fa2a0cee27",
-            "package_name": "com.valentinvignal.periodik"
-          },
           "client_id": "883959527648-5astk55m3pnfc735c2jtehq3j1kjce7d.apps.googleusercontent.com",
-          "client_type": 1
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.valentinvignal.periodik",
+            "certificate_hash": "c043b842b799f5270944e3dc6de4d7fa2a0cee27"
+          }
+        },
+        {
+          "client_id": "883959527648-96gesbmsl631dimaaema0b1jpofjkt0c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.valentinvignal.periodik",
+            "certificate_hash": "fe52b80aa1690fd1a21ce0c4ded98e848f8ae02c"
+          }
+        },
+        {
+          "client_id": "883959527648-br9bc1kda3020cdom6c99rk2n29eaa4p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.valentinvignal.periodik",
+            "certificate_hash": "71afd70d5969a34f008f55ee713bd7805d643a61"
+          }
         },
         {
           "client_id": "883959527648-ntqj2b49kb4680ovjj6m8vn14r0lbbmj.apps.googleusercontent.com",
           "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBX-Z87gjH16je18cqr3Tsv3f9wPCug_U"
         }
       ],
       "services": {
@@ -45,10 +66,5 @@
       }
     }
   ],
-  "configuration_version": "1",
-  "project_info": {
-    "project_id": "period-ik",
-    "project_number": "883959527648",
-    "storage_bucket": "period-ik.appspot.com"
-  }
+  "configuration_version": "1"
 }

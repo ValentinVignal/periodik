@@ -6,7 +6,7 @@ part 'signal_with_points.freezed.dart';
 part 'signal_with_points.g.dart';
 
 @freezed
-class SignalWithPoints with _$SignalWithPoints {
+abstract class SignalWithPoints with _$SignalWithPoints {
   const factory SignalWithPoints({
     required Signal signal,
     required List<Point> points,

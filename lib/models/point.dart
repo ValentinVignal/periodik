@@ -7,7 +7,7 @@ part 'point.freezed.dart';
 part 'point.g.dart';
 
 @freezed
-class Point with _$Point {
+abstract class Point with _$Point {
   const factory Point({
     // It is what freezed recommends.
     //
@@ -19,10 +19,8 @@ class Point with _$Point {
 
   factory Point.fromJson(Json json) => _$PointFromJson(json);
 
-  factory Point.fromJsonDocument(String id, Json document) => Point.fromJson({
-        ...document,
-        'id': id,
-      });
+  factory Point.fromJsonDocument(String id, Json document) =>
+      Point.fromJson({...document, 'id': id});
 
   const Point._();
 }

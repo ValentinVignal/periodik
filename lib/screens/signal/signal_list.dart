@@ -6,10 +6,7 @@ import '../point/delete_point.dart';
 import '../point/point_dialog.dart';
 
 class SignalList extends ConsumerWidget {
-  const SignalList({
-    super.key,
-    required this.id,
-  });
+  const SignalList({super.key, required this.id});
   final String id;
 
   @override
@@ -21,22 +18,12 @@ class SignalList extends ConsumerWidget {
         final point = points[index];
         return ListTile(
           onTap: () {
-            PointDialog.show(
-              context: context,
-              signalId: id,
-              point: point,
-            );
+            PointDialog.show(context: context, signalId: id, point: point);
           },
-          onLongPress: () => deletePoint(
-            context: context,
-            signalId: id,
-            pointId: point.id,
-          ),
+          onLongPress: () =>
+              deletePoint(context: context, signalId: id, pointId: point.id),
           trailing: point.state
-              ? Icon(
-                  Icons.circle,
-                  color: Theme.of(context).colorScheme.error,
-                )
+              ? Icon(Icons.circle, color: Theme.of(context).colorScheme.error)
               : null,
           title: Text(point.date.toString()),
           subtitle: Text(point.state.toString()),

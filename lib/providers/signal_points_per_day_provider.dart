@@ -5,34 +5,28 @@ import 'package:periodik/utils/date_time.dart';
 
 import '../models/point_state.dart';
 
-final signalPointsPerDayProvider =
-    Provider.family.autoDispose<List<SignalWithState>, DateTime>(
-  (ref, day) {
-    final signalsWithPoints =
-        ref.watch(signalsWithPointsProvider).asData?.value ?? const [];
-    return signalsWithPoints
-        .map(
-          (signal) => signal.copyWith(
-            points: signal.points
-                .where(
-                  (point) => point.date.isSameDayAs(day),
-                )
-                .toList(),
-          ),
-        )
-        .where((signal) => signal.points.isNotEmpty)
-        .expand(
-          (signal) => signal.points.map(
-            (point) => SignalWithState(
+final signalPointsPerDayProvider = Provider.family
+    .autoDispose<List<SignalWithState>, DateTime>((ref, day) {
+      final signalsWithPoints =
+          ref.watch(signalsWithPointsProvider).asData?.value ?? const [];
+      return signalsWithPoints
+          .map(
+            (signal) => signal.copyWith(
+              points: signal.points
+                  .where((point) => point.date.isSameDayAs(day))
+                  .toList(),
+            ),
+          )
+          .where((signal) => signal.points.isNotEmpty)
+          .expand(
+            (signal) => signal.points.map(
+              (point) => SignalWithState(
                 signal: signal.signal,
                 point: point.state
                     ? PointState.activated
-                    : PointState.deactivated),
-          ),
-        )
-        .toList();
-  },
-  dependencies: [
-    signalsWithPointsProvider,
-  ],
-);
+                    : PointState.deactivated,
+              ),
+            ),
+          )
+          .toList();
+    }, dependencies: [signalsWithPointsProvider]);
