@@ -12,6 +12,11 @@
         "**/*.freezed.dart",
         "**/*.g.dart",
         "pubspec.lock",
-        "cspell.json"
+        "cspell.json",
+        ".gitignore",
+        "android/**",
+        "ios/**",
+        "macos/**",
+        "web/**"
     ]
 }

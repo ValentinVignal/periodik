@@ -18,11 +18,7 @@ void main() {
               'signalId',
             ).overrideWith((_) => Stream.value(signal)),
           ],
-          child: MaterialApp(
-            home: Scaffold(
-              body: DeleteSignalConfirmationDialog(id: 'signalId'),
-            ),
-          ),
+          child: MaterialApp(home: Scaffold(body: widget)),
         ),
       );
 
