@@ -64,8 +64,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '883959527648',
     projectId: 'period-ik',
     storageBucket: 'period-ik.firebasestorage.app',
-    androidClientId: '883959527648-5astk55m3pnfc735c2jtehq3j1kjce7d.apps.googleusercontent.com',
-    iosClientId: '883959527648-bd3vth4qi80j0jdtgt6f1naggnb0db8i.apps.googleusercontent.com',
+    androidClientId:
+        '883959527648-5astk55m3pnfc735c2jtehq3j1kjce7d.apps.googleusercontent.com',
+    iosClientId:
+        '883959527648-bd3vth4qi80j0jdtgt6f1naggnb0db8i.apps.googleusercontent.com',
     iosBundleId: 'com.valentinvignal.periodik',
   );
 
@@ -75,8 +77,10 @@ class DefaultFirebaseOptions {
     messagingSenderId: '883959527648',
     projectId: 'period-ik',
     storageBucket: 'period-ik.firebasestorage.app',
-    androidClientId: '883959527648-5astk55m3pnfc735c2jtehq3j1kjce7d.apps.googleusercontent.com',
-    iosClientId: '883959527648-bd3vth4qi80j0jdtgt6f1naggnb0db8i.apps.googleusercontent.com',
+    androidClientId:
+        '883959527648-5astk55m3pnfc735c2jtehq3j1kjce7d.apps.googleusercontent.com',
+    iosClientId:
+        '883959527648-bd3vth4qi80j0jdtgt6f1naggnb0db8i.apps.googleusercontent.com',
     iosBundleId: 'com.valentinvignal.periodik',
   );
 
@@ -89,5 +93,4 @@ class DefaultFirebaseOptions {
     storageBucket: 'period-ik.firebasestorage.app',
     measurementId: 'G-XQJ3SXNRTY',
   );
-
 }
