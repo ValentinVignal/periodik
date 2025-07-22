@@ -7,8 +7,7 @@ on:
     branches:
       - main
 
-
-jobs: 
+jobs:
   test:
     runs-on: macos-latest
     name: Tests
@@ -20,4 +19,6 @@ jobs:
       - name: Run tests
         run: flutter test --coverage
       - name: Upload to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
