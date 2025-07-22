@@ -1,4 +1,4 @@
-## NEXT
+## 0.25.0
 
 - Upgrades to flutter 3.24.
 - Upgrades to flutter 3.32.
