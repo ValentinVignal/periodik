@@ -17,6 +17,7 @@
         "android/**",
         "ios/**",
         "macos/**",
-        "web/**"
+        "web/**",
+        "lib/firebase_options.dart"
     ]
 }
