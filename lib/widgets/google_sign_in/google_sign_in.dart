@@ -36,11 +36,7 @@ class _GoogleSignInWidgetState extends State<GoogleSignInWidget> {
 
   Future<void> _signInWithGoogle() async {
     // Trigger the authentication flow
-    try {
-      await GoogleSignIn.instance.authenticate();
-    } catch (e) {
-      print(e);
-    }
+    await GoogleSignIn.instance.authenticate();
   }
 
   Future<void> _handleAuthenticationEvent(
