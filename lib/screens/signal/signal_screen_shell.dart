@@ -43,21 +43,7 @@ class SignalScreenShell extends ConsumerWidget {
         final delete =
             await showDialog<bool>(
               context: context,
-              builder: (context) => AlertDialog(
-                title: const Text('Delete Signal?'),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    child: const Text('Cancel'),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop(true);
-                    },
-                    child: const Text('Delete'),
-                  ),
-                ],
-              ),
+              builder: (context) => DeleteSignalConfirmationDialog(id: id),
             ) ??
             false;
         if (delete) {
@@ -225,6 +211,58 @@ class __EditSignalDialogState extends ConsumerState<_EditSignalDialog> {
                   Navigator.of(context).pop();
                 },
           child: const Text('Save'),
+        ),
+      ],
+    );
+  }
+}
+
+@visibleForTesting
+class DeleteSignalConfirmationDialog extends ConsumerStatefulWidget {
+  const DeleteSignalConfirmationDialog({super.key, required this.id});
+
+  final String id;
+
+  @override
+  ConsumerState<DeleteSignalConfirmationDialog> createState() =>
+      __DeleteSignalConfirmationDialogState();
+}
+
+class __DeleteSignalConfirmationDialogState
+    extends ConsumerState<DeleteSignalConfirmationDialog> {
+  String _text = '';
+
+  @override
+  Widget build(BuildContext context) {
+    final signal = ref.watch(signalProvider(widget.id)).valueOrNull;
+    return AlertDialog(
+      title: const Text('Delete Signal?'),
+      content: TextField(
+        decoration: InputDecoration(
+          labelText: 'Type "${signal?.name}" to confirm',
+        ),
+        onChanged: (value) {
+          setState(() {
+            _text = value;
+          });
+        },
+      ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Cancel'),
+        ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Theme.of(context).colorScheme.errorContainer,
+            foregroundColor: Theme.of(context).colorScheme.onErrorContainer,
+          ),
+          onPressed: signal != null && _text == signal.name
+              ? () {
+                  Navigator.of(context).pop(true);
+                }
+              : null,
+          child: const Text('Delete'),
         ),
       ],
     );
