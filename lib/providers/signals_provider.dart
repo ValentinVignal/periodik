@@ -6,7 +6,7 @@ import 'package:periodik/utils/collections.dart';
 
 final signalsProvider = StreamProvider.autoDispose<List<Signal>>((ref) async* {
   final displayHiddenSignals =
-      ref.watch(settingsProvider).valueOrNull?.displayHiddenSignals ?? false;
+      ref.watch(settingsProvider).value?.displayHiddenSignals ?? false;
   try {
     await for (final signals
         in Collections.signals.orderBy('name').snapshots()) {

@@ -16,7 +16,7 @@ import '../screens/signal/signal_screen.dart';
 part 'routes.g.dart';
 
 @TypedGoRoute<HomeRoute>(path: '/')
-class HomeRoute extends GoRouteData with _$HomeRoute {
+class HomeRoute extends GoRouteData with $HomeRoute {
   const HomeRoute();
 
   @override
@@ -26,7 +26,7 @@ class HomeRoute extends GoRouteData with _$HomeRoute {
 }
 
 @TypedGoRoute<VerifyEmailRoute>(path: '/verify-email')
-class VerifyEmailRoute extends GoRouteData with _$VerifyEmailRoute {
+class VerifyEmailRoute extends GoRouteData with $VerifyEmailRoute {
   const VerifyEmailRoute();
 
   @override
@@ -39,7 +39,7 @@ class VerifyEmailRoute extends GoRouteData with _$VerifyEmailRoute {
   path: '/login',
   routes: [TypedGoRoute<SignUpRoute>(path: 'sign-up')],
 )
-class LoginRoute extends GoRouteData with _$LoginRoute {
+class LoginRoute extends GoRouteData with $LoginRoute {
   const LoginRoute();
 
   @override
@@ -48,7 +48,7 @@ class LoginRoute extends GoRouteData with _$LoginRoute {
   }
 }
 
-class SignUpRoute extends GoRouteData with _$SignUpRoute {
+class SignUpRoute extends GoRouteData with $SignUpRoute {
   const SignUpRoute();
 
   @override
@@ -66,7 +66,7 @@ class SignUpRoute extends GoRouteData with _$SignUpRoute {
     TypedGoRoute<SignalListRoute>(path: ':id/list'),
   ],
 )
-class SignalsRoute extends GoRouteData with _$SignalsRoute {
+class SignalsRoute extends GoRouteData with $SignalsRoute {
   const SignalsRoute();
 
   @override
@@ -75,7 +75,7 @@ class SignalsRoute extends GoRouteData with _$SignalsRoute {
   }
 }
 
-class SignalsCalendarRoute extends GoRouteData with _$SignalsCalendarRoute {
+class SignalsCalendarRoute extends GoRouteData with $SignalsCalendarRoute {
   const SignalsCalendarRoute();
 
   @override
@@ -84,7 +84,7 @@ class SignalsCalendarRoute extends GoRouteData with _$SignalsCalendarRoute {
   }
 }
 
-class SignalRoute extends GoRouteData with _$SignalRoute {
+class SignalRoute extends GoRouteData with $SignalRoute {
   const SignalRoute({required this.id});
 
   final String id;
@@ -95,7 +95,7 @@ class SignalRoute extends GoRouteData with _$SignalRoute {
   }
 }
 
-class SignalCalendarRoute extends GoRouteData with _$SignalCalendarRoute {
+class SignalCalendarRoute extends GoRouteData with $SignalCalendarRoute {
   const SignalCalendarRoute({required this.id});
 
   final String id;
@@ -106,7 +106,7 @@ class SignalCalendarRoute extends GoRouteData with _$SignalCalendarRoute {
   }
 }
 
-class SignalListRoute extends GoRouteData with _$SignalListRoute {
+class SignalListRoute extends GoRouteData with $SignalListRoute {
   const SignalListRoute({required this.id});
 
   final String id;
@@ -118,7 +118,7 @@ class SignalListRoute extends GoRouteData with _$SignalListRoute {
 }
 
 @TypedGoRoute<SettingsRoute>(path: '/settings')
-class SettingsRoute extends GoRouteData with _$SettingsRoute {
+class SettingsRoute extends GoRouteData with $SettingsRoute {
   const SettingsRoute();
 
   @override

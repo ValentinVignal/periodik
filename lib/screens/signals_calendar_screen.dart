@@ -35,13 +35,10 @@ class __SignalsCalendarScreenState
   Widget build(BuildContext context) {
     Widget builder(BuildContext context, DateTime day) {
       final List<SignalWithState> points;
-      if (ref.watch(settingsProvider).valueOrNull?.displayPredictions ??
-          false) {
+      if (ref.watch(settingsProvider).value?.displayPredictions ?? false) {
         points =
-            ref.watch(signalsProvider).valueOrNull?.map((signal) {
-              final cycle = ref
-                  .watch(estimatedCyclesProvider(signal.id))
-                  .valueOrNull;
+            ref.watch(signalsProvider).value?.map((signal) {
+              final cycle = ref.watch(estimatedCyclesProvider(signal.id)).value;
               final point = cycle?.estimate(day) ?? PointState.none;
               return SignalWithState(signal: signal, point: point);
             }).toList() ??

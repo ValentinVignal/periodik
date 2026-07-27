@@ -14,10 +14,13 @@ List<RouteBase> get $appRoutes => [
   $settingsRoute,
 ];
 
-RouteBase get $homeRoute =>
-    GoRouteData.$route(path: '/', factory: _$HomeRoute._fromState);
+RouteBase get $homeRoute => GoRouteData.$route(
+  path: '/',
+  hasOverriddenOnExit: false,
+  factory: $HomeRoute._fromState,
+);
 
-mixin _$HomeRoute on GoRouteData {
+mixin $HomeRoute on GoRouteData {
   static HomeRoute _fromState(GoRouterState state) => const HomeRoute();
 
   @override
@@ -39,10 +42,11 @@ mixin _$HomeRoute on GoRouteData {
 
 RouteBase get $verifyEmailRoute => GoRouteData.$route(
   path: '/verify-email',
-  factory: _$VerifyEmailRoute._fromState,
+  hasOverriddenOnExit: false,
+  factory: $VerifyEmailRoute._fromState,
 );
 
-mixin _$VerifyEmailRoute on GoRouteData {
+mixin $VerifyEmailRoute on GoRouteData {
   static VerifyEmailRoute _fromState(GoRouterState state) =>
       const VerifyEmailRoute();
 
@@ -65,13 +69,18 @@ mixin _$VerifyEmailRoute on GoRouteData {
 
 RouteBase get $loginRoute => GoRouteData.$route(
   path: '/login',
-  factory: _$LoginRoute._fromState,
+  hasOverriddenOnExit: false,
+  factory: $LoginRoute._fromState,
   routes: [
-    GoRouteData.$route(path: 'sign-up', factory: _$SignUpRoute._fromState),
+    GoRouteData.$route(
+      path: 'sign-up',
+      hasOverriddenOnExit: false,
+      factory: $SignUpRoute._fromState,
+    ),
   ],
 );
 
-mixin _$LoginRoute on GoRouteData {
+mixin $LoginRoute on GoRouteData {
   static LoginRoute _fromState(GoRouterState state) => const LoginRoute();
 
   @override
@@ -91,7 +100,7 @@ mixin _$LoginRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$SignUpRoute on GoRouteData {
+mixin $SignUpRoute on GoRouteData {
   static SignUpRoute _fromState(GoRouterState state) => const SignUpRoute();
 
   @override
@@ -113,22 +122,33 @@ mixin _$SignUpRoute on GoRouteData {
 
 RouteBase get $signalsRoute => GoRouteData.$route(
   path: '/signals',
-  factory: _$SignalsRoute._fromState,
+  hasOverriddenOnExit: false,
+  factory: $SignalsRoute._fromState,
   routes: [
     GoRouteData.$route(
       path: 'calendar',
-      factory: _$SignalsCalendarRoute._fromState,
+      hasOverriddenOnExit: false,
+      factory: $SignalsCalendarRoute._fromState,
     ),
-    GoRouteData.$route(path: ':id', factory: _$SignalRoute._fromState),
+    GoRouteData.$route(
+      path: ':id',
+      hasOverriddenOnExit: false,
+      factory: $SignalRoute._fromState,
+    ),
     GoRouteData.$route(
       path: ':id/calendar',
-      factory: _$SignalCalendarRoute._fromState,
+      hasOverriddenOnExit: false,
+      factory: $SignalCalendarRoute._fromState,
     ),
-    GoRouteData.$route(path: ':id/list', factory: _$SignalListRoute._fromState),
+    GoRouteData.$route(
+      path: ':id/list',
+      hasOverriddenOnExit: false,
+      factory: $SignalListRoute._fromState,
+    ),
   ],
 );
 
-mixin _$SignalsRoute on GoRouteData {
+mixin $SignalsRoute on GoRouteData {
   static SignalsRoute _fromState(GoRouterState state) => const SignalsRoute();
 
   @override
@@ -148,7 +168,7 @@ mixin _$SignalsRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$SignalsCalendarRoute on GoRouteData {
+mixin $SignalsCalendarRoute on GoRouteData {
   static SignalsCalendarRoute _fromState(GoRouterState state) =>
       const SignalsCalendarRoute();
 
@@ -169,7 +189,7 @@ mixin _$SignalsCalendarRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$SignalRoute on GoRouteData {
+mixin $SignalRoute on GoRouteData {
   static SignalRoute _fromState(GoRouterState state) =>
       SignalRoute(id: state.pathParameters['id']!);
 
@@ -193,7 +213,7 @@ mixin _$SignalRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$SignalCalendarRoute on GoRouteData {
+mixin $SignalCalendarRoute on GoRouteData {
   static SignalCalendarRoute _fromState(GoRouterState state) =>
       SignalCalendarRoute(id: state.pathParameters['id']!);
 
@@ -218,7 +238,7 @@ mixin _$SignalCalendarRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-mixin _$SignalListRoute on GoRouteData {
+mixin $SignalListRoute on GoRouteData {
   static SignalListRoute _fromState(GoRouterState state) =>
       SignalListRoute(id: state.pathParameters['id']!);
 
@@ -242,10 +262,13 @@ mixin _$SignalListRoute on GoRouteData {
   void replace(BuildContext context) => context.replace(location);
 }
 
-RouteBase get $settingsRoute =>
-    GoRouteData.$route(path: '/settings', factory: _$SettingsRoute._fromState);
+RouteBase get $settingsRoute => GoRouteData.$route(
+  path: '/settings',
+  hasOverriddenOnExit: false,
+  factory: $SettingsRoute._fromState,
+);
 
-mixin _$SettingsRoute on GoRouteData {
+mixin $SettingsRoute on GoRouteData {
   static SettingsRoute _fromState(GoRouterState state) => const SettingsRoute();
 
   @override

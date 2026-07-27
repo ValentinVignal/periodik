@@ -34,7 +34,7 @@ class __SignalCalendarState extends ConsumerState<SignalCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    final cycles = ref.watch(estimatedCyclesProvider(widget.id)).valueOrNull;
+    final cycles = ref.watch(estimatedCyclesProvider(widget.id)).value;
     Widget builder(BuildContext context, DateTime day) {
       final point = cycles?.mapPoints[day.rounded];
       final calendarDayState = cycles?.estimate(day) ?? PointState.none;

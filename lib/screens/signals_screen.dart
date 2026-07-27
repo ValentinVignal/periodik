@@ -89,15 +89,12 @@ class _Signals extends ConsumerWidget {
                 return Consumer(
                   builder: (context, ref, child) {
                     var state = PointState.none;
-                    if (ref
-                            .watch(settingsProvider)
-                            .valueOrNull
-                            ?.displayPredictions ??
+                    if (ref.watch(settingsProvider).value?.displayPredictions ??
                         false) {
                       state =
                           ref
                               .watch(estimatedCyclesProvider(signal.id))
-                              .valueOrNull
+                              .value
                               ?.estimate(DateTime.now()) ??
                           PointState.none;
                     }

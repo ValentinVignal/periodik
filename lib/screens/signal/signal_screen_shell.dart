@@ -200,8 +200,7 @@ class __EditSignalDialogState extends ConsumerState<_EditSignalDialog> {
         ),
         ElevatedButton(
           onPressed:
-              _modifiedSignal ==
-                  ref.watch(signalProvider(widget.id)).valueOrNull
+              _modifiedSignal == ref.watch(signalProvider(widget.id)).value
               ? null
               : () async {
                   await Collections.signals
@@ -234,7 +233,7 @@ class __DeleteSignalConfirmationDialogState
 
   @override
   Widget build(BuildContext context) {
-    final signal = ref.watch(signalProvider(widget.id)).valueOrNull;
+    final signal = ref.watch(signalProvider(widget.id)).value;
     return AlertDialog(
       title: const Text('Delete Signal?'),
       content: TextField(
