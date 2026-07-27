@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:animated_collection/animated_collection.dart';
-import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
+import 'package:material_ui/material_ui.dart';
 
 import '../utils/auth.dart';
 import '../utils/iterable_extension.dart';

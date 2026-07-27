@@ -50,6 +50,7 @@ dependencies:
   firebase_crashlytics: ^5.2.6 # https://github.com/firebase/flutterfire/issues/10994#issuecomment-1554320808 and https://github.com/firebase/flutterfire/issues/10994
   meta: ^1.18.0
   animated_collection: ^1.5.2
+  material_ui: ^0.0.2
 
 dev_dependencies:
   flutter_test:

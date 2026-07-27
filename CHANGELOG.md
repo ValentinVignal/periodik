@@ -1,6 +1,7 @@
 ## NEXT
 
 - Upgrade dependencies.
+- Migrate to material_ui.
 
 ## 0.25.0
 

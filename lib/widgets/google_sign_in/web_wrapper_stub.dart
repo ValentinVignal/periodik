@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Stub for the web-only renderButton method, since google_sign_in_web has to
 /// be behind a conditional import.

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:periodik/screens/signal/signal_calendar.dart';
 import 'package:periodik/screens/signal/signal_list.dart';
 import 'package:periodik/screens/signal/signal_screen_shell.dart';

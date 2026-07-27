@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:periodik/models/point.dart';
 import 'package:periodik/providers/points_provider.dart';
 import 'package:periodik/utils/collections.dart';
